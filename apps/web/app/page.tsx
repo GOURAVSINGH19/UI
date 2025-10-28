@@ -1,5 +1,5 @@
 import Home from "../components/Home";
-import Notificaton from "@workspace/ui/components/notification";
+import LoginPage from "@workspace/ui/components/Login"
 const ComponentLibraryDemo = () => {
   return (
     <main className="w-screen h-screen bg_svg">
@@ -9,7 +9,7 @@ const ComponentLibraryDemo = () => {
       {/* <div className=" max-w-screen-xl mx-auto p-[.8rem] px-[2rem] h-full">
         <Home />
       </div> */}
-      <Notificaton/>
+      <LoginPage/>
     </main>
   );
 };

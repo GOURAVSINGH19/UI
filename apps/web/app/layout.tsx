@@ -25,7 +25,7 @@ export default function RootLayout({
         className={`${fontSans.variable} ${fontMono.variable} antialiased`}
       >
         <Providers >
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
         </Providers>
       </body>
