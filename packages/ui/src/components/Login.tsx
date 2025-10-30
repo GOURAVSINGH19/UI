@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Zap, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import Input from "@workspace/ui/components/Input"
 import {cn} from "@workspace/ui/lib/utils"
+
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');

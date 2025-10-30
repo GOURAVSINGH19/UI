@@ -1,21 +1,7 @@
-// import { docsConfig } from "@/config/docs"
-// import { ScrollArea } from "@/components/ui/scroll-area"
+import type { ReactNode } from "react";
+import { DocsLayout as FumaDocsLayout } from "fumadocs-ui/layouts/docs";
+import { source } from "@/lib/source";
 
-interface DocsLayoutProps {
-  children: React.ReactNode
-}
-
-export default function DocsLayout({ children }: DocsLayoutProps) {
-  return (
-      <div className="border-b pt-12">
-        <div className="flex-1 items-start bg-[#FAFAFA] px-2 dark:bg-[#171517]  sm:px-4 md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-          <aside className="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
-            {/* <ScrollArea className="h-full py-6  pr-2 lg:py-8">
-            
-            </ScrollArea> */}
-          </aside>
-          {children}
-        </div>
-      </div>
-  )
+export default function DocsLayout({ children }: { children: ReactNode }) {
+  return <FumaDocsLayout tree={source.pageTree}>{children}</FumaDocsLayout>;
 }
