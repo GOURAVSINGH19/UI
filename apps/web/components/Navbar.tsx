@@ -1,24 +1,52 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Search_bar from "./Search_bar/Search_bar"
 import { Menu } from "lucide-react"
+import Link from "next/link"
 
 const Navbar = () => {
     const [Open, setOpen] = useState(false)
 
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+                event.preventDefault()
+                setOpen(true)
+            }
+            if (event.key === 'Escape' && Open) {
+                setOpen(false)
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [Open])
+
     return (
         <header className="w-full fixed top-[.5rem] left-0 z-50 text-sm">
             <nav className=" max-w-screen-xl mx-auto p-[.8rem] px-[2rem]  rounded-[1rem] gap-10 flex justify-between items-center">
-                <div className="font-semibold w-fit md:block hidden">_Ghibli_</div>
+                <div className="font-semibold w-fit md:block hidden">
+                    <Link href="/">
+                        <p>_Ghibli_</p>
+                    </Link>
+                </div>
                 <div className="flex gap-2 items-center">
-                    <div className="md:hidden cursor-pointer"><Menu className="w-4 h-4"/></div>
+                    <div className="md:hidden cursor-pointer"><Menu className="w-4 h-4" /></div>
                     <p className="w-full font-medium md:hidden">Menu</p>
                 </div>
                 <ul className="w-full md:flex gap-6 font-medium  hidden">
-                    <li className="cursor-pointer">Docs</li>
-                    <li className="cursor-pointer">Components</li>
-                    <li className="cursor-pointer">Charts</li>
+                    <Link href="/docs/installation">
+                        <li className="cursor-pointer">Docs</li>
+                    </Link>
+                    <Link href="/components">
+                        <li className="cursor-pointer">Components</li>
+                    </Link>
+                    <Link href="/charts">
+                        <li className="cursor-pointer">Charts</li>
+                    </Link>
                 </ul>
                 <div className="flex">
                     <div onClick={() => setOpen(!Open)} className="w-[35vw]  md:w-[30vw] flex  justify-between cursor-default relative items-center lg:w-[20vw] h-[2em] bg-[var(--bg-light)] shadow-[var(--shadow-s)] rounded-lg  px-[1rem] py-[1rem] outline-0 text-sm" >

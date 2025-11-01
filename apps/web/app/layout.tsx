@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@workspace/ui/styles/globals.css"
 import { Providers } from "@/components/providers"
 import { RootProvider } from 'fumadocs-ui/provider/next';
+import Navbar from "@/components/Navbar";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -17,15 +18,16 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
-  
+
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${fontSans.variable} ${fontMono.variable} antialiased`}
       >
+        <Navbar />
         <RootProvider search={{
-          enabled:false
+          enabled: false
         }}
         >
           <Providers>

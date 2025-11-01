@@ -6,10 +6,9 @@ const ComponentLibraryDemo = () => {
       <div className="w-full h-full absolute top-[-10rem] left-0 -z-10">
         <img src="/home_svg.svg" alt="Description" className="h-[30rem] w-full" />
       </div>
-      {/* <div className=" max-w-screen-xl mx-auto p-[.8rem] px-[2rem] h-full">
+      <div className=" max-w-screen-xl mx-auto p-[.8rem] px-[2rem] h-full">
         <Home />
-      </div> */}
-      <LoginPage/>
+      </div>
     </main>
   );
 };
