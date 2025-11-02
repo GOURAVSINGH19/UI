@@ -38,7 +38,7 @@ const Navbar = () => {
                     <p className="w-full font-medium md:hidden">Menu</p>
                 </div>
                 <ul className="w-full md:flex gap-6 font-medium  hidden">
-                    <Link href="/docs/installation">
+                    <Link href="/docs">
                         <li className="cursor-pointer">Docs</li>
                     </Link>
                     <Link href="/components">

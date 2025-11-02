@@ -10,9 +10,35 @@ import {
 import { source } from "@/lib/source"
 import { absoluteUrl } from "@workspace/ui/lib/utils"
 import { Badge } from "@workspace/ui/components/ui/badge"
-import { Button } from "@workspace/ui/components/ui/button"
 import { DocsCopyPage } from "@/components/doc-copy-page"
 import { DocsTableOfContents } from "@/components/doc-toc"
+import { findNeighbour } from 'fumadocs-core/page-tree';
+import { docsConfig } from "@/config/docs"
+
+function flattenNav(items: any[]): Array<{ url: string; name: string }> {
+  const result: Array<{ url: string; name: string }> = []
+  for (const item of items) {
+    if (item.href) {
+      result.push({ url: item.href, name: item.title })
+    }
+    if (item.items && item.items.length > 0) {
+      result.push(...flattenNav(item.items))
+    }
+  }
+  return result
+}
+
+function findNeighboursFromConfig(currentUrl: string) {
+  const pages = docsConfig.sidebarNav.flatMap(section => flattenNav(section.items))
+  const currentIndex = pages.findIndex(p => p.url === currentUrl)
+  
+  if (currentIndex === -1) return { previous: null, next: null }
+  
+  return {
+    previous: currentIndex > 0 ? pages[currentIndex - 1] : null,
+    next: currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null,
+  }
+}
 
 export const revalidate = false
 export const dynamic = "force-static"
@@ -82,8 +108,8 @@ export default async function Page(props: {
   const doc = page.data
   const MDX = doc.body
 
-  // @ts-expect-error - revisit fumadocs types.
-  const links = doc.links
+  const neighbours = findNeighboursFromConfig(page.url)
+  const links = doc.links as { doc?: string; api?: string } | undefined
 
   return (
     <div
@@ -105,7 +131,19 @@ export default async function Page(props: {
                     page={doc.content || ""}
                     url={absoluteUrl(page.url)}
                   />
-
+                  {neighbours.previous &&
+                    <Link href={neighbours.previous.url}>
+                      <button className='rounded-full py-2 px-2 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                        <ArrowLeft className="w-3 h-3 text-neutral-400" />
+                      </button>
+                    </Link>
+                  }
+                  {neighbours.next &&
+                    <Link href={neighbours.next.url}>
+                      <button className='rounded-full py-2 px-2  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                        <ArrowRight className="w-3 h-3 text-neutral-400" />
+                      </button>
+                    </Link>}
                 </div>
               </div>
               {doc.description && (
@@ -137,10 +175,34 @@ export default async function Page(props: {
             <MDX components={mdxComponents} />
           </div>
         </div>
-        <div className="mx-auto hidden h-16 w-full max-w-2xl items-center gap-2 px-4 sm:flex md:px-0">
-          next && prev
+        <div className="mx-auto hidden h-16 w-full max-w-xl items-center gap-2 px-4 sm:flex md:px-0">
+          {neighbours.previous &&
+            <Link href={neighbours.previous.url}>
+              <button className='rounded-full py-2 px-6 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                <ArrowLeft className="w-4 h-4 text-neutral-400" />
+                <span className='text-sm text-[#ffffff68]'>{neighbours.previous.name}</span>
+              </button>
+            </Link>
+          }
+          {neighbours.next &&
+            <Link href={neighbours.next.url}>
+              <button className='rounded-full py-2 px-8  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                <span className='text-sm text-[#ffffff68]'>{neighbours.next?.name}</span>
+                <ArrowRight className="w-4 h-4 text-neutral-400" />
+              </button>
+            </Link>}
         </div>
       </div>
-    </div>
+      <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+        <div className="h-(--top-spacing) shrink-0" />
+        {doc.toc?.length ? (
+          <div className="no-scrollbar overflow-y-auto px-8">
+            <DocsTableOfContents toc={doc.toc} />
+            <div className="h-12" />
+          </div>
+        ) : null}
+        {/* for pro card */}
+      </div>
+    </div >
   )
 }

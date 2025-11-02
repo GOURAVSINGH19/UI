@@ -1,5 +1,5 @@
+import { BentoGrid } from "@/components/Bento/bentogrid";
 import Home from "../components/Home";
-import LoginPage from "@workspace/ui/components/Login"
 const ComponentLibraryDemo = () => {
   return (
     <main className="w-screen h-screen bg_svg">
@@ -8,6 +8,9 @@ const ComponentLibraryDemo = () => {
       </div>
       <div className=" max-w-screen-xl mx-auto p-[.8rem] px-[2rem] h-full">
         <Home />
+      </div>
+      <div className="">
+        <BentoGrid />
       </div>
     </main>
   );

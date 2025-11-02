@@ -11,17 +11,23 @@ export const docsConfig: DocsConfig = {
             title: "Getting Started",
             items: [
                 {
+                    title: "Introduction",
+                    href: "/docs",
+                    items: []
+                },
+                {
                     title: "Installation",
                     href: "/docs/installation",
                     items: [],
-                },
+                }
             ],
+
         },
         {
             title: "Components",
             items: [
                 {
-                    title: "Buttons & Controls",
+                    title: "Buttons",
                     items: [
                         {
                             title: "Button",
@@ -31,7 +37,7 @@ export const docsConfig: DocsConfig = {
                     ],
                 },
                 {
-                    title: "Cards & Containers",
+                    title: "Cards",
                     items: [
                         {
                             title: "Expandable Card",
@@ -45,7 +51,7 @@ export const docsConfig: DocsConfig = {
                     items: [
                         {
                             title: "Dynamic Island",
-                            href: "/docs/components/button",
+                            href: "/docs/components/animate",
                             items: [],
                         }
                     ],

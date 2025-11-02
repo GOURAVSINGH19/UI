@@ -5,10 +5,10 @@ import { cn } from "@workspace/ui/lib/utils"
 
 interface DocsTableOfContentsProps {
   toc: Array<{
-    title: string
+    title: React.ReactNode
     url: string
     children?: Array<{
-      title: string
+      title: React.ReactNode
       url: string
     }>
   }>
