@@ -10,9 +10,7 @@ import {
 import { source } from "@/lib/source"
 import { absoluteUrl } from "@workspace/ui/lib/utils"
 import { Badge } from "@workspace/ui/components/ui/badge"
-import { DocsCopyPage } from "@/components/doc-copy-page"
 import { DocsTableOfContents } from "@/components/doc-toc"
-import { findNeighbour } from 'fumadocs-core/page-tree';
 import { docsConfig } from "@/config/docs"
 
 function flattenNav(items: any[]): Array<{ url: string; name: string }> {
@@ -31,9 +29,9 @@ function flattenNav(items: any[]): Array<{ url: string; name: string }> {
 function findNeighboursFromConfig(currentUrl: string) {
   const pages = docsConfig.sidebarNav.flatMap(section => flattenNav(section.items))
   const currentIndex = pages.findIndex(p => p.url === currentUrl)
-  
+
   if (currentIndex === -1) return { previous: null, next: null }
-  
+
   return {
     previous: currentIndex > 0 ? pages[currentIndex - 1] : null,
     next: currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null,
@@ -109,6 +107,7 @@ export default async function Page(props: {
   const MDX = doc.body
 
   const neighbours = findNeighboursFromConfig(page.url)
+  //@ts-ignore
   const links = doc.links as { doc?: string; api?: string } | undefined
 
   return (
@@ -126,11 +125,6 @@ export default async function Page(props: {
                   {doc.title}
                 </h1>
                 <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
-                  <DocsCopyPage
-                    // @ts-expect-error - revisit fumadocs types.
-                    page={doc.content || ""}
-                    url={absoluteUrl(page.url)}
-                  />
                   {neighbours.previous &&
                     <Link href={neighbours.previous.url}>
                       <button className='rounded-full py-2 px-2 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
@@ -193,7 +187,7 @@ export default async function Page(props: {
             </Link>}
         </div>
       </div>
-      <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+      {/* <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
         <div className="h-(--top-spacing) shrink-0" />
         {doc.toc?.length ? (
           <div className="no-scrollbar overflow-y-auto px-8">
@@ -201,8 +195,8 @@ export default async function Page(props: {
             <div className="h-12" />
           </div>
         ) : null}
-        {/* for pro card */}
-      </div>
+         for pro card 
+      </div>*/}
     </div >
   )
 }

@@ -1,16 +1,7 @@
 // source.config.ts
-import { defineConfig, defineDocs, frontmatterSchema } from "fumadocs-mdx/config";
-import { z } from "zod";
+import { defineConfig, defineDocs } from "fumadocs-mdx/config";
 var docs = defineDocs({
-  dir: "content/docs",
-  docs: {
-    schema: frontmatterSchema.extend({
-      links: z.object({
-        doc: z.string().optional(),
-        api: z.string().optional()
-      }).optional()
-    })
-  }
+  dir: "content/docs"
 });
 var source_config_default = defineConfig({});
 export {

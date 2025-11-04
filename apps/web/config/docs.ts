@@ -28,33 +28,23 @@ export const docsConfig: DocsConfig = {
             items: [
                 {
                     title: "Buttons",
-                    items: [
-                        {
-                            title: "Button",
-                            href: "/docs/components/button",
-                            items: [],
-                        },
-                    ],
+                    href: "/docs/components/button",
+                    items: []
                 },
                 {
-                    title: "Cards",
-                    items: [
-                        {
-                            title: "Expandable Card",
-                            href: "/docs/components/expandable",
-                            items: [],
-                        },
-                    ],
+                    title: "Input",
+                    href: "/docs/components/input",
+                    items: [],
                 },
                 {
-                    title: "Interactive Elements",
-                    items: [
-                        {
-                            title: "Dynamic Island",
-                            href: "/docs/components/animate",
-                            items: [],
-                        }
-                    ],
+                    title: "LogIn",
+                    href: "/docs/components/login",
+                    items: [],
+                },
+                {
+                    title: "Menu",
+                    href: "/docs/components/menu",
+                    items: [],
                 },
             ],
         },

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Search_bar from "./Search_bar/Search_bar"
-import { Menu } from "lucide-react"
+import { Github, Menu } from "lucide-react"
 import Link from "next/link"
 
 const Navbar = () => {
@@ -44,18 +44,23 @@ const Navbar = () => {
                     <Link href="/components">
                         <li className="cursor-pointer">Components</li>
                     </Link>
-                    <Link href="/charts">
+                    {/* <Link href="/charts">
                         <li className="cursor-pointer">Charts</li>
-                    </Link>
+                    </Link> */}
                 </ul>
-                <div className="flex">
-                    <div onClick={() => setOpen(!Open)} className="w-[35vw]  md:w-[30vw] flex  justify-between cursor-default relative items-center lg:w-[20vw] h-[2em] bg-[var(--bg-light)] shadow-[var(--shadow-s)] rounded-lg  px-[1rem] py-[1rem] outline-0 text-sm" >
+                <div className="flex items-center gap-4">
+                    <div onClick={() => setOpen(!Open)} className="w-[35vw]  md:w-[30vw] flex  justify-between cursor-default relative items-center lg:w-[20vw] h-[2em] bg-[var(--bg)] shadow-[var(--shadow-s)] rounded-lg  px-[1rem] py-[1rem] outline-0 text-sm" >
                         <p className="text-[1vw]">Search Components...</p>
                         <div className="right-[10px] flex items-center gap-2 text-[12px] text-[#ffffff54]">
-                            <div className="bg-[var(--bg)]  flex items-center justify-center rounded-md px-[8px] py-[2.5px]">Ctrl</div>
-                            <div className="bg-[var(--bg)]  flex items-center justify-center rounded-md px-[8px] py-[2.5px] ">K</div>
+                            <div className="bg-[var(--bg-light)]  flex items-center justify-center rounded-md px-[8px] py-[3px]">⌘</div>
+                            <div className="bg-[var(--bg-light)]  flex items-center justify-center rounded-md px-[8px] py-[3px] ">K</div>
                         </div>
                     </div>
+                    <Link href='https://github.com/GOURAVSINGH19/UI'>
+                        <button className='rounded-sm py-2 px-2  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                            <Github className='w-3 h-3' />
+                        </button>
+                    </Link>
                 </div>
             </nav>
             {

@@ -2,7 +2,7 @@
 import { createMDX } from "fumadocs-mdx/next";
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
-  cacheComponentS: true
+  cacheComponents: true
 };
 
 const withMDX = createMDX({
