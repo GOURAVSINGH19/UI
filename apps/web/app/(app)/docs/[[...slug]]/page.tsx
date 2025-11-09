@@ -38,9 +38,9 @@ function findNeighboursFromConfig(currentUrl: string) {
   }
 }
 
-export const revalidate = false
 export const dynamic = "force-static"
 export const dynamicParams = false
+export const revalidate = 60
 
 export function generateStaticParams() {
   return source.generateParams()
@@ -169,7 +169,7 @@ export default async function Page(props: {
             <MDX components={mdxComponents} />
           </div>
         </div>
-        <div className="mx-auto hidden h-16 w-full max-w-xl items-center gap-2 px-4 sm:flex md:px-0">
+        <div className="mx-auto hidden h-16 w-full  items-center justify-between gap-2 px-4 sm:flex md:px-0">
           {neighbours.previous &&
             <Link href={neighbours.previous.url}>
               <button className='rounded-full py-2 px-6 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
@@ -180,7 +180,7 @@ export default async function Page(props: {
           }
           {neighbours.next &&
             <Link href={neighbours.next.url}>
-              <button className='rounded-full py-2 px-8  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+              <button className='rounded-full mr-10 py-2 px-8  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
                 <span className='text-sm text-[#ffffff68]'>{neighbours.next?.name}</span>
                 <ArrowRight className="w-4 h-4 text-neutral-400" />
               </button>

@@ -1,11 +1,11 @@
 "use client"
-
 import * as React from "react"
 
 import { useConfig } from "@/hooks/useConfig"
 import { Tabs } from "@workspace/ui/components/ui/tabs"
 
 export function CodeTabs({ children }: React.ComponentProps<typeof Tabs>) {
+    
     const [config, setConfig] = useConfig()
 
     const installationType = React.useMemo(() => {

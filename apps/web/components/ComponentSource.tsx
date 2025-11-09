@@ -4,7 +4,6 @@ import path from "node:path"
 import * as React from "react"
 
 import { highlightCode } from "../lib/highlightCode"
-// import { getRegistryItem } from "@/lib/registry"
 import { cn } from "@workspace/ui/lib/utils"
 import { CodeCollapsibleWrapper } from "@/components/codeCollapse"
 import { CopyButton } from "@/components/copy-button"
@@ -29,11 +28,6 @@ export async function ComponentSource({
   }
 
   let code: string | undefined
-
-//   if (name) {
-//     const item = await getRegistryItem(name)
-//     code = item?.files?.[0]?.content
-//   }
 
   if (src) {
     const file = await fs.readFile(path.join(process.cwd(), src), "utf-8")

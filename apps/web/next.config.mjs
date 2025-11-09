@@ -2,15 +2,11 @@
 import { createMDX } from "fumadocs-mdx/next";
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
-  cacheComponents: true
+  pageExtensions: ["ts", "tsx", "mdx"],
 };
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-  },
 });
 
 export default withMDX(nextConfig);

@@ -18,6 +18,7 @@ export function ComponentPreviewTabs({
   component: React.ReactNode
   source: React.ReactNode
 }) {
+  
   const [tab, setTab] = React.useState("preview")
 
   return (

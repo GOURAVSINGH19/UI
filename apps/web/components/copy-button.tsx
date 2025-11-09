@@ -13,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@workspace/ui/components/ui/dropdown"
-
+import { useEffect } from "react"
 interface CopyButtonProps extends ButtonProps {
   value: string
   src?: string
@@ -37,7 +37,7 @@ export function CopyButton({
 }: CopyButtonProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       setHasCopied(false)
     }, 2000)
@@ -53,11 +53,11 @@ export function CopyButton({
           value,
           event
             ? {
-                name: event,
-                properties: {
-                  code: value,
-                },
-              }
+              name: event,
+              properties: {
+                code: value,
+              },
+            }
             : undefined
         )
         setHasCopied(true)
@@ -84,7 +84,7 @@ export function CopyWithClassNames({
 }: CopyWithClassNamesProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       setHasCopied(false)
     }, 2000)
@@ -137,7 +137,7 @@ export function CopyNpmCommandButton({
 }: CopyNpmCommandButtonProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       setHasCopied(false)
     }, 2000)

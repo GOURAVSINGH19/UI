@@ -1,6 +1,13 @@
 ---
 title: Button
-description: Displays a button or a component that looks like a button.
-featured: true
-component: true
+description: A button with gradient and animation defaults
 ---
+
+import {Button} from "@workspace/ui/components/button"
+
+```tsx
+<Button variant="outline">Button</Button>
+<Button variant="outline" size="icon" aria-label="Submit">
+  <ArrowUpIcon />
+</Button>
+```
