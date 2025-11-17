@@ -1,13 +1,94 @@
 ---
 title: Button
-description: A button with gradient and animation defaults
+description: Opinionated button styles for primary actions
 ---
 
-import {Button} from "@workspace/ui/components/button"
+import { Button } from "@workspace/ui/components/button"
+import { CodeTabs } from "../../../components/CodeTabs"
+import { ArrowUpIcon } from "lucide-react"
 
-```tsx
-<Button variant="outline">Button</Button>
-<Button variant="outline" size="icon" aria-label="Submit">
-  <ArrowUpIcon />
-</Button>
+## Overview
+
+`Button` wraps the base shadcn/ui primitive and ships with a subtle gradient,
+micro-interactions, and theme-aware tokens so you can drop it into any page
+without fiddling with Tailwind classes. Use it for form submits, CTAs, or any
+action that needs more visual weight than plain text links.
+
+## Installation
+
+You only need the `@ui` package; 
+pick the installer your team prefers.
+
+<Tabs defaultValue="npm">
+  <TabsList>
+    <TabsTrigger value="npm">`npm`</TabsTrigger>
+    <TabsTrigger value="pnpm">`pnpm`</TabsTrigger>
+    <TabsTrigger value="yarn">`yarn`</TabsTrigger>
+    <TabsTrigger value="bun">`bun`</TabsTrigger>
+  </TabsList>
+  <TabsContent value="`pnpm`">
+```bash
+pnpm add @ui
 ```
+  </TabsContent>
+  <TabsContent value="npm">
+```bash
+npm install @ui
+```
+  </TabsContent>
+  <TabsContent value="yarn">
+```bash
+yarn add @ui
+```
+  </TabsContent>
+  <TabsContent value="bun">
+```bash
+bun add @ui
+```
+  </TabsContent>
+</Tabs>
+
+## When to use
+
+- Primary call to action on a page or card
+- Secondary outline button when paired with a solid primary action
+- Icon trigger for compact surfaces such as toolbars
+
+## Playground
+
+Below is the exact component in the design system plus the snippet needed to
+render it. Tweak the props right in the preview to see states update instantly.
+
+<Tabs>
+<TabsList>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="destructive">Delete</Button>
+  <Button size="sm">Small</Button>
+  <Button size="lg">Large</Button>
+  <Button variant="outline" size="icon" aria-label="Submit">
+    <ArrowUpIcon className="h-4 w-4" />
+  </Button>
+  </TabsList>
+</Tabs>
+
+## API Surface
+
+<table>
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "outline" \| "ghost" \| "destructive"` | `"default"` | Extends the shadcn variants with design-token driven colors |
+| `size` | `"sm" \| "default" \| "lg" \| "icon"` | `"default"` | Provides consistent spacing + typography across breakpoints |
+| `asChild` | `boolean` | `false` | Forward rendering to another component (e.g. `Link`) |
+</table>
+
+All other props pass straight through to the native `button` element, so you can
+set `type="submit"`, `disabled`, `aria-*` attributes, and event handlers as
+needed.
+
+## Accessibility
+
+- Always pair icon-only buttons with `aria-label`
+- Disabled buttons set `aria-disabled` and skip pointer events, so rely on the
+  `onClick` guard server-side as well
+- Focus ring follows the theme accent color and respects reduced motion

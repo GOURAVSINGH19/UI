@@ -17,8 +17,9 @@ export function ComponentPreviewTabs({
   hideCode?: boolean
   component: React.ReactNode
   source: React.ReactNode
+  className?: string
 }) {
-  
+
   const [tab, setTab] = React.useState("preview")
 
   return (

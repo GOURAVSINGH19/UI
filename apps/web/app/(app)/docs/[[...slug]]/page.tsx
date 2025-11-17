@@ -10,7 +10,6 @@ import {
 import { source } from "@/lib/source"
 import { absoluteUrl } from "@workspace/ui/lib/utils"
 import { Badge } from "@workspace/ui/components/ui/badge"
-import { DocsTableOfContents } from "@/components/doc-toc"
 import { docsConfig } from "@/config/docs"
 
 function flattenNav(items: any[]): Array<{ url: string; name: string }> {
@@ -113,11 +112,11 @@ export default async function Page(props: {
   return (
     <div
       data-slot="docs"
-      className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full"
+      className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full p-3"
     >
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="h-(--top-spacing) shrink-0" />
-        <div className="mx-auto flex w-full max-w-4xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-0 lg:py-8 dark:text-neutral-300">
+        <div className="mx-auto flex w-full max-w-5xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-0 lg:py-8 lg:px-4 dark:text-neutral-300 bg-[#121212] border-1 border-[var(--bg-light)]  rounded-md">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
               <div className="flex items-start justify-between">
@@ -165,10 +164,11 @@ export default async function Page(props: {
               </div>
             ) : null}
           </div>
-          <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0">
+          <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0]">
             <MDX components={mdxComponents} />
           </div>
         </div>
+        {/* bottom button */}
         <div className="mx-auto hidden h-16 w-full  items-center justify-between gap-2 px-4 sm:flex md:px-0">
           {neighbours.previous &&
             <Link href={neighbours.previous.url}>
@@ -187,16 +187,6 @@ export default async function Page(props: {
             </Link>}
         </div>
       </div>
-      {/* <div className="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--footer-height)+2rem)] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
-        <div className="h-(--top-spacing) shrink-0" />
-        {doc.toc?.length ? (
-          <div className="no-scrollbar overflow-y-auto px-8">
-            <DocsTableOfContents toc={doc.toc} />
-            <div className="h-12" />
-          </div>
-        ) : null}
-         for pro card 
-      </div>*/}
     </div >
   )
 }

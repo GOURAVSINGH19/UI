@@ -3,6 +3,7 @@ import { createMDX } from "fumadocs-mdx/next";
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   pageExtensions: ["ts", "tsx", "mdx"],
+  reactCompiler: true
 };
 
 const withMDX = createMDX({

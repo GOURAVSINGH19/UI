@@ -14,6 +14,13 @@ import { Alert, AlertDescription, AlertTitle } from "@workspace/ui/components/ui
 import { AspectRatio } from "@workspace/ui/components/ui/aspect-ratio"
 import { Button } from "@workspace/ui/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/ui/tabs"
+import { CopyButton } from "./components/copy-button"
+import { getIconForLanguageExtension } from "@workspace/ui/components/ui/icons"
+import { ComponentPreviewTabs } from "./components/ComponentPreview"
+import { CodeCollapsibleWrapper } from "./components/codeCollapse"
+import { CodeTabs } from "./components/CodeTabs"
+import { ComponentSource } from "./components/ComponentSource"
+import { Callout } from "./components/Callout"
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
@@ -171,10 +178,10 @@ export const mdxComponents = {
     children,
     ...props
   }: React.ComponentProps<"figcaption">) => {
-    // const iconExtension =
-    //   "data-language" in props && typeof props["data-language"] === "string"
-    //     ? getIconForLanguageExtension(props["data-language"])
-    //     : null
+    const iconExtension =
+      "data-language" in props && typeof props["data-language"] === "string"
+        ? getIconForLanguageExtension(props["data-language"])
+        : null
 
     return (
       <figcaption
@@ -184,7 +191,7 @@ export const mdxComponents = {
         )}
         {...props}
       >
-        {/* {iconExtension} */}
+        {iconExtension}
         {children}
       </figcaption>
     )
@@ -222,24 +229,37 @@ export const mdxComponents = {
     // npm command.
     const isNpmCommand = __npm__ && __yarn__ && __pnpm__ && __bun__
     if (isNpmCommand) {
+      const managers = [
+        { label: "npm", command: __npm__ },
+        { label: "yarn", command: __yarn__ },
+        { label: "pnpm", command: __pnpm__ },
+        { label: "bun", command: __bun__ },
+      ]
+
       return (
-        // <CodeBlockCommand
-        <div>
-            __npm__={__npm__}
-            __yarn__={__yarn__}
-            __pnpm__={__pnpm__}
-            __bun__={__bun__}
+        <div className="space-y-3 rounded-lg border border-border bg-[var(--bg-dark)] p-4  text-sm">
+          {managers.map(({ label, command }) => (
+            <div key={label} className="flex flex-col gap-1">
+              <div className="flex items-center justify-between text-xs uppercase tracking-wide text-muted-foreground">
+                <span>{label}</span>
+                {command && <CopyButton value={command} aria-label={`Copy ${label} command`} />}
+              </div>
+              <code className="rounded bg-black/40 px-2 py-1 text-left text-code-foreground">
+                {command}
+              </code>
+            </div>
+          ))}
         </div>
-        // />
       )
     }
 
-    // Default codeblock.
     return (
-      <>
-        {/* {__raw__ && <CopyButton value={__raw__} src={__src__} />} */}
-        <code {...props} />
-      </>
+      <div className="bg-[var(--bg-dark)] w-full p-2 rounded-md flex flex-col gap-2">
+        {__raw__ && <CopyButton value={__raw__} src={__src__} className="w-fit" />}
+        <div>
+          <code {...props} />
+        </div>
+      </div>
     )
   },
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
@@ -318,7 +338,7 @@ export const mdxComponents = {
     <div className={cn(className)} {...props} />
   ),
   Button,
-//   Callout,
+  Callout,
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -327,11 +347,11 @@ export const mdxComponents = {
   AlertTitle,
   AlertDescription,
   AspectRatio,
-//   CodeTabs,
-//   ComponentPreview,
-//   ComponentSource,
-//   CodeCollapsibleWrapper,
-//   ComponentsList,
+  CodeTabs,
+  ComponentPreviewTabs,
+  ComponentSource,
+  CodeCollapsibleWrapper,
+  // ComponentsList,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link
       className={cn("font-medium underline underline-offset-4", className)}
