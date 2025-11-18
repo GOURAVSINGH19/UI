@@ -4,8 +4,8 @@ import { atomWithStorage } from "jotai/utils"
 type Config = {
     style?: string
     packageManager: "npm" | "yarn" | "pnpm" | "bun"
-    installationType: "cli" | "manual"
     theme?: string
+    installationType: "cli" | "menual" | string 
     radius: number
 }
 

@@ -46,6 +46,11 @@ export const docsConfig: DocsConfig = {
                     href: "/docs/components/menu",
                     items: [],
                 },
+                {
+                    title: "Slidecard",
+                    href: "/docs/components/slidecard",
+                    items: [],
+                },
             ],
         },
     ],

@@ -59,7 +59,7 @@ function NavItem({ item, pathname }: NavItemProps) {
   if (hasChildren) {
     return (
       <div>
-        <span className={`flex w-full cursor-default items-center rounded-md p-2 text-[12px] font-medium `}>
+        <span className={`flex w-full cursor-default items-center rounded-md  text-[12px] font-medium `}>
           {item.title}
         </span>
         <div className={`ml-3 border-l border-border pl-3 text-xs ${isActive ? "text-white" : "text-zinc-800"}`}>

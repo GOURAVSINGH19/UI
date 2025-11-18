@@ -1,4 +1,83 @@
 ---
 title: "Input"
-description: "Input docs"
+description: "Frictionless, theme-aware text inputs"
 ---
+
+import Input from "../../../components/ui/Input"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+
+## Overview
+
+`Input` is a lightweight wrapper around the native `<input>` that ships with the
+same tokens and shadows used across the rest of the system. It keeps spacing,
+typography, and focus rings consistent so you can drop it into auth screens,
+filters, or command bars without restyling from scratch.
+
+## Installation
+
+Copy the component from `apps/web/components/ui/Input.tsx`, or run the CLI:
+
+```bash
+pnpm dlx @workspace/cli add input
+```
+
+## When to use
+
+- Email or password collection inside onboarding flows
+- Inline filters, global search, or quick actions
+- Small form rows where you need custom visuals beyond the browser default
+
+## Preview
+
+<DocsPreview>
+  <Input />
+</DocsPreview>
+
+## Usage
+
+```tsx
+import Input from "@/components/ui/Input";
+
+export function Input() {
+    return (
+      <Input
+        type="email"
+        placeholder="jane@workspace.so"
+        value={value}
+        className="rounded-xs border border-white/10 bg-white/5 py-3"
+      />
+  );
+}
+```
+
+## API Surface
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [
+      <code key="placeholder">placeholder</code>,
+      <code key="placeholder-type">string</code>,
+      "—",
+      "Helper text rendered inside the field when it’s empty.",
+    ],
+    [
+      <code key="className">className</code>,
+      <code key="className-type">string</code>,
+      "—",
+      "Extend or override the default tokens with extra Tailwind classes.",
+    ],
+    [
+      <code key="disabled">disabled</code>,
+      <code key="disabled-type">boolean</code>,
+      <code key="disabled-default">false</code>,
+      "Disables interactivity and lowers opacity automatically.",
+    ],
+  ]}
+/>
+
+## Accessibility
+
+- Associate inputs with `<label>` elements for better screen-reader context.
+- Keep contrast on text and placeholder above WCAG AA (we default to 60%+).
+- Disabled inputs remove pointer events, so pair with server-side guards.

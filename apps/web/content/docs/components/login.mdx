@@ -1,4 +1,63 @@
 ---
 title: "Login"
-description: "Login Page"
+description: "High-converting credential wall with gradients and motion"
 ---
+
+import LoginPage from "@/components/ui/Login"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+
+## Overview
+
+`Login` bundles an authentication hero, lightning badge, stacked inputs, and
+social actions into a single, production-ready layout. It honors the same token
+system as the rest of the marketing site, so headings, radius, and shadows feel
+native out of the box.
+
+## Installation
+
+Copy `apps/web/components/ui/Login.tsx` into your project or run:
+
+```bash
+pnpm dlx @workspace/cli add login
+```
+
+## When to use
+
+- Dedicated login routes where you want more storytelling than a plain card
+- Billing or workspace gating experiences that need SOC2-grade polish
+- Launch pages that showcase third-party auth providers alongside email/password
+
+## Preview
+
+<DocsPreview inset className="bg-[var(--bg)]">
+  <LoginPage />
+</DocsPreview>
+
+## Usage
+
+```tsx
+import LoginPage from "@/components/ui/Login";
+
+export default function LoginRoute() {
+  return <LoginPage />;
+}
+```
+
+## API Surface
+
+<DocsTable
+  headers={["Component", "Props", "Notes"]}
+  rows={[
+    [
+      <code key="login">LoginPage</code>,
+      "—",
+      "Self-contained page component with internal state management. Clone it if you need to customize copy, providers, or theme tokens.",
+    ],
+  ]}
+/>
+
+## Accessibility
+
+- Inputs forward `aria-*` attributes, so you can announce validation states.
+- Buttons include real text labels—supplement icons with `aria-label` if you add more providers.
+- Remember to handle authentication failures server-side; the demo form only logs to the console.

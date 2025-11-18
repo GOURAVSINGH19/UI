@@ -1,0 +1,112 @@
+---
+title: "Slidecard"
+description: "Stacked status cards for agents, workflows, or dashboards"
+---
+
+import { Slidcard, Skeleton, Slider, Badge, CardFooter } from "@/components/ui/Slidcard"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+
+## Overview
+
+`Slidecard` is a ready-to-drop, tilted stack of status cards that showcases
+multiple workstreams in a single hero block. It ships with layered `Skeleton`
+cards, animated badges, and a footer CTA so you can highlight automations,
+pipelines, or assistant states without composing dozens of Tailwind classes.
+
+## Installation
+
+Clone the component into your app with the workspace CLI:
+
+```bash
+pnpm dlx @workspace/cli add slidecard
+```
+
+## Preview
+
+<DocsPreview>
+  <Slidcard />
+</DocsPreview>
+
+## Usage
+
+```tsx
+import { Slidcard } from "@/components/ui/Slidcard";
+
+export default function AutomationSpotlight() {
+  return (
+      <Slidcard />
+    );
+}
+```
+## Anatomy
+
+- `Card` – wraps the stacked skeletons and keeps sizes in sync with the outer shell.
+- `Skeleton` – individual tiles showing a title, description, badges, and optional chips.
+- `Slider` – compact pill labels that call out sub-tasks or channels.
+- `Badge` – dual-icon badge that communicates state or duration.
+- `CardFooter` – sticky footer with a descriptive line and icon button affordance.
+
+## Customizing
+
+- Swap the lucide icons passed to each `Skeleton` or the footer button to match the story you want to tell.
+- Adjust the `title`, `desc`, and `time` props for every `Skeleton` to highlight unique milestones.
+- Use the optional `children` slot on `Skeleton` to inject additional `Slider` chips or any React node.
+- Override Tailwind classes via the `className` prop to change colors, depth, or stacking order.
+
+## API Surface
+
+<DocsTable
+  headers={["Component", "Props", "Notes"]}
+  rows={[
+    [
+      <code key="slidcard">Slidcard</code>,
+      "—",
+      "Renders the opinionated stack of Skeleton cards. Clone it when you want the exact hero layout.",
+    ],
+    [
+      <code key="skeleton">Skeleton</code>,
+      <span key="skeleton-props" className="flex flex-wrap gap-2">
+        <code>title</code>
+        <code>desc</code>
+        <code>time</code>
+        <code>variant</code>
+        <code>icon</code>
+        <code>children?</code>
+        <code>className?</code>
+      </span>,
+      "Use directly when you need a single card with custom content or stacking order.",
+    ],
+    [
+      <code key="slider">Slider</code>,
+      <span key="slider-props" className="flex flex-wrap gap-2">
+        <code>title</code>
+        <code>className?</code>
+      </span>,
+      "Tiny rounded pills that highlight sub-tasks or target channels.",
+    ],
+    [
+      <code key="badge">Badge</code>,
+      <span key="badge-props" className="flex flex-wrap gap-2">
+        <code>variant</code>
+        <code>time</code>
+        <code>className?</code>
+      </span>,
+      "Wraps the dual-icon time indicator. Unknown variants fall back to a neutral palette.",
+    ],
+    [
+      <code key="footer">CardFooter</code>,
+      <span key="footer-props" className="flex flex-wrap gap-2">
+        <code>desc?</code>
+        <code>icon?</code>
+      </span>,
+      "Persistent CTA area—the icon button already carries hover states.",
+    ],
+  ]}
+/>
+
+## Tips
+
+- Pair it with a muted gradient or photo background—the transparent edges let the card feel layered.
+- Because transforms are hard-coded, keep the component on GPU-accelerated surfaces for smoother animation.
+- Respect pointer events: only the footer icon is clickable by default, so wrap the entire block with a link if you want a single action.
+

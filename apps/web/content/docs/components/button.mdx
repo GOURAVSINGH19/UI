@@ -3,9 +3,9 @@ title: Button
 description: Opinionated button styles for primary actions
 ---
 
-import { Button } from "@workspace/ui/components/button"
-import { CodeTabs } from "../../../components/CodeTabs"
-import { ArrowUpIcon } from "lucide-react"
+import { Button } from "@workspace/ui/components/ui/button"
+import { ButtonVariantPlayground } from "../../../components/docs/ButtonVariantPlayground"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
 
 ## Overview
 
@@ -54,33 +54,49 @@ bun add @ui
 - Secondary outline button when paired with a solid primary action
 - Icon trigger for compact surfaces such as toolbars
 
-## Playground
+## Preview
 
-Below is the exact component in the design system plus the snippet needed to
-render it. Tweak the props right in the preview to see states update instantly.
+<DocsPreview>
+  <ButtonVariantPlayground />
+</DocsPreview>
 
-<Tabs>
-<TabsList>
-  <Button variant="outline">Outline</Button>
-  <Button variant="ghost">Ghost</Button>
-  <Button variant="destructive">Delete</Button>
-  <Button size="sm">Small</Button>
-  <Button size="lg">Large</Button>
-  <Button variant="outline" size="icon" aria-label="Submit">
-    <ArrowUpIcon className="h-4 w-4" />
-  </Button>
-  </TabsList>
-</Tabs>
+## Usage
+
+```tsx
+import { Button } from "@workspace/ui/components/ui/button";
+
+export default function AutomationSpotlight() {
+  return (
+      <Button> Hello World! </Button>
+    );
+}
+```
 
 ## API Surface
 
-<table>
-| Prop | Type | Default | Notes |
-| --- | --- | --- | --- |
-| `variant` | `"default" \| "outline" \| "ghost" \| "destructive"` | `"default"` | Extends the shadcn variants with design-token driven colors |
-| `size` | `"sm" \| "default" \| "lg" \| "icon"` | `"default"` | Provides consistent spacing + typography across breakpoints |
-| `asChild` | `boolean` | `false` | Forward rendering to another component (e.g. `Link`) |
-</table>
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [
+      <code key="variant">variant</code>,
+      <code key="variant-type">"default" | "outline" | "ghost" | "destructive"</code>,
+      <code key="variant-default">"default"</code>,
+      "Extends the shadcn variants with design-token driven colors.",
+    ],
+    [
+      <code key="size">size</code>,
+      <code key="size-type">"sm" | "default" | "lg" | "icon"</code>,
+      <code key="size-default">"default"</code>,
+      "Provides consistent spacing and typography across breakpoints.",
+    ],
+    [
+      <code key="asChild">asChild</code>,
+      <code key="asChild-type">boolean</code>,
+      <code key="asChild-default">false</code>,
+      "Forward rendering to another component such as Link.",
+    ],
+  ]}
+/>
 
 All other props pass straight through to the native `button` element, so you can
 set `type="submit"`, `disabled`, `aria-*` attributes, and event handlers as

@@ -1,4 +1,92 @@
 ---
 title: "Menu"
-description: "Menu"
+description: "Docs sidebar navigation with section labels and badges"
 ---
+
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+import { MenuPreview } from "../../../components/docs/MenuPreview"
+import { DocsSidebarNav } from "@/components/Sidenav"
+
+## Overview
+
+`DocsSidebarNav` is the vertical menu that powers this documentation site. It
+collapses sections, highlights the active page based on the current URL, and
+displays contextual badges like “new” or “updated” without extra wiring.
+
+## Installation
+
+Copy `apps/web/components/Sidenav.tsx` into your project or use the CLI:
+
+```bash
+pnpm dlx @workspace/cli add menu
+```
+
+## When to use
+
+- Documentation or knowledge-base layouts with nested sections
+- Desks and dashboards that need a labeled navigation rail
+- Marketing launchpads that call out “new”, “updated”, or “beta” screens
+
+## Preview
+
+<DocsPreview>
+  <MenuPreview />
+</DocsPreview>
+
+## Usage
+
+```tsx
+import { DocsSidebarNav } from "@/components/Sidenav";
+
+const sidebar = [
+  {
+    title: "Components",
+    items: [
+      { title: "Buttons", href: "/docs/components/button" },
+      { title: "Input", href: "/docs/components/input", label: "updated" },
+    ],
+  },
+];
+
+export function Sidebar() {
+  return <DocsSidebarNav items={sidebar} />;
+}
+```
+
+## API Surface
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [
+      <code key="items">items</code>,
+      <code key="items-type">SidebarNavItem[]</code>,
+      "—",
+      "Structured tree containing sections and child links. Matches `docsConfig.sidebarNav`.",
+    ],
+    [
+      <code key="item.href">item.href</code>,
+      <code key="item-href-type">string</code>,
+      "—",
+      "Optional URL used to highlight the active link through `usePathname`.",
+    ],
+    [
+      <code key="item.label">item.label</code>,
+      <code key="item-label-type">"new" | "recent" | "updated"</code>,
+      "—",
+      "Renders color-coded badges next to the nav item.",
+    ],
+    [
+      <code key="item.items">item.items</code>,
+      <code key="item-items-type">SidebarNavItem[]</code>,
+      <code key="item-items-default">[]</code>,
+      "Nest additional pages to create multi-depth menus.",
+    ],
+  ]}
+/>
+
+## Accessibility
+
+- Links include focus states and rely on semantic `<a>` tags for screen-reader support.
+- Use descriptive titles for every nav item so the sidebar remains scannable.
+- Keep badge labels short (≤6 characters) to avoid truncation on narrow viewports.

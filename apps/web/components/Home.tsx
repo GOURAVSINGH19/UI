@@ -2,6 +2,8 @@ import { ArrowRight, Github } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
+
+
 const Home = () => {
     return (
         <section className='w-full h-[75vh] flex items-center mt-[4vw] flex-col mb-10'>

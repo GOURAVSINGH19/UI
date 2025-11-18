@@ -6,7 +6,7 @@ import { CheckIcon, ClipboardIcon } from "lucide-react"
 import { NpmCommands } from "@/types/unist"
 import { Event, trackEvent } from "../lib/events"
 import { cn } from "@workspace/ui/lib/utils"
-import { Button, ButtonProps } from "@workspace/ui/components/ui/button"
+import { Button } from "@workspace/ui/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,8 @@ import {
   DropdownMenuTrigger,
 } from "@workspace/ui/components/ui/dropdown"
 import { useEffect } from "react"
-interface CopyButtonProps extends ButtonProps {
+
+interface CopyButtonProps extends React.ComponentPropsWithoutRef<typeof Button> {
   value: string
   src?: string
   event?: Event["name"]
@@ -29,10 +30,9 @@ export async function copyToClipboardWithMeta(value: string, event?: Event) {
 
 export function CopyButton({
   value,
-  className,
   src,
-  variant = "ghost",
   event,
+  className,
   ...props
 }: CopyButtonProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
@@ -46,7 +46,6 @@ export function CopyButton({
   return (
     <Button
       size="icon"
-      variant={variant}
       className={cn("relative z-10 size-6  [&_svg]:size-3", className)}
       onClick={() => {
         copyToClipboardWithMeta(
