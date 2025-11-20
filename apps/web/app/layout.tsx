@@ -31,7 +31,9 @@ export default function RootLayout({
         }}
         >
           <Providers>
-            {children}
+            <div className="relative z-10 flex min-h-screen flex-col ">
+              {children}
+            </div>
           </Providers>
         </RootProvider>
       </body>

@@ -37,17 +37,6 @@ const Navbar = () => {
                     <div className="md:hidden cursor-pointer"><Menu className="w-4 h-4" /></div>
                     <p className="w-full font-medium md:hidden">Menu</p>
                 </div>
-                <ul className="w-full md:flex gap-6 font-medium  hidden">
-                    <Link href="/docs">
-                        <li className="cursor-pointer">Docs</li>
-                    </Link>
-                    <Link href="/components">
-                        <li className="cursor-pointer">Components</li>
-                    </Link>
-                    {/* <Link href="/charts">
-                        <li className="cursor-pointer">Charts</li>
-                    </Link> */}
-                </ul>
                 <div className="flex items-center gap-4">
                     <div onClick={() => setOpen(!Open)} className="flex  justify-between cursor-pointer relative items-center lg:w-fit h-[2em] bg-[var(--bg)] shadow-[var(--shadow-s)] rounded-lg  px-[1rem] py-[1rem] outline-0 text-sm" >
                         <p className="border-r-1 border-white mr-4 pr-4">

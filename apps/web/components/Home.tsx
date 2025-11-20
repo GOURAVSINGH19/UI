@@ -6,9 +6,9 @@ import React from 'react'
 
 const Home = () => {
     return (
-        <section className='w-full h-[75vh] flex items-center mt-[4vw] flex-col mb-10'>
+        <section className='w-full h-[100vh] flex items-center mt-[4vw] flex-col space-y-4'>
             <div className='w-full flex-col flex justify-center items-center'>
-                <div className='mt-10 w-fit backdrop-blur-2xl bg-white/10 border border-white/10 lg:w-[30%] px-4 py-1/2 rounded-2xl flex items-center justify-center gap-3 mb-5 shadow-[var(--shadow-sm)]'>
+                <div className=' mt-20 lg:mt-10 w-fit backdrop-blur-2xl bg-white/10 border border-white/10 lg:w-[30%] px-2 md:px-4 py-1/2 rounded-2xl flex items-center justify-center gap-3 mb-5 shadow-[var(--shadow-sm)]'>
                     <svg xmlns="http://www.w3.org/2000/svg" className='w-2 h-2' width="24" height="24" viewBox="0 0 24 24">
                         <title>star-sparkle</title>
                         <g fill="none">
@@ -57,23 +57,27 @@ const Home = () => {
                             </defs>
                         </g>
                     </svg>
-                    <p className='text-[10px]'>A modern UI library designed for speed, flexibility, and simplicity.</p>
+                    <p className=' text-[8px] md:text-[10px]'>A modern UI library designed for speed, flexibility, and simplicity.</p>
                     <ArrowRight className='w-3 font-light' />
                 </div>
-                <h1 className='text-[5.5vw] line-clamp-2 leading-[110%] capitalize'>Build beautiful</h1>
-                <h1 className='text-[4.5vw] line-clamp-2 leading-[110%] capitalize mb-5'>consistent UIs — fast.</h1>
-                <p className='text-[10px] font-medium leading-[110%] capitalize text-[#d4d4d4]'>Get started with our documentation and examples.</p>
+                <h1 className=' font-serif text-[3rem] md:text-[5.5vw] line-clamp-2 leading-[110%] capitalize'>Build beautiful</h1>
+                <h1 className=' font-serif text-[2.2rem] md:text-[4.5vw] line-clamp-2 leading-[110%] capitalize mb-5'>consistent UIs — fast.</h1>
+                <div className='mx-auto max-w-3xl space-y-6 md:space-y-8' >
+                    <p className='text-[12px] md:text-[10px] font-serif font-medium leading-[120%] capitalize text-[#d4d4d4] text-center'>
+                        Free and open source components. Turn intent into action, configured for vibe coding.
+                    </p>
+                </div>
             </div>
             <div className='btn_container w-full leading-[130%] flex justify-center items-center gap-4 mt-4'>
                 <Link href="/docs/index">
-                    <button className='px-10 bg-[#fff] py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black'>
+                    <button className='px-3 bg-[#fff] py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black'>
                         Get Started
                     </button>
                 </Link>
                 <Link href="/components">
-                    <button className=' px-6 py-2  flex items-center justify-center bg-[var(--bg)]  rounded-full gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                    <button className=' px-3 py-2  flex items-center justify-center bg-[var(--bg)]  rounded-full gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
                         <p className='text-sm'>
-                            View Components
+                            Components
                         </p>
                     </button>
                 </Link>
