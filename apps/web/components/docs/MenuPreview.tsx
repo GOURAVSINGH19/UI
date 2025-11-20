@@ -7,11 +7,11 @@ const demoNav: SidebarNavItem[] = [
   {
     title: "Workspace",
     items: [
-      { title: "Overview", href: "/docs/workspace/overview", items: [] },
-      { title: "Activity", href: "/docs/workspace/activity", items: [] },
+      { title: "Overview", href: "*", items: [] },
+      { title: "Activity", href: "*", items: [] },
       {
         title: "Security",
-        href: "/docs/workspace/security",
+        href: "*",
         label: "updated",
         items: [],
       },

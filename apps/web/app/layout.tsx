@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "@workspace/ui/styles/globals.css"
+import "@workspace/ui/global.css"
 import { Providers } from "@/app/providers"
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import Navbar from "@/components/Navbar";

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Zap, Mail, Lock, Eye, EyeOff } from 'lucide-react';
-import Input from "@/components/ui/Input"
+import Input from "@/components/docs/Input"
 import {cn} from "@workspace/ui/lib/utils"
 
 const LoginPage = () => {
