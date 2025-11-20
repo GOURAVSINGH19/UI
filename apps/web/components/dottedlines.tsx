@@ -35,14 +35,13 @@ const easingFunctions = {
 }
 
 export function DottedContainer({
-  columnCount = 4,
+  columnCount = 6,
   className = "",
   solidLines = [],
   animated = true,
-  animationDuration = 62,
+  animationDuration = 10,
   animationDelay = 0.8,
-  glowColor = "hsl(var(--accent))",
-  //   glowColor = "#D2F583",
+  glowColor = "#D2F583",
   glowSize = "10vh",
   glowOpacity = 0.4,
   randomize = true,
@@ -137,8 +136,8 @@ export function DottedContainer({
 
   const lineColors = useMemo(() => {
     return {
-      solid: darkMode ? "hsl(233 14% 13%)" : "#fff",
-      dashed: darkMode ? "hsl(233 14% 20%)" : "#fff",
+      solid: darkMode ? "hsl(233 14% 13%)" : "bg-purple-700",
+      dashed: darkMode ? "hsl(233 14% 20%)" : "bg-purple-700",
     }
   }, [darkMode])
 
@@ -162,24 +161,22 @@ export function DottedContainer({
           {columns.map((_, index) => (
             <div key={index} className="relative h-full">
               <div
-                className={`absolute inset-y-0 ${
-                  index === 0
+                className={`absolute inset-y-0 ${index === 0
                     ? "left-0"
                     : index === columns.length - 1
                       ? "right-0"
                       : "left-1/2"
-                } w-px ${
-                  solidLines.includes(index + 1)
+                  } w-px ${solidLines.includes(index + 1)
                     ? "bg-gray-300"
                     : "bg-gradient-to-b"
-                } overflow-hidden`}
+                  } overflow-hidden`}
                 style={
                   solidLines.includes(index + 1)
                     ? { background: lineColors.dashed }
                     : {
-                        backgroundImage: `linear-gradient(to bottom, ${lineColors.dashed} 50%, transparent 50%)`,
-                        backgroundSize: "1px 8px",
-                      }
+                      backgroundImage: `linear-gradient(to bottom, ${lineColors.dashed} 50%, transparent 50%)`,
+                      backgroundSize: "1px 8px",
+                    }
                 }
               >
                 <AnimatePresence>
@@ -189,9 +186,8 @@ export function DottedContainer({
                       className="absolute w-full"
                       style={{
                         height: glowSize,
-                        background: `linear-gradient(to bottom, transparent, ${glowColor}, ${
-                          darkMode ? "black" : "white"
-                        })`,
+                        background: `linear-gradient(to bottom, transparent, ${glowColor}, ${darkMode ? "black" : "white"
+                          })`,
                         opacity: glowOpacity,
                       }}
                       initial={

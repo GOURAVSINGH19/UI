@@ -2,6 +2,7 @@
 
 import { DocsSidebarNav } from "@/components/Sidenav"
 import type { SidebarNavItem } from "@/types/nav"
+import { cn } from "@workspace/ui/lib/utils"
 
 const demoNav: SidebarNavItem[] = [
   {
@@ -32,9 +33,9 @@ const demoNav: SidebarNavItem[] = [
   },
 ]
 
-export function MenuPreview() {
+export function MenuPreview({ className }: { className?: string }) {
   return (
-    <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-white">
+    <div className={cn("w-full max-w-lg rounded-2xl ring-1 bg-white p-6 shadow-[10px_8px_1px_1px_#121212]", className)}>
       <DocsSidebarNav items={demoNav} />
     </div>
   )
