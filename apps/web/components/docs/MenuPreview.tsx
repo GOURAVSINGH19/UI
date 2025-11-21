@@ -35,7 +35,7 @@ const demoNav: SidebarNavItem[] = [
 
 export function MenuPreview({ className }: { className?: string }) {
   return (
-    <div className={cn("w-full max-w-lg rounded-2xl ring-1 bg-white p-6 shadow-[10px_8px_1px_1px_#121212]", className)}>
+    <div className={cn("w-full max-w-lg rounded-2xl ring-1 bg-white p-6", className)}>
       <DocsSidebarNav items={demoNav} />
     </div>
   )

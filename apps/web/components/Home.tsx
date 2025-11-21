@@ -6,7 +6,7 @@ import React from 'react'
 
 const Home = () => {
     return (
-        <section className='w-full h-screen flex items-center mt-[4vw] flex-col space-y-4'>
+        <section className='w-full h-full flex items-center mt-[4vw] flex-col space-y-4'>
             <div className='w-full flex-col flex justify-center items-center'>
                 <div className=' mt-20 lg:mt-10 w-fit backdrop-blur-2xl bg-white/10 border border-white/10 lg:w-[30%] px-2 md:px-4 py-1/2 rounded-2xl flex items-center justify-center gap-3 mb-5 shadow-[var(--shadow-sm)]'>
                     <svg xmlns="http://www.w3.org/2000/svg" className='w-2 h-2' width="24" height="24" viewBox="0 0 24 24">

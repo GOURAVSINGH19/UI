@@ -35,7 +35,7 @@ const easingFunctions = {
 }
 
 export function DottedContainer({
-  columnCount = 6,
+  columnCount = 3,
   className = "",
   solidLines = [],
   animated = true,

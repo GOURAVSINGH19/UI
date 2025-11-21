@@ -128,10 +128,10 @@ export function FileUpload({
         .filter(Boolean)
         .join(", ");
     return (
-        <div className={cn("flex items-center justify-center min-h-screen bg-neutral-800 p-4", className)}>
+        <div className={cn("flex items-center justify-center p-4", className)}>
             <div className="w-full max-w-sm bg-[var(--bg)] rounded-sm shadow-[var(--shadow-sm)]">
-                <div className="flex items-center justify-end border-b border-zinc-800 px-6 py-4">
-                    <button className="w-6 h-6 rounded-full bg-[var(--bg-light)] text-center flex items-center justify-center shadow-[var(--shadow-m)]">
+                <div className="flex items-center justify-end border-b border-zinc-800 px-6 py-2">
+                    <button className="w-4 h-4 rounded-full bg-[var(--bg-light)] text-center flex items-center justify-center shadow-[var(--shadow-s)]">
                         <X className="w-3 h-3 cursor-pointer" />
                     </button>
                 </div>
@@ -247,7 +247,7 @@ export function FileUpload({
                             <button onClick={handleCancel} className="bg-[var(--bg-light)] shadow-[var(--shadow-s)] text-sm px-3 py-1 rounded-md border-purple-300 text-neutral-200 cursor-pointer ">
                                 Cancel
                             </button>
-                            <button onClick={handleUpload} className="bg-purple-800 shadow-[var(--shadow-s)] text-sm px-3 py-1 rounded-md border-purple-300 text-neutral-200 cursor-pointer ">
+                            <button onClick={handleUpload} className="bg-neutral-900 shadow-[var(--shadow-s)] text-sm px-3 py-1 rounded-md border-purple-300 text-neutral-200 cursor-pointer ">
                                 Continue
                             </button>
                         </div>

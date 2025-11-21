@@ -53,5 +53,15 @@ export const docsConfig: DocsConfig = {
                 },
             ],
         },
+        {
+            title: "Charts",
+            items: [
+                {
+                    title: "Bar Chart",
+                    href: "/docs/charts/barchart",
+                    items: []
+                }
+            ]
+        }
     ],
 }
