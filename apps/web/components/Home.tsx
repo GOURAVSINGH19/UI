@@ -69,7 +69,7 @@ const Home = () => {
                 </div>
             </div>
             <div className='btn_container w-full leading-[130%] flex justify-center items-center gap-4 mt-4'>
-                <Link href="/docs/index">
+                <Link href="/docs">
                     <button className='px-3 bg-[#fff] py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black'>
                         Get Started
                     </button>
