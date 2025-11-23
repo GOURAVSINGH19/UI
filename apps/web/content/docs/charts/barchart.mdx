@@ -1,4 +1,88 @@
 ---
 title: "Bar Chart"
-description: "Some description"
+description: "Beautiful and customizable charts for data visualization"
 ---
+
+import { AnalyticsLineChart } from "../../../components/charts/Barchart"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+
+## Overview
+
+The chart components provide flexible and customizable ways to display data in various formats. Our chart library uses Recharts under the hood, providing powerful data visualization capabilities with beautiful styling.
+
+<Callout type="info" title="Data Visualization">
+  Charts are ideal for visualizing trends, comparing values, and presenting data in an easy-to-understand format. Choose the right chart type based on your data and use case.
+</Callout>
+
+## Installation
+
+Install the required dependencies:
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="npm">npm</TabsTrigger>
+    <TabsTrigger value="pnpm">pnpm</TabsTrigger>
+    <TabsTrigger value="yarn">yarn</TabsTrigger>
+    <TabsTrigger value="bun">bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+```bash
+npm install recharts
+```
+  </TabsContent>
+  <TabsContent value="pnpm">
+```bash
+pnpm add recharts
+```
+  </TabsContent>
+  <TabsContent value="yarn">
+```bash
+yarn add recharts
+```
+  </TabsContent>
+  <TabsContent value="bun">
+```bash
+bun add recharts
+```
+  </TabsContent>
+</CodeTabs>
+
+## When to use
+
+- Visualizing trends over time
+- Comparing values across different categories
+- Displaying analytics and metrics
+- Presenting statistical data and insights
+
+## Preview
+
+<ComponentPreviewTabs
+  component={<AnalyticsLineChart />}
+  source={
+    <ComponentSource
+      src="components/charts/Barchart.tsx"
+      title="Barchart.tsx"
+      language="tsx"
+    />
+  }
+/>
+
+## Customization
+
+Chart components can be customized with different colors, sizes, and data configurations. The components use Recharts, which provides extensive customization options.
+
+<Callout type="warning" title="Data Format">
+  Ensure your data is properly formatted before passing it to the chart component. Data should be an array of objects with consistent keys.
+</Callout>
+
+## Best Practices
+
+- Keep the number of data points reasonable for readability
+- Use consistent colors that match your theme
+- Provide clear labels, legends, and tooltips
+- Ensure sufficient contrast for accessibility
+- Use responsive containers for mobile compatibility
+
+<Callout type="success" title="Pro Tip">
+  For better performance with large datasets, consider implementing data aggregation, pagination, or virtualization for your charts.
+</Callout>

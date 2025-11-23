@@ -14,39 +14,6 @@ micro-interactions, and theme-aware tokens so you can drop it into any page
 without fiddling with Tailwind classes. Use it for form submits, CTAs, or any
 action that needs more visual weight than plain text links.
 
-## Installation
-
-You only need the `@ui` package; 
-pick the installer your team prefers.
-
-<Tabs defaultValue="npm">
-  <TabsList>
-    <TabsTrigger value="npm">`npm`</TabsTrigger>
-    <TabsTrigger value="pnpm">`pnpm`</TabsTrigger>
-    <TabsTrigger value="yarn">`yarn`</TabsTrigger>
-    <TabsTrigger value="bun">`bun`</TabsTrigger>
-  </TabsList>
-  <TabsContent value="`pnpm`">
-```bash
-pnpm add @ui
-```
-  </TabsContent>
-  <TabsContent value="npm">
-```bash
-npm install @ui
-```
-  </TabsContent>
-  <TabsContent value="yarn">
-```bash
-yarn add @ui
-```
-  </TabsContent>
-  <TabsContent value="bun">
-```bash
-bun add @ui
-```
-  </TabsContent>
-</Tabs>
 
 ## When to use
 
@@ -56,21 +23,16 @@ bun add @ui
 
 ## Preview
 
-<DocsPreview>
-  <ButtonVariantPlayground />
-</DocsPreview>
-
-## Usage
-
-```tsx
-import { Button } from "@workspace/ui/components/ui/button";
-
-export default function AutomationSpotlight() {
-  return (
-      <Button> Hello World! </Button>
-    );
-}
-```
+<ComponentPreviewTabs
+  component={<ButtonVariantPlayground />}
+  source={
+    <ComponentSource
+      src="components/docs/ButtonVariantPlayground.tsx"
+      title="ButtonVariantPlayground.tsx"
+      language="tsx"
+    />
+  }
+/>
 
 ## API Surface
 

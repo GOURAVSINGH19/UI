@@ -7,17 +7,18 @@ import { SidebarNavItem } from "types/nav"
 import { cn } from "@workspace/ui/lib/utils"
 
 export interface DocsSidebarNavProps {
-  items: SidebarNavItem[]
+  items: SidebarNavItem[],
+  className?: string
 }
 
-export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
+export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
   const pathname = usePathname()
 
   return items.length ? (
     <div className="w-full">
       {items.map((item, index) => (
         <div key={index} className={cn("pb-4")}>
-          <h4 className="mb-1 rounded-md px-2 py-1 text-md font-medium text-white">
+          <h4 className={cn("mb-1 rounded-md px-2 py-1 text-md font-medium text-black", className)}>
             {item.title}
           </h4>
           {item?.items?.length && (
@@ -39,7 +40,7 @@ export function DocsSidebarNavItems({
   pathname,
 }: DocsSidebarNavItemsProps) {
   return items?.length ? (
-    <div className="grid grid-flow-row auto-rows-max text-xs font-medium">
+    <div className="grid grid-flow-row auto-rows-max text-xs font-medium ml-2">
       {items.map((item, index) => (
         <NavItem key={index} item={item} pathname={pathname} />
       ))}
@@ -59,7 +60,7 @@ function NavItem({ item, pathname }: NavItemProps) {
   if (hasChildren) {
     return (
       <div>
-        <span className={`flex w-full cursor-default items-center rounded-md  text-[12px] font-medium `}>
+        <span className={`flex w-full cursor-default items-center rounded-md text-black  text-[12px] font-medium `}>
           {item.title}
         </span>
         <div className={`ml-3 border-l border-border pl-3 text-xs ${isActive ? "text-white" : "text-zinc-800"}`}>
@@ -76,12 +77,12 @@ function NavItem({ item, pathname }: NavItemProps) {
         className={cn(
           "group flex w-full items-center rounded-md border border-transparent px-2 py-1",
           item.disabled && "cursor-not-allowed opacity-60",
-          isActive ? "font-medium text-foreground" : "text-muted-foreground"
+          isActive ? "font-medium text-foreground" : "text-neutral-600"
         )}
         target={item.external ? "_blank" : ""}
         rel={item.external ? "noreferrer" : ""}
       >
-        <p className=" hover:underline">{item.title}</p>
+        <p className=" hover:underline ">{item.title}</p>
         {item.label === "new" && (
           <span className="ml-2 rounded-md border border-black bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline">
             {item.label}

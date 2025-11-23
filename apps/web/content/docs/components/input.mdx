@@ -17,9 +17,25 @@ filters, or command bars without restyling from scratch.
 
 Copy the component from `apps/web/components/ui/Input.tsx`, or run the CLI:
 
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+  <TabsContent value="cli">
 ```bash
 pnpm dlx @workspace/cli add input
 ```
+  </TabsContent>
+  <TabsContent value="manual">
+<ComponentSource
+  src="components/docs/Input.tsx"
+  title="Input.tsx"
+  language="tsx"
+  collapsible={true}
+/>
+  </TabsContent>
+</CodeTabs>
 
 ## When to use
 
@@ -27,28 +43,23 @@ pnpm dlx @workspace/cli add input
 - Inline filters, global search, or quick actions
 - Small form rows where you need custom visuals beyond the browser default
 
+<Callout type="info" title="Component Usage">
+  The Input component is designed to be flexible and theme-aware, making it easy to integrate into any form or search interface.
+</Callout>
+
 ## Preview
 
-<DocsPreview>
-  <Input />
-</DocsPreview>
+<ComponentPreviewTabs
+  component={<Input />}
+  source={
+    <ComponentSource
+      src="components/docs/Input.tsx"
+      title="Input.tsx"
+      language="tsx"
+    />
+  }
+/>
 
-## Usage
-
-```tsx
-import Input from "@/components/ui/Input";
-
-export function Input() {
-    return (
-      <Input
-        type="email"
-        placeholder="jane@workspace.so"
-        value={value}
-        className="rounded-xs border border-white/10 bg-white/5 py-3"
-      />
-  );
-}
-```
 
 ## API Surface
 

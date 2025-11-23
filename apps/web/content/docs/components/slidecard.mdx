@@ -14,30 +14,20 @@ cards, animated badges, and a footer CTA so you can highlight automations,
 pipelines, or assistant states without composing dozens of Tailwind classes.
 
 ## Installation
-
-Clone the component into your app with the workspace CLI:
-
-```bash
-pnpm dlx @workspace/cli add slidecard
-```
-
+ Copy the Code directly into your code no need to install
 ## Preview
 
-<DocsPreview>
-  <Slidcard />
-</DocsPreview>
+<ComponentPreviewTabs
+  component={<Slidcard />}
+  source={
+    <ComponentSource
+      src="components/docs/Slidcard.tsx"
+      title="Slidcard.tsx"
+      language="tsx"
+    />
+  }
+/>
 
-## Usage
-
-```tsx
-import { Slidcard } from "@/components/ui/Slidcard";
-
-export default function AutomationSpotlight() {
-  return (
-      <Slidcard />
-    );
-}
-```
 ## Anatomy
 
 - `Card` – wraps the stacked skeletons and keeps sizes in sync with the outer shell.

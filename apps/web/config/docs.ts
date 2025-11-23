@@ -1,11 +1,15 @@
 
 import { MainNavItem, SidebarNavItem } from "@/types/nav"
 
+type CodeThemeName = "default" | "min" | "vitesse" | "slack" | "nord" | "dracula" | "one-dark-pro" | "catppuccin"
+
 interface DocsConfig {
     sidebarNav: SidebarNavItem[]
+    codeTheme?: CodeThemeName
 }
 
 export const docsConfig: DocsConfig = {
+    codeTheme: (process.env.CODE_THEME as CodeThemeName) || "nord",
     sidebarNav: [
         {
             title: "Getting Started",
@@ -30,16 +34,6 @@ export const docsConfig: DocsConfig = {
                     title: "Buttons",
                     href: "/docs/components/button",
                     items: []
-                },
-                {
-                    title: "Input",
-                    href: "/docs/components/input",
-                    items: [],
-                },
-                {
-                    title: "LogIn",
-                    href: "/docs/components/login",
-                    items: [],
                 },
                 {
                     title: "Menu",

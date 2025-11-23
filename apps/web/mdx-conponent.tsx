@@ -21,6 +21,8 @@ import { CodeCollapsibleWrapper } from "./components/codeCollapse"
 import { CodeTabs } from "./components/CodeTabs"
 import { ComponentSource } from "./components/ComponentSource"
 import { Callout } from "./components/Callout"
+import { DocsCopyPage } from "./components/doc-copy-page"
+import { DocsTableOfContents } from "./components/doc-toc"
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
@@ -351,6 +353,8 @@ export const mdxComponents = {
   ComponentPreviewTabs,
   ComponentSource,
   CodeCollapsibleWrapper,
+  DocsCopyPage,
+  DocsTableOfContents,
   // ComponentsList,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link

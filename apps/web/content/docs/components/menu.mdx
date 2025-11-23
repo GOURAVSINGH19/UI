@@ -6,6 +6,15 @@ description: "Docs sidebar navigation with section labels and badges"
 import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
 import { MenuPreview } from "../../../components/docs/MenuPreview"
 import { DocsSidebarNav } from "@/components/Sidenav"
+import {
+  SidebarUsageBasic,
+  SidebarUsageLabels,
+  SidebarUsageDisabled,
+  SidebarUsageExternal,
+  SidebarUsageNested,
+  SidebarUsageComplete,
+  SidebarUsageWithClassName,
+} from "../../../components/Usage/Sidebar_Usage"
 
 ## Overview
 
@@ -17,41 +26,93 @@ displays contextual badges like “new” or “updated” without extra wiring.
 
 Copy `apps/web/components/Sidenav.tsx` into your project or use the CLI:
 
-```bash
-pnpm dlx @workspace/cli add menu
-```
-
 ## When to use
 
 - Documentation or knowledge-base layouts with nested sections
 - Desks and dashboards that need a labeled navigation rail
-- Marketing launchpads that call out “new”, “updated”, or “beta” screens
+- Marketing launchpads that call out "new", "updated", or "beta" screens
+
+<Callout type="info" title="Navigation Structure">
+  The menu component supports nested navigation items and automatically highlights the active page based on the current URL.
+</Callout>
 
 ## Preview
 
-<DocsPreview>
-  <MenuPreview />
-</DocsPreview>
+<ComponentPreviewTabs
+  component={<MenuPreview />}
+  source={
+    <ComponentSource
+      src="components/Sidenav.tsx"
+      title="Sidenav.tsx"
+      language="tsx"
+    />
+  }
+/>
 
 ## Usage
 
-```tsx
-import { DocsSidebarNav } from "@/components/Sidenav";
+The `DocsSidebarNav` component accepts an array of `SidebarNavItem` objects and an optional `className` prop. Each item can have nested children, labels, disabled state, and external links.
 
-const sidebar = [
-  {
-    title: "Components",
-    items: [
-      { title: "Buttons", href: "/docs/components/button" },
-      { title: "Input", href: "/docs/components/input", label: "updated" },
-    ],
-  },
-];
+### Basic Usage
 
-export function Sidebar() {
-  return <DocsSidebarNav items={sidebar} />;
-}
-```
+The simplest usage with just titles and hrefs:
+
+<ComponentPreviewTabs
+  component={<SidebarUsageBasic />}
+  source={
+    <ComponentSource
+      src="components/Usage/Sidebar_Usage.tsx"
+      title="Basic Usage Example"
+      language="tsx"
+    />
+  }
+/>
+
+### With Labels
+
+Add visual badges using the `label` property. Supported values are `"new"`, `"recent"`, and `"updated"`:
+
+<ComponentPreviewTabs
+  component={<SidebarUsageLabels />}
+  source={
+    <ComponentSource
+      src="components/Usage/Sidebar_Usage.tsx"
+      title="Labels Example"
+      language="tsx"
+    />
+  }
+/>
+
+
+### Nested Items
+
+Create multi-level navigation by nesting items within the `items` array:
+
+<ComponentPreviewTabs
+  component={<SidebarUsageNested />}
+  source={
+    <ComponentSource
+      src="components/Usage/Sidebar_Usage.tsx"
+      title="Nested Items Example"
+      language="tsx"
+    />
+  }
+/>
+
+### Complete Example
+
+A comprehensive example showcasing all properties together:
+
+<ComponentPreviewTabs
+  component={<SidebarUsageComplete />}
+  source={
+    <ComponentSource
+      src="components/Usage/Sidebar_Usage.tsx"
+      title="Complete Example"
+      language="tsx"
+    />
+  }
+/>
 
 ## API Surface
 
@@ -81,6 +142,24 @@ export function Sidebar() {
       <code key="item-items-type">SidebarNavItem[]</code>,
       <code key="item-items-default">[]</code>,
       "Nest additional pages to create multi-depth menus.",
+    ],
+    [
+      <code key="item.disabled">item.disabled</code>,
+      <code key="item-disabled-type">boolean</code>,
+      <code key="item-disabled-default">false</code>,
+      "Disables the nav item, making it non-clickable and visually muted.",
+    ],
+    [
+      <code key="item.external">item.external</code>,
+      <code key="item-external-type">boolean</code>,
+      <code key="item-external-default">false</code>,
+      "Opens the link in a new tab with proper security attributes.",
+    ],
+    [
+      <code key="className">className</code>,
+      <code key="className-type">string</code>,
+      "—",
+      "Optional CSS class to apply custom styling to section titles.",
     ],
   ]}
 />

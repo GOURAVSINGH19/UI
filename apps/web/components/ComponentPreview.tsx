@@ -24,7 +24,7 @@ export function ComponentPreviewTabs({
 
   return (
     <div
-      className={cn("group relative mt-4 mb-12 flex flex-col gap-2", className)}
+      className={cn("relative mt-4 mb-12 flex flex-col gap-2 w-full", className)}
       {...props}
     >
       <Tabs
@@ -45,27 +45,31 @@ export function ComponentPreviewTabs({
         data-tab={tab}
         className="data-[tab=code]:border-code relative rounded-lg border md:-mx-1"
       >
-        <div
-          data-slot="preview"
-          data-active={tab === "preview"}
-          className="invisible data-[active=true]:visible"
-        >
-          <div
-            data-align={align}
-            className={cn(
-              "preview flex overflow-y-auto min-h-[650px] w-full justify-center p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start "
-            )}
-          >
-            {component}
-          </div>
-        </div>
-        <div
-          data-slot="code"
-          data-active={tab === "code"}
-          className="absolute inset-0 hidden overflow-auto data-[active=true]:block **:[figure]:!m-0"
-        >
-          {source}
-        </div>
+        {
+          tab === "preview" ? (
+            <div
+              data-slot="preview"
+              data-active={tab === "preview"}
+              className="invisible data-[active=true]:visible"
+            >
+              <div
+                data-align={align}
+                className={cn(
+                  "preview flex overflow-y-auto min-h-80 w-full justify-center p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start "
+                )}
+              >
+                {component}
+              </div>
+            </div>
+          ) :
+            <div
+              data-slot="code"
+              data-active={tab === "code"}
+              className="overflow-auto data-[active=true]:block bg-[var(--bg)] rounded-lg p-4"
+            >
+              {source}
+            </div>
+        }
       </div>
     </div>
   )

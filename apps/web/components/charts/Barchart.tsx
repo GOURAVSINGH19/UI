@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -26,9 +27,9 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return null;
 };
 
-export const AnalyticsLineChart: React.FC = () => {
+export const AnalyticsLineChart = () => {
     return (
-        <div className="h-full w-full flex flex-col bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/60 rounded-[32px] p-6 md:p-8 relative overflow-hidden group">
+        <div className="w-120 h-90 flex flex-col bg-zinc-900/40 backdrop-blur-xl  shadow-[var(--shadow-s)] rounded-2xl p-6 md:p-8 relative overflow-hidden group">
             <div className="flex justify-between items-start mb-6 z-10">
                 <div className="flex flex-col">
                     <div className="flex items-center space-x-2">
@@ -75,7 +76,7 @@ export const AnalyticsLineChart: React.FC = () => {
                 </ResponsiveContainer>
             </div>
 
-            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-purple-600/10 blur-3xl rounded-full pointer-events-none"></div>
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 blur-3xl rounded-full pointer-events-none"></div>
         </div>
     );
 };

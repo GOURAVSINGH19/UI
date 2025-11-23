@@ -5,11 +5,65 @@ description: Welcome to your Library setup.
 
 # Getting Started
 
-This is a sample page rendered by Fumadocs MDX.
+Welcome to the component library! This guide will help you get started with installing and using our components.
 
-- Edit `apps/web/content/docs/index.mdx` to change this page
-- Add more files under `apps/web/content/docs` to create more routes
+<Callout type="info" title="Quick Start">
+  If you're new to this library, we recommend starting with the [Introduction](/docs) page to understand our approach.
+</Callout>
 
-```ts
-export const hello = "world";
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- Node.js 18+ installed
+- A package manager (npm, pnpm, yarn, or bun)
+- Basic knowledge of React and TypeScript
+
+## Installation
+
+Choose your preferred package manager:
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="npm">npm</TabsTrigger>
+    <TabsTrigger value="pnpm">pnpm</TabsTrigger>
+    <TabsTrigger value="yarn">yarn</TabsTrigger>
+    <TabsTrigger value="bun">bun</TabsTrigger>
+  </TabsList>
+  <TabsContent value="npm">
+```bash
+npm install @workspace/ui
 ```
+  </TabsContent>
+  <TabsContent value="pnpm">
+```bash
+pnpm add @workspace/ui
+```
+  </TabsContent>
+  <TabsContent value="yarn">
+```bash
+yarn add @workspace/ui
+```
+  </TabsContent>
+  <TabsContent value="bun">
+```bash
+bun add @workspace/ui
+```
+  </TabsContent>
+</CodeTabs>
+
+<Callout type="warning" title="Important">
+  Make sure your project is set up with Tailwind CSS before installing components. Our components rely on Tailwind for styling.
+</Callout>
+
+## Next Steps
+
+Once installed, you can:
+
+1. Browse available [Components](/docs/components/button) to see what's available
+2. Check out [Charts](/docs/charts/barchart) for data visualization components
+3. Copy component code directly into your project
+
+<Callout type="success" title="Ready to go!">
+  You're all set! Start exploring components and building amazing interfaces.
+</Callout>

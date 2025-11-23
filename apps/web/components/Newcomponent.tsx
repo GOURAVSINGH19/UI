@@ -4,8 +4,8 @@ import Link from "next/link";
 const LatestComponent = () => {
     return (
         <section className="w-full space-y-4 md:block mt-10 relative z-[10]">
-            <div className={cn("mx-auto overflow-hidden realtive shadow-[4px_4px_2px_.4px_#F8F1DE] w-full max-w-3xl bg-neutral-50/80 border-[.5px] border-[#FDFDFD] ring-1 rounded-md")}>
-                <div className="relative flex flex-col space-y-2">
+            <div className={cn("mx-auto overflow-hidden realtive  w-full max-w-3xl bg-neutral-50/80 border-[.5px] border-[#FDFDFD] ring-1 rounded-md")}>
+                <div className="relative flex flex-col">
                     <div className="inline-flex items-center px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground absolute left-4 top-6 rounded-[14px] border border-black/10 text-base md:left-6">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -13,7 +13,7 @@ const LatestComponent = () => {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
+                            strokeWidth="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             className="lucide lucide-sparkles mr-1 fill-[#EEBDE0] stroke-1 text-neutral-800" aria-hidden="true">
@@ -24,13 +24,7 @@ const LatestComponent = () => {
                         </svg>
                         <h4 className="text-black">Latest component</h4>
                     </div>
-                    <div className="flex flex-col justify-start pb-2 pl-4 pt-14 md:items-start mt-4 ml-2">
-                        <Link href="/docs/components/slidecard">
-                            <h3>
-                                <span className="tracking-tight pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-700 to-neutral-800  text-2xl sm:text-3xl lg:text-2xl font-bold">File Uploader</span>
-                            </h3>
-                        </Link>
-                    </div>
+                    <div className="flex flex-col justify-start pb-2 pl-4 pt-14 md:items-start mt-4 ml-2"></div>
                     <FileUpload />
                 </div>
             </div>

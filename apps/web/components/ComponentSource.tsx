@@ -4,10 +4,10 @@ import path from "node:path"
 import * as React from "react"
 
 import { highlightCode } from "../lib/highlightCode"
+import { docsConfig } from "../config/docs"
 import { cn } from "@workspace/ui/lib/utils"
 import { CodeCollapsibleWrapper } from "@/components/codeCollapse"
 import { CopyButton } from "@/components/copy-button"
-import { getIconForLanguageExtension } from "@workspace/ui/components/ui/icons"
 
 export async function ComponentSource({
   name,
@@ -39,7 +39,8 @@ export async function ComponentSource({
   }
 
   const lang = language ?? title?.split(".").pop() ?? "tsx"
-  const highlightedCode = await highlightCode(code, lang)
+  const theme = docsConfig.codeTheme || "default"
+  const highlightedCode = await highlightCode(code, lang, theme)
 
   if (!collapsible) {
     return (
@@ -80,18 +81,8 @@ function ComponentCode({
   return (
     <figure
       data-rehype-pretty-code-figure=""
-      className="relative [&>pre]:max-h-[650px] [&>pre]:overflow-auto"
+      className="relative"
     >
-      {title && (
-        <figcaption
-          data-rehype-pretty-code-title=""
-          className="text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70"
-          data-language={language}
-        >
-          {getIconForLanguageExtension(language)}
-          {title}
-        </figcaption>
-      )}
       <div className="absolute top-2 right-2 z-10">
         <CopyButton value={code} />
       </div>
