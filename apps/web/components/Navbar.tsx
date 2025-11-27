@@ -1,9 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Search_bar from "./Search_bar/Search_bar"
+import dynamic from "next/dynamic"
 import { Github, Menu, Search } from "lucide-react"
 import Link from "next/link"
+
+const SearchBar = dynamic(
+    () => import("./Search_bar/Search_bar"),
+    { loading: () => null }
+)
 
 const Navbar = () => {
     const [Open, setOpen] = useState(false)
@@ -57,7 +62,7 @@ const Navbar = () => {
             {
                 Open &&
                 <div className='fixed inset-0 h-screen z-[20000] backdrop-blur-[1px]'>
-                    <Search_bar Open={setOpen} />
+                    <SearchBar Open={setOpen} />
                 </div>
             }
         </header>

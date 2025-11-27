@@ -1,14 +1,23 @@
+'use client'
 import { ArrowRight, Github } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-
-
+import { motion } from 'motion/react'
+import { buttonVariants, containerVariants, textVariants, wordVariants } from '@/lib/variants'
 
 const Home = () => {
     return (
         <section className='w-full h-full flex items-center mt-[4vw] flex-col space-y-4'>
-            <div className='w-full flex-col flex justify-center items-center'>
-                <div className=' mt-20 lg:mt-10 w-fit backdrop-blur-2xl bg-white/10 border border-white/10 lg:w-[30%] px-2 md:px-4 py-1/2 rounded-2xl flex items-center justify-center gap-3 mb-5 shadow-[var(--shadow-sm)]'>
+            <motion.div
+                className='w-full flex-col flex justify-center items-center'
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                <motion.div
+                    className=' mt-20 lg:mt-10 w-fit backdrop-blur-2xl bg-white/10 border border-white/10 lg:w-[30%] px-2 md:px-4 py-1/2 rounded-2xl flex items-center justify-center gap-3 mb-5 shadow-[var(--shadow-sm)]'
+                    variants={textVariants}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" className='w-2 h-2' width="24" height="24" viewBox="0 0 24 24">
                         <title>star-sparkle</title>
                         <g fill="none">
@@ -59,29 +68,82 @@ const Home = () => {
                     </svg>
                     <p className=' text-[8px] md:text-[10px]'>A modern UI library designed for speed, flexibility, and simplicity.</p>
                     <ArrowRight className='w-3 font-light' />
-                </div>
-                <h1 className=' font-serif text-[3rem] md:text-[5.5vw] line-clamp-2 leading-[110%] capitalize'>Build beautiful</h1>
-                <h1 className=' font-serif text-[2.2rem] md:text-[4.5vw] line-clamp-2 leading-[110%] capitalize mb-5'>consistent UIs — fast.</h1>
-                <div className='mx-auto max-w-3xl space-y-6 md:space-y-8' >
+                </motion.div>
+                <motion.h1
+                    className=' font-serif text-[3rem] md:text-[5.5vw] line-clamp-2 leading-[110%] capitalize'
+                    variants={textVariants}
+                >
+                    Build beautiful
+                </motion.h1>
+                <motion.h1
+                    className=' font-serif text-[2.2rem] md:text-[4.5vw] line-clamp-2 leading-[110%] capitalize mb-5'
+                    variants={textVariants
+                    }
+                >
+                    consistent UIs — fast.
+                </motion.h1>
+                <motion.div
+                    className='mx-auto max-w-3xl space-y-6 md:space-y-8'
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                        hidden: { opacity: 0 },
+                        visible: {
+                            opacity: 1,
+                            transition: {
+                                staggerChildren: 0.05,
+                                delayChildren: 0.2,
+                            },
+                        },
+                    }}
+                >
                     <p className='text-[12px] md:text-[10px] font-serif font-medium leading-[120%] capitalize text-[#d4d4d4] text-center'>
-                        Free and open source components. Turn intent into action, configured for vibe coding.
+                        {'Free and open source components. Turn intent into action, configured for vibe coding.'
+                            .split(' ')
+                            .map((word, i) => (
+                                <motion.span
+                                    key={i}
+                                    variants={wordVariants}
+                                    style={{ display: 'inline-block', marginRight: '0.25em' }}
+                                >
+                                    {word}
+                                </motion.span>
+                            ))}
                     </p>
-                </div>
-            </div>
-            <div className='btn_container w-full leading-[130%] flex justify-center items-center gap-4 mt-4'>
-                <Link href="/docs">
-                    <button className='px-3 bg-[#fff] py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black'>
-                        Get Started
-                    </button>
-                </Link>
-                <Link href="/components">
-                    <button className=' px-3 py-2  flex items-center justify-center bg-[var(--bg)]  rounded-full gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
-                        <p className='text-sm'>
-                            Components
-                        </p>
-                    </button>
-                </Link>
-            </div>
+                </motion.div>
+            </motion.div>
+            <motion.div
+                className='btn_container w-full leading-[130%] flex justify-center items-center gap-4 mt-4'
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                        opacity: 1,
+                        transition: {
+                            staggerChildren: 0.1,
+                            delayChildren: 0.6,
+                        },
+                    },
+                }}
+            >
+                <motion.div variants={buttonVariants}>
+                    <Link href="/docs">
+                        <button className='px-3 bg-[#fff] py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black'>
+                            Get Started
+                        </button>
+                    </Link>
+                </motion.div>
+                <motion.div variants={buttonVariants}>
+                    <Link href="/components">
+                        <button className=' px-3 py-2  flex items-center justify-center bg-[var(--bg)]  rounded-full gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                            <p className='text-sm'>
+                                Components
+                            </p>
+                        </button>
+                    </Link>
+                </motion.div>
+            </motion.div>
         </section>
     )
 }

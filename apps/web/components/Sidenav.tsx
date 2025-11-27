@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { SidebarNavItem } from "types/nav"
 
 import { cn } from "@workspace/ui/lib/utils"
@@ -12,8 +11,6 @@ export interface DocsSidebarNavProps {
 }
 
 export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
-  const pathname = usePathname()
-
   return items.length ? (
     <div className="w-full">
       {items.map((item, index) => (
@@ -22,7 +19,7 @@ export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
             {item.title}
           </h4>
           {item?.items?.length && (
-            <DocsSidebarNavItems items={item.items} pathname={pathname} />
+            <DocsSidebarNavItems items={item.items} />
           )}
         </div>
       ))}
@@ -32,7 +29,7 @@ export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
 
 interface DocsSidebarNavItemsProps {
   items: SidebarNavItem[]
-  pathname: string | null
+  pathname?: string | null
 }
 
 export function DocsSidebarNavItems({
@@ -42,7 +39,7 @@ export function DocsSidebarNavItems({
   return items?.length ? (
     <div className="grid grid-flow-row auto-rows-max text-xs font-medium ml-2">
       {items.map((item, index) => (
-        <NavItem key={index} item={item} pathname={pathname} />
+        <NavItem key={index} item={item} pathname="/" />
       ))}
     </div>
   ) : null
@@ -50,7 +47,7 @@ export function DocsSidebarNavItems({
 
 interface NavItemProps {
   item: SidebarNavItem
-  pathname: string | null
+  pathname?: string | null
 }
 
 function NavItem({ item, pathname }: NavItemProps) {
@@ -64,7 +61,7 @@ function NavItem({ item, pathname }: NavItemProps) {
           {item.title}
         </span>
         <div className={`ml-3 border-l border-border pl-3 text-xs ${isActive ? "text-white" : "text-zinc-800"}`}>
-          <DocsSidebarNavItems items={item.items} pathname={pathname} />
+          <DocsSidebarNavItems items={item.items} pathname="/" />
         </div>
       </div>
     )

@@ -28,30 +28,6 @@ const labelsNav: SidebarNavItem[] = [
   },
 ]
 
-// With disabled items
-const disabledNav: SidebarNavItem[] = [
-  {
-    title: "Features",
-    items: [
-      { title: "Active Feature", href: "/docs/features/active", items: [] },
-      { title: "Coming Soon", href: "/docs/features/coming-soon", disabled: true, items: [] },
-      { title: "Under Maintenance", href: "/docs/features/maintenance", disabled: true, items: [] },
-    ],
-  },
-]
-
-// With external links
-const externalNav: SidebarNavItem[] = [
-  {
-    title: "Resources",
-    items: [
-      { title: "Documentation", href: "/docs", items: [] },
-      { title: "GitHub", href: "https://github.com", external: true, items: [] },
-      { title: "Discord", href: "https://discord.com", external: true, items: [] },
-    ],
-  },
-]
-
 // With nested items (multi-level)
 const nestedNav: SidebarNavItem[] = [
   {
