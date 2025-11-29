@@ -57,6 +57,10 @@ export async function generateMetadata(props: {
 
   const doc = page.data
 
+  if (!params.slug || params.slug.length === 0) {
+    return { title: doc.title, description: doc.description }
+  }
+
   if (!doc.title || !doc.description) {
     notFound()
   }
@@ -112,18 +116,18 @@ export default async function Page(props: {
   return (
     <div
       data-slot="docs"
-      className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full p-3"
+      className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full p-3 "
     >
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="h-(--top-spacing) shrink-0" />
-        <div className="mx-auto flex w-full max-w-5xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 md:px-0 lg:py-8 lg:px-4 dark:text-neutral-300 bg-[#121212] border-1 border-[var(--bg-light)]  rounded-md">
+        <div className="mx-auto flex w-full max-w-5xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 lg:py-8 lg:px-4 dark:text-neutral-300 bg-[#171717] border-1 border-[var(--bg-light)]  rounded-md">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
               <div className="flex items-start justify-between">
                 <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
                   {doc.title}
                 </h1>
-                <div className="docs-nav bg-background/80 border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm sm:static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
+                <div className="docs-nav  border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
                   {neighbours.previous &&
                     <Link href={neighbours.previous.url}>
                       <button className='rounded-full py-2 px-2 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
@@ -168,7 +172,6 @@ export default async function Page(props: {
             <MDX components={mdxComponents} />
           </div>
         </div>
-        {/* bottom button */}
         <div className="mx-auto hidden h-16 w-full  items-center justify-between gap-2 px-4 sm:flex md:px-0">
           {neighbours.previous &&
             <Link href={neighbours.previous.url}>

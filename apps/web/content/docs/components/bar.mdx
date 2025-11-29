@@ -1,0 +1,104 @@
+---
+title: "NavbarLinks"
+description: "Animated navbar with sliding highlight indicator"
+---
+
+import NavbarLinks from "@/components/docs/slidebar"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+import { IconShopping, IconSidebarLeftShow } from "nucleo-glass"
+
+## Overview
+
+`NavbarLinks` is a lightweight, animated navigation bar featuring a smooth
+spring-based sliding indicator that tracks the currently active link. It is
+built for Next.js apps using `next/link` and powered by `motion` for friction-based
+animations.
+
+With zero external dependencies beyond Motion and Tailwind, `NavbarLinks`
+offers a sleek and interactive header element ideal for dashboards,
+landing pages, or multi-section layouts.
+
+## Installation
+
+Copy the component into your project directory .
+```
+pnpm install nucleo-glass
+```
+## Preview
+
+<ComponentPreviewTabs
+  component={<NavbarLinks
+    items={[
+      { id: "home", title: "Home" ,icon: <IconShopping size={14} /> },
+      { id: "projects", title: "Projects", icon: <IconSidebarLeftShow size={14} /> },
+      { id: "about", title: "About",icon: <IconShopping size={14} />}
+    ]}
+  />}
+  source={
+    <ComponentSource
+      src="components/docs/slidebar.tsx"
+      title="NavbarLinks.tsx"
+      language="tsx"
+    />
+  }
+/>
+
+## Anatomy
+
+- **Container** — wraps all nav items and ensures the indicator positions correctly.
+- **Indicator (`motion.div`)** — animated highlight that moves under the active item.
+- **Nav Items** — each item can be a plain label or a `next/link` route with optional icon.
+- **Refs Map** — stores DOM references to compute indicator width + position.
+
+## Customizing
+
+- Pass any number of `items` with `id`, `title`, `href`, and optional `icon` nodes.
+- Change the default active item using `initialActive`.
+- Override colors, spacing, or hover states using the `className` prop or Tailwind utilities.
+- Replace Motion spring stiffness/damping to modify animation feel.
+- Icons can be any React node (Lucide, Radix, custom SVG, etc.).
+
+## API Surface
+
+<DocsTable
+  headers={["Prop", "Type", "Description"]}
+  rows={[
+    [
+      <code key="items">items</code>,
+      <code>NavItem[]</code>,
+      "List of navbar entries. Each may have an `href`, `title`, `id`, and optional `icon`."
+    ],
+    [
+      <code key="className">className</code>,
+      <code>string?</code>,
+      "Optional wrapper classes for layout or styling overrides."
+    ],
+    [
+      <code key="initialActive">initialActive</code>,
+      <code>string?</code>,
+      "ID of the item that should be active on mount (defaults to `'home'`)."
+    ]
+  ]}
+/>
+
+### `NavItem` Shape
+
+<DocsTable
+  headers={["Field", "Type", "Notes"]}
+  rows={[
+    ["`id`", <code>string</code>, "Unique identifier used to track active state."],
+    ["`title`", <code>string</code>, "Text label for the item."],
+    ["`href?`", <code>string</code>, "If provided, item becomes a Next.js `<Link>`."],
+    ["`icon?`", <code>React.ReactNode</code>, "Optional icon rendered before the title."]
+  ]}
+/>
+
+## Tips
+
+- Ideal for headers with 3–7 items to keep indicator motion feeling snappy.
+- When used on dynamic pages, pair `active` state with router path to auto-sync selection.
+- Icons should use consistent width to avoid indicator jitter during layout shifts.
+- You can wrap the entire navbar in a parent container with blurred or elevated backgrounds
+  to match modern dashboard UI patterns.
+- If you add horizontal scroll or responsive collapsing, ensure the indicator recalculates using layout effects.
+

@@ -5,7 +5,6 @@ const eventSchema = z.object({
   name: z.enum([
     "copy_npm_command",
   ]),
-  // declare type AllowedPropertyValues = string | number | boolean | null
   properties: z
     .record(z.union([z.string(), z.number(), z.boolean(), z.null()]))
     .optional(),

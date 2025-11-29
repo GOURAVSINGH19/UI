@@ -5,6 +5,8 @@ description: "Beautiful and customizable charts for data visualization"
 
 import { AnalyticsLineChart } from "../../../components/charts/Barchart"
 import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+import { ComponentPreviewTabs } from "../../../components/ComponentPreview"
+import { ComponentSource } from "../../../components/ComponentSource"
 
 ## Overview
 
@@ -21,6 +23,15 @@ The chart components provide flexible and customizable ways to display data in v
 - Displaying analytics and metrics
 - Presenting statistical data and insights
 
+## Installation
+
+Copy the component code into your project — no package install required. If you use Recharts, ensure it's available in your project:
+
+```bash
+pnpm add recharts
+```
+
+
 ## Preview
 
 <ComponentPreviewTabs
@@ -33,6 +44,40 @@ The chart components provide flexible and customizable ways to display data in v
     />
   }
 />
+
+## Usage
+
+Here is a minimal usage example showing how to include the chart in a page or dashboard. Copy the code into a React/Next component.
+
+```tsx
+import React from 'react'
+import { AnalyticsLineChart } from '@/components/charts/Barchart'
+
+export default function Dashboard() {
+  return (
+    <div className="p-6">
+      <h2 className="text-lg font-medium mb-4">Monthly Active Users</h2>
+      <AnalyticsLineChart />
+    </div>
+  )
+}
+```
+
+## Anatomy
+
+- `AnalyticsLineChart` – wrapper that composes `ResponsiveContainer` and `AreaChart` with styles and tooltip
+- `CustomTooltip` – lightweight tooltip renderer used by the chart
+
+## API
+
+<DocsTable
+  headers={["Prop", "Type", "Description"]}
+  rows={[
+    [<code key="data">data</code>, "Array<{ name: string; value: number }>", "Optional: pass an array of data points to render a custom series."],
+    [<code key="width">width</code>, "number|string", "Optional: overrides container width (default: responsive)."],
+    [<code key="height">height</code>, "number|string", "Optional: overrides container height (default: responsive)."],
+  ]}
+/> 
 
 ## Customization
 

@@ -4,7 +4,6 @@ const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   pageExtensions: ["ts", "tsx", "mdx"],
   experimental: {
-    reactCompiler: true,
     cacheComponents: true,
   },
 };

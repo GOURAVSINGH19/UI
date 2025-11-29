@@ -58,6 +58,7 @@ const buttonVariants = {
     },
 }
 
+
 export {
     containerVariants, buttonVariants, wordVariants, textVariants
 }

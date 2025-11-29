@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { SidebarNavItem } from "types/nav"
-
+import { usePathname } from "next/navigation"
 import { cn } from "@workspace/ui/lib/utils"
 
 export interface DocsSidebarNavProps {
@@ -11,6 +11,7 @@ export interface DocsSidebarNavProps {
 }
 
 export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
+  const pathname = usePathname();
   return items.length ? (
     <div className="w-full">
       {items.map((item, index) => (
@@ -19,7 +20,7 @@ export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
             {item.title}
           </h4>
           {item?.items?.length && (
-            <DocsSidebarNavItems items={item.items} />
+            <DocsSidebarNavItems items={item.items} pathname={pathname} />
           )}
         </div>
       ))}
@@ -39,7 +40,7 @@ export function DocsSidebarNavItems({
   return items?.length ? (
     <div className="grid grid-flow-row auto-rows-max text-xs font-medium ml-2">
       {items.map((item, index) => (
-        <NavItem key={index} item={item} pathname="/" />
+        <NavItem key={index} item={item} pathname={pathname} />
       ))}
     </div>
   ) : null
@@ -74,7 +75,7 @@ function NavItem({ item, pathname }: NavItemProps) {
         className={cn(
           "group flex w-full items-center rounded-md border border-transparent px-2 py-1",
           item.disabled && "cursor-not-allowed opacity-60",
-          isActive ? "font-medium text-foreground" : "text-neutral-600"
+          isActive ? "font-medium text-white" : "text-zinc-600"
         )}
         target={item.external ? "_blank" : ""}
         rel={item.external ? "noreferrer" : ""}
