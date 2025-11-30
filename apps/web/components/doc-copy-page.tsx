@@ -141,7 +141,7 @@ export function DocsCopyPage({ page, url }: { page: string; url: string }) {
                 >
                     {Object.entries(menuItems).map(([key, value]) => (
                         <Button
-                            variant="ghost"
+                            
                             size="lg"
                             asChild
                             key={key}

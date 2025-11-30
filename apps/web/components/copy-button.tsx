@@ -98,7 +98,7 @@ export function CopyWithClassNames({
       <DropdownMenuTrigger asChild>
         <Button
           size="icon"
-          variant="ghost"
+          
           className={cn(
             "relative z-10 size-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50",
             className
@@ -160,7 +160,7 @@ export function CopyNpmCommandButton({
       <DropdownMenuTrigger asChild>
         <Button
           size="icon"
-          variant="ghost"
+          
           className={cn(
             "relative z-10 size-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50",
             className
