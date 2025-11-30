@@ -16,41 +16,9 @@ Welcome to the component library! This guide will help you get started with inst
 Before you begin, make sure you have:
 
 - Node.js 18+ installed
-- A package manager (npm, pnpm, yarn, or bun)
 - Basic knowledge of React and TypeScript
 
 ## Installation
-
-Choose your preferred package manager:
-
-<CodeTabs>
-  <TabsList>
-    <TabsTrigger value="npm">npm</TabsTrigger>
-    <TabsTrigger value="pnpm">pnpm</TabsTrigger>
-    <TabsTrigger value="yarn">yarn</TabsTrigger>
-    <TabsTrigger value="bun">bun</TabsTrigger>
-  </TabsList>
-  <TabsContent value="npm">
-```bash
-npm install @workspace/ui
-```
-  </TabsContent>
-  <TabsContent value="pnpm">
-```bash
-pnpm add @workspace/ui
-```
-  </TabsContent>
-  <TabsContent value="yarn">
-```bash
-yarn add @workspace/ui
-```
-  </TabsContent>
-  <TabsContent value="bun">
-```bash
-bun add @workspace/ui
-```
-  </TabsContent>
-</CodeTabs>
 
 <Callout type="warning" title="Important">
   Make sure your project is set up with Tailwind CSS before installing components. Our components rely on Tailwind for styling.
@@ -63,6 +31,16 @@ Once installed, you can:
 1. Browse available [Components](/docs/components/button) to see what's available
 2. Check out [Charts](/docs/charts/barchart) for data visualization components
 3. Copy component code directly into your project
+4. Add Libs/utils
+   ```tsx
+   import { clsx, type ClassValue } from "clsx"
+   import { twMerge } from "tailwind-merge"
+   export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs))
+   }
+   ```
+
+
 
 <Callout type="success" title="Ready to go!">
   You're all set! Start exploring components and building amazing interfaces.

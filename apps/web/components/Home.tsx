@@ -77,38 +77,16 @@ const Home = () => {
                 </motion.h1>
                 <motion.h1
                     className=' font-serif text-[2.2rem] md:text-[4.5vw] line-clamp-2 leading-[110%] capitalize mb-5'
-                    variants={textVariants
-                    }
+                    variants={textVariants}
                 >
                     consistent UIs — fast.
                 </motion.h1>
                 <motion.div
                     className='mx-auto max-w-3xl space-y-6 md:space-y-8'
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                        hidden: { opacity: 0 },
-                        visible: {
-                            opacity: 1,
-                            transition: {
-                                staggerChildren: 0.05,
-                                delayChildren: 0.2,
-                            },
-                        },
-                    }}
+                    variants={textVariants}
                 >
                     <p className='text-[12px] md:text-[10px] font-serif font-medium leading-[120%] capitalize text-[#d4d4d4] text-center'>
-                        {'Free and open source components. Turn intent into action, configured for vibe coding.'
-                            .split(' ')
-                            .map((word, i) => (
-                                <motion.span
-                                    key={i}
-                                    variants={wordVariants}
-                                    style={{ display: 'inline-block', marginRight: '0.25em' }}
-                                >
-                                    {word}
-                                </motion.span>
-                            ))}
+                        Free and open source components. Turn intent into action, configured for vibe coding.
                     </p>
                 </motion.div>
             </motion.div>
@@ -128,7 +106,7 @@ const Home = () => {
                 }}
             >
                 <motion.div variants={buttonVariants}>
-                    <Link href="/docs">
+                    <Link href="/docs/introduction">
                         <button className='px-3 bg-[#fff] py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black'>
                             Get Started
                         </button>

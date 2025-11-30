@@ -1,15 +1,75 @@
 "use client"
-
 import { useState } from "react"
-
 import { Button } from "@workspace/ui/components/ui/button"
 import { cn } from "@workspace/ui/lib/utils"
 
+
+
+// Copy Button code in new component.
+
+{/*import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@workspace/ui/lib/utils"
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-primary text-primary-foreground shadow-xs  hover:bg-primary/95 ",
+        destructive:
+          "bg-destructive text-white shadow-[inset_0_.2px_.2px_red,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline:
+          "border bg-background shadow-[inset_0_.5px_.5px_#ffffff30,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        primary:
+          "bg-secondary text-secondary-foreground shadow-[inset_0_.5px_.5px_#ffffff30,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] hover:bg-secondary/80",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-8 rounded-full",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot : "button"
+
+  return (
+    <Comp
+      data-slot="button"
+      className={cn(buttonVariants({ variant, size, className }),"overflow-hidden")}
+      {...props}
+    />
+  )
+}
+export { Button, buttonVariants } */}
+
+
+//  Sample
+
 const variants: Array<React.ComponentProps<typeof Button>["variant"]> = [
     "default",
-    "outline",
-    "ghost",
-    "secondary",
+    "primary",
     "destructive",
 ]
 
@@ -26,8 +86,8 @@ export function ButtonVariantPlayground() {
     const [size, setSize] = useState<React.ComponentProps<typeof Button>['size']>("default")
 
     return (
-        <div className="flex w-full h-full flex-col gap-6 text-sm p-4">
-            <div className="flex flex-wrap gap-2">
+        <div className="flex w-full h-full flex-col gap-6 text-sm ">
+            <div className="flex flex-col md:flex-row flex-wrap gap-2">
                 <div className="flex flex-wrap gap-2">
                     {variants.map((option) => (
                         <button
@@ -69,7 +129,7 @@ export function ButtonVariantPlayground() {
             </div>
             <div className="flex flex-col items-center gap-2 rounded-xs p-8 text-center">
                 <Button variant={variant} size={size} className="mt-4 capitalize">
-                    {variant}
+                    {size === "icon" ? variant?.slice(0, 1) : variant}
                 </Button>
             </div>
         </div>

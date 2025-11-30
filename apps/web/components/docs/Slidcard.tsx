@@ -4,7 +4,7 @@ import { cn } from "@workspace/ui/lib/utils";
 export const Slidcard = () => {
     return (
         <div className="flex justify-center items-center w-full h-full gap-4">
-            <div className="w-80 min-h-50 md:min-h-80 lg:h-80 bg-neutral-50 relative overflow-hidden rounded-md">
+            <div className="w-80 min-h-80 md:min-h-80 lg:h-80 bg-neutral-50 relative overflow-hidden rounded-md">
                 <Card className="w-full">
                     <Skeleton
                         desc="This is a sample description text for the card header component."

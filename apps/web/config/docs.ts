@@ -1,5 +1,5 @@
 
-import { MainNavItem, SidebarNavItem } from "@/types/nav"
+import { SidebarNavItem } from "@/types/nav"
 
 type CodeThemeName = "default" | "min" | "vitesse" | "slack" | "nord" | "dracula" | "one-dark-pro" | "catppuccin"
 
@@ -16,7 +16,7 @@ export const docsConfig: DocsConfig = {
             items: [
                 {
                     title: "Introduction",
-                    href: "/docs",
+                    href: "/docs/introduction",
                     items: []
                 },
                 {
@@ -48,6 +48,11 @@ export const docsConfig: DocsConfig = {
                 {
                     title: "Slidecard",
                     href: "/docs/components/slidecard",
+                    items: [],
+                },
+                {
+                    title: "Top up",
+                    href: "/docs/components/notification",
                     items: [],
                 },
             ],
