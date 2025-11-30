@@ -28,7 +28,6 @@ export function CodeCollapsibleWrapper({
       <CollapsibleTrigger asChild>
         <div className="absolute top-1.5 right-9 z-10 flex items-center">
           <Button
-            variant="ghost"
             size="sm"
             className="text-muted-foreground h-7 rounded-md px-2"
           >
