@@ -52,7 +52,7 @@ export const docsConfig: DocsConfig = {
                 },
                 {
                     title: "Top up",
-                    href: "/docs/components/notification",
+                    href: "/docs/components/Topup",
                     items: [],
                 },
             ],

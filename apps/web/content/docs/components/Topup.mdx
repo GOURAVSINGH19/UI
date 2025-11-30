@@ -1,0 +1,94 @@
+---
+title: Top up
+description: Opinionated button styles for primary actions
+---
+
+
+import { Slidcard, Skeleton, Slider, Badge, CardFooter } from "@/components/docs/Slidcard"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+
+## Overview
+
+`Topup` 
+
+## Installation
+ Copy the Code directly into your code no need to install
+ ```tsx 
+ pnpm install nucleo-glass
+ ```
+## Preview
+
+<ComponentPreviewTabs
+  component={<Slidcard />}
+  source={
+    <ComponentSource
+      src="components/docs/Topup.tsx"
+      title="Topup.tsx"
+      language="tsx"
+    />
+  }
+/>
+
+## Anatomy
+
+
+## Customizing
+
+
+## API Surface
+
+<DocsTable
+  headers={["Component", "Props", "Notes"]}
+  rows={[
+    [
+      <code key="slidcard">Slidcard</code>,
+      "—",
+      "Renders the opinionated stack of Skeleton cards. Clone it when you want the exact hero layout.",
+    ],
+    [
+      <code key="skeleton">Skeleton</code>,
+      <span key="skeleton-props" className="flex flex-wrap gap-2">
+        <code>title</code>
+        <code>desc</code>
+        <code>time</code>
+        <code>variant</code>
+        <code>icon</code>
+        <code>children?</code>
+        <code>className?</code>
+      </span>,
+      "Use directly when you need a single card with custom content or stacking order.",
+    ],
+    [
+      <code key="slider">Slider</code>,
+      <span key="slider-props" className="flex flex-wrap gap-2">
+        <code>title</code>
+        <code>className?</code>
+      </span>,
+      "Tiny rounded pills that highlight sub-tasks or target channels.",
+    ],
+    [
+      <code key="badge">Badge</code>,
+      <span key="badge-props" className="flex flex-wrap gap-2">
+        <code>variant</code>
+        <code>time</code>
+        <code>className?</code>
+      </span>,
+      "Wraps the dual-icon time indicator. Unknown variants fall back to a neutral palette.",
+    ],
+    [
+      <code key="footer">CardFooter</code>,
+      <span key="footer-props" className="flex flex-wrap gap-2">
+        <code>desc?</code>
+        <code>icon?</code>
+      </span>,
+      "Persistent CTA area—the icon button already carries hover states.",
+    ],
+  ]}
+/>
+
+## Tips
+
+- Pair it with a muted gradient or photo background—the transparent edges let the card feel layered.
+- Because transforms are hard-coded, keep the component on GPU-accelerated surfaces for smoother animation.
+- Respect pointer events: only the footer icon is clickable by default, so wrap the entire block with a link if you want a single action.
+

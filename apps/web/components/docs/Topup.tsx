@@ -1,5 +1,6 @@
 "use client"
 import { NotificationMenu } from "@workspace/ui/components/notification";
+import { IconFolders, IconGear, IconLock, IconSquareKanban, IconUsers } from "nucleo-glass";
 
 export default function Example() {
     return (
@@ -12,11 +13,11 @@ export default function Example() {
             ]}
             onCreateWorkspace={() => console.log("create workspace")}
             menuItems={[
-                { id: "personal-info", label: "Personal info" },
-                { id: "account-security", label: "Account Security" },
-                { id: "templates", label: "Templates" },
-                { id: "manage-users", label: "Manage users" },
-                { id: "settings", label: "Settings" },
+                { id: "personal-info", icon: <IconFolders size={14} />, label: "Personal info" },
+                { id: "account-security", icon: <IconLock size={14} />, label: "Account Security" },
+                { id: "templates", icon: <IconSquareKanban />, label: "Templates" },
+                { id: "manage-users", icon: <IconUsers />, label: "Manage users" },
+                { id: "settings", icon: <IconGear />, label: "Settings" },
             ]}
             onLogout={() => console.log("logout")}
         />
