@@ -95,7 +95,7 @@ export function DocsCopyPage({ page, url }: { page: string; url: string }) {
 
     const trigger = (
         <Button
-            variant="secondary"
+            variant="primary"
             size="sm"
             className="peer -ml-0.5 size-8 shadow-none md:size-7 md:text-[0.8rem]"
         >
@@ -108,7 +108,7 @@ export function DocsCopyPage({ page, url }: { page: string; url: string }) {
             <div className="bg-secondary group/buttons relative flex rounded-lg *:[[data-slot=button]]:focus-visible:relative *:[[data-slot=button]]:focus-visible:z-10">
                 <PopoverAnchor />
                 <Button
-                    variant="secondary"
+                    variant="primary"
                     size="sm"
                     className="h-8 shadow-none md:h-7 md:text-[0.8rem]"
                     onClick={() => copyToClipboard(page)}
@@ -141,7 +141,6 @@ export function DocsCopyPage({ page, url }: { page: string; url: string }) {
                 >
                     {Object.entries(menuItems).map(([key, value]) => (
                         <Button
-                            
                             size="lg"
                             asChild
                             key={key}

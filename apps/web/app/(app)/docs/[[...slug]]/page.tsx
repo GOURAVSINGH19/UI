@@ -116,7 +116,7 @@ export default async function Page(props: {
   return (
     <div
       data-slot="docs"
-      className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full p-3 "
+      className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full p-1 md:p-3 "
     >
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="h-(--top-spacing) shrink-0" />
@@ -127,7 +127,7 @@ export default async function Page(props: {
                 <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
                   {doc.title}
                 </h1>
-                <div className="docs-nav  border-border/50 fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 border-t px-6 py-4 backdrop-blur-sm static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
+                <div className="docs-nav fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 px-6 py-4 backdrop-blur-sm static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
                   {neighbours.previous &&
                     <Link href={neighbours.previous.url}>
                       <button className='rounded-full py-2 px-2 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>

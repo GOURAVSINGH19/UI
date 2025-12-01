@@ -15,7 +15,7 @@ const Home = () => {
                 animate="visible"
             >
                 <motion.div
-                    className=' mt-20 lg:mt-10 w-fit backdrop-blur-2xl bg-white/10 border border-white/10 lg:w-[30%] px-2 md:px-4 py-1/2 rounded-2xl flex items-center justify-center gap-3 mb-5 shadow-[var(--shadow-sm)]'
+                    className=' mt-20 lg:mt-10 w-fit backdrop-blur-2xl bg-white/10 border border-white/10 lg:w-[32%] px-2 md:px-4 py-1/2 rounded-2xl flex items-center justify-center gap-3 mb-5 shadow-[var(--shadow-sm)]'
                     variants={textVariants}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className='w-2 h-2' width="24" height="24" viewBox="0 0 24 24">
@@ -107,14 +107,14 @@ const Home = () => {
             >
                 <motion.div variants={buttonVariants}>
                     <Link href="/docs/introduction">
-                        <button className='px-3 bg-[#fff] py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black'>
+                        <button className='px-3 ring-1 ring-white/50 bg-[#fff] hover:bg-neutral-50 py-2 text-sm  rounded-full flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer text-black duration-600 ease-inOut'>
                             Get Started
                         </button>
                     </Link>
                 </motion.div>
                 <motion.div variants={buttonVariants}>
                     <Link href="/components">
-                        <button className=' px-3 py-2  flex items-center justify-center bg-[var(--bg)]  rounded-full gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                        <button className=' px-3 py-2 ring-[.5px] ring-white/20 flex items-center justify-center bg-[var(--bg)]  rounded-full gap-2 w-max shadow-[var(--shadow-s)] cursor-pointer hover:shadow-[var(--shadow-m)] duration-600 ease-inOut'>
                             <p className='text-sm'>
                                 Components
                             </p>

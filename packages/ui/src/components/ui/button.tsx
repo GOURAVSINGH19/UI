@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-xs  hover:bg-primary/95 ",
+          "bg-primary text-primary-foreground shadow-xs ring-1 ring-white/60 duration-600 ease-inOut hover:bg-primary/95 ",
         destructive:
           "bg-destructive text-white shadow-[inset_0_.2px_.2px_red,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
@@ -48,7 +48,7 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }),"overflow-hidden")}
+      className={cn(buttonVariants({ variant, size, className }), "overflow-hidden")}
       {...props}
     />
   )

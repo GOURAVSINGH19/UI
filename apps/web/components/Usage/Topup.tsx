@@ -1,5 +1,5 @@
 "use client"
-import { NotificationMenu } from "@workspace/ui/components/notification";
+import { NotificationMenu } from "@/components/docs/notification";
 import { IconFolders, IconGear, IconLock, IconSquareKanban, IconUsers } from "nucleo-glass";
 
 export default function Example() {

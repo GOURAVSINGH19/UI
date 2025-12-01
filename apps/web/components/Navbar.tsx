@@ -32,18 +32,14 @@ const Navbar = () => {
 
     return (
         <header className="w-full fixed top-[.5rem] left-0 z-50 text-sm">
-            <nav className=" max-w-screen-xl mx-auto p-[.8rem] px-[2rem]  rounded-[1rem] gap-10 flex justify-between items-center">
-                <div className="font-semibold w-fit md:block hidden">
+            <nav className=" max-w-screen-xl mx-auto p-[.8rem] md:px-[2rem]  rounded-[1rem] gap-10 flex justify-between items-center">
+                <div className="font-semibold w-fit md:block">
                     <Link href="/">
                         <p>_Ghibli_</p>
                     </Link>
                 </div>
-                <div className="flex gap-2 items-center">
-                    <div className="md:hidden cursor-pointer"><Menu className="w-4 h-4" /></div>
-                    <p className="w-full font-medium md:hidden">Menu</p>
-                </div>
                 <div className="flex items-center gap-4">
-                    <div onClick={() => setOpen(!Open)} className="flex  justify-between cursor-pointer relative items-center lg:w-fit h-[2em] bg-[var(--bg)] shadow-[var(--shadow-s)] rounded-lg  px-[1rem] py-[1rem] outline-0 text-sm" >
+                    <div onClick={() => setOpen(!Open)} className="flex ring-[.5px] ring-white/30 justify-between cursor-pointer relative items-center lg:w-fit h-[2em] bg-[var(--bg)] shadow-[var(--shadow-s)] rounded-lg  px-[1rem] py-[1rem] outline-0 text-sm" >
                         <p className="border-r-1 border-white mr-4 pr-4">
                             <Search className="w-4 h-4" />
                         </p>
@@ -53,7 +49,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <Link href='https://github.com/GOURAVSINGH19/UI' target="_blank">
-                        <button className='rounded-sm py-2 px-2  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+                        <button className='rounded-sm py-2 px-2 ring-[.5px] ring-white/40 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
                             <Github className='w-3 h-3' />
                         </button>
                     </Link>

@@ -49,9 +49,10 @@ export function DocsSidebarNavItems({
 interface NavItemProps {
   item: SidebarNavItem
   pathname?: string | null
+  className?: string
 }
 
-function NavItem({ item, pathname }: NavItemProps) {
+function NavItem({ item, pathname, className }: NavItemProps) {
   const isActive = pathname === item.href
   const hasChildren = item.items && item.items.length > 0
 
@@ -75,7 +76,8 @@ function NavItem({ item, pathname }: NavItemProps) {
         className={cn(
           "group flex w-full items-center rounded-md border border-transparent px-2 py-1",
           item.disabled && "cursor-not-allowed opacity-60",
-          isActive ? "font-medium text-white" : "text-zinc-600"
+          isActive ? "font-medium text-white" : "text-zinc-400",
+          className
         )}
         target={item.external ? "_blank" : ""}
         rel={item.external ? "noreferrer" : ""}

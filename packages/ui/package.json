@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
-  "scripts": {
-    "lint": "eslint . --max-warnings 0"
-  },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -20,6 +17,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "eslint": "^9.32.0",
     "framer-motion": "^12.23.24",
     "fumadocs-ui": "^15.0.4",
     "gsap": "^3.13.0",
