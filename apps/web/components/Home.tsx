@@ -1,9 +1,9 @@
 'use client'
-import { ArrowRight, Github } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { motion } from 'motion/react'
-import { buttonVariants, containerVariants, textVariants, wordVariants } from '@/lib/variants'
+import { buttonVariants, containerVariants, textVariants } from '@/lib/variants'
 
 const Home = () => {
     return (

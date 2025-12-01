@@ -70,8 +70,6 @@ export async function ComponentSource({
 function ComponentCode({
   code,
   highlightedCode,
-  language,
-  title,
 }: {
   code: string
   highlightedCode: string

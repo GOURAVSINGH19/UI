@@ -12,7 +12,7 @@ const data = [
     { name: 'Jul', value: 4800 },
 ];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload, label }:any) => {
     if (active && payload && payload.length) {
         return (
             <div className="bg-zinc-900/90 backdrop-blur-md border border-zinc-700 p-3 rounded-xl shadow-xl">

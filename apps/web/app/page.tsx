@@ -3,7 +3,6 @@ import Home from "../components/Home";
 import Footer from "@/components/Footer";
 import LatestComponent from "@/components/Newcomponent";
 import { Techsection } from "@/components/Tech";
-import Lines from "@/components/docs/Lines";
 
 const ComponentLibraryDemo = () => {
   return (

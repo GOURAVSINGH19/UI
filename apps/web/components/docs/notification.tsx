@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import * as React from "react";
 import { cn } from "@workspace/ui/lib/utils";
+import Image from "next/image";
 
 export interface NotificationMenuItem {
     id: string;
@@ -64,10 +65,12 @@ export function NotificationMenu(props: NotificationProps) {
                         aria-expanded={isOpen}
                         aria-haspopup="menu"
                     >
-                        <img
+                        <Image
                             src={avatarSrc}
                             alt={avatarAlt}
                             className="w-full h-full object-cover rounded-sm"
+                            width={100}
+                            height={100}
                         />
                     </button>
                 </div>

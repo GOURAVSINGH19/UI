@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { CheckIcon, ClipboardIcon } from "lucide-react"
-import { NpmCommands } from "@/types/unist"
 import { Event, trackEvent } from "../lib/events"
 import { cn } from "@workspace/ui/lib/utils"
 import { Button } from "@workspace/ui/components/ui/button"
@@ -124,78 +123,3 @@ export function CopyWithClassNames({
   )
 }
 
-interface CopyNpmCommandButtonProps extends React.ComponentPropsWithoutRef<typeof DropdownMenuTrigger> {
-  commands: Required<NpmCommands>
-}
-
-export function CopyNpmCommandButton({
-  commands,
-  className,
-  ...props
-}: CopyNpmCommandButtonProps) {
-  const [hasCopied, setHasCopied] = React.useState(false)
-
-  useEffect(() => {
-    setTimeout(() => {
-      setHasCopied(false)
-    }, 2000)
-  }, [hasCopied])
-
-  const copyCommand = React.useCallback(
-    (value: string, pm: "npm" | "pnpm" | "yarn" | "bun") => {
-      copyToClipboardWithMeta(value, {
-        name: "copy_npm_command",
-        properties: {
-          command: value,
-          pm,
-        },
-      })
-      setHasCopied(true)
-    },
-    []
-  )
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          size="icon"
-          
-          className={cn(
-            "relative z-10 size-6 text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50",
-            className
-          )}
-        >
-          {hasCopied ? (
-            <CheckIcon className="size-3" />
-          ) : (
-            <ClipboardIcon className="size-3" />
-          )}
-          <span className="sr-only">Copy</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          onClick={() => copyCommand(commands.__npmCommand__, "npm")}
-        >
-          npm
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => copyCommand(commands.__yarnCommand__, "yarn")}
-        >
-          yarn
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => copyCommand(commands.__pnpmCommand__, "pnpm")}
-        >
-          pnpm
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => copyCommand(commands.__bunCommand__, "bun")}
-        >
-          bun
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
-}

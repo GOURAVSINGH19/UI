@@ -50,11 +50,6 @@ export const docsConfig: DocsConfig = {
                     href: "/docs/components/slidecard",
                     items: [],
                 },
-                {
-                    title: "Top up",
-                    href: "/docs/components/Topup",
-                    items: [],
-                },
             ],
         },
         {

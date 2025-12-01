@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
-import { Github, Menu, Search } from "lucide-react"
+import { Github, Search } from "lucide-react"
 import Link from "next/link"
 
 const SearchBar = dynamic(
