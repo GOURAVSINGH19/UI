@@ -20,7 +20,7 @@ export const Slidcard = () => {
                     <Skeleton
                         desc="This is a sample description text for the card header component."
                         icon={<MoveRight className="w-4 h-4 border-2 border-dashed border-neutral-500 rounded-full text-neutral-900 group-hover:border-red-400 group-hover:text-red-400 p-[1px]" />}
-                        className={cn("bg-neutral-200/90 group perspective-distant shadow-2xl shadow-white hover:translate-y-0.5 duration-200 ease-in-out cursor-pointer",
+                        className={cn("bg-neutral-100/90 group perspective-distant shadow-2xl shadow-white hover:translate-y-0.5 duration-200 ease-in-out cursor-pointer",
                             "absolute bottom-36 left-2 z-9")}
                         title="Risk Analysis"
                         varient="danger"
@@ -67,7 +67,7 @@ export const Skeleton = ({
     desc: string
 }) => {
     return (
-        <div className={cn("max-w-[85%] bg-neutral-200 h-28 my-auto shadow-lg mx-auto w-full rounded-lg border-netural-200 dark:border-netural-700", "perspective-distant mask-r-from-95% mask-b-from-20% mask-b-to-200% flex flex-col gap-2", className)} style={{ padding: 6, margin: "auto", transform: "rotateX(30deg) rotateY(-20deg) rotateZ(24deg) scale(1.1) " }}>
+        <div className={cn("max-w-[85%] bg-neutral-200 md:h-28 my-auto shadow-lg mx-auto w-full rounded-lg border-netural-200 dark:border-netural-700", "perspective-distant mask-r-from-95% mask-b-from-20% mask-b-to-200% flex flex-col gap-2", className)} style={{ padding: 6, margin: "auto", transform: "rotateX(30deg) rotateY(-20deg) rotateZ(24deg) scale(1.1) " }}>
             <div className="text-sm flex gap-3 items-center relative">
                 {icon}
                 <span className="ml-2 text-sm font-medium text-black">{title}</span>

@@ -84,7 +84,7 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
         }
     }
     return (
-        <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 4, animationDuration: 800 }} className='w-[90%] md:w-[80%] lg:w-[50%] mx-auto absolute bottom-0 left-[50%] -translate-x-[50%]  bg-neutral-800 px-4 pt-[1rem] rounded-t-2xl'>
+        <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 4, animationDuration: 800 }} className='w-[90%] md:w-[80%] lg:w-[50%] mx-auto absolute bottom-0 h-[60dvh] left-[50%] -translate-x-[50%]  bg-neutral-800 px-4 pt-[1rem] rounded-t-2xl'>
             <div className='w-full'>
                 <p onClick={handleclick} onKeyDown={handlenavigate} tabIndex={0} className='rounded-full  px-6 py-3 bg-[var(--bg)] flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
                     <CornerUpLeft className='w-4 h-4' />
