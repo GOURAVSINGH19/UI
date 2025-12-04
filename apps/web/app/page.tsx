@@ -12,7 +12,6 @@ const ComponentLibraryDemo = () => {
       <div className=" z-[10] max-w-screen-sm w-full md:max-w-screen-xl mx-auto md:p-[.8rem] px-[.5rem] md:px-[2rem]">
         <Home />
         <LatestComponent />
-        <SliderScore/>
         <Techsection />
         <Footer />
       </div>

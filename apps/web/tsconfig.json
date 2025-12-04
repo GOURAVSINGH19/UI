@@ -17,6 +17,6 @@
     "next-env.d.ts",
     "next.config.js",
     ".next/types/**/*.ts"
-, "components/docs/notification.tsx"  ],
+, "components/docs/notification.tsx", "content/docs/components/slider.mdx"  ],
   "exclude": ["node_modules"]
 }
