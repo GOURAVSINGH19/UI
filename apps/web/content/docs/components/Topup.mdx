@@ -1,94 +1,74 @@
 ---
-title: Top up
-description: Opinionated button styles for primary actions
+title: Notification Menu
+description: A comprehensive notification and user menu component with workspace switching.
 ---
 
-
-import { Slidcard, Skeleton, Slider, Badge, CardFooter } from "@/components/docs/Slidcard"
+import Example from "../../../components/Usage/Topup"
 import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+import { ComponentPreviewTabs } from "../../../components/ComponentPreview"
+import { ComponentSource } from "../../../components/ComponentSource"
 
 ## Overview
 
-`Topup` 
+The `NotificationMenu` component provides a polished user interface for handling user profiles, notifications, and workspace navigation. It features smooth animations using `framer-motion` and a glassmorphism design style.
 
-## Installation
- Copy the Code directly into your code no need to install
- ```tsx 
- pnpm install nucleo-glass
- ```
 ## Preview
 
 <ComponentPreviewTabs
-  component={<Slidcard />}
+  component={
+    <div className="min-h-[420px] w-full flex justify-end">
+      <Example/>
+    </div>
+   }
   source={
     <ComponentSource
-      src="components/Usage/Topup.tsx"
-      title="Topup.tsx"
+      src="components/docs/notification.tsx"
+      title="notification.tsx"
       language="tsx"
     />
   }
 />
 
-## Anatomy
+## Usage
 
+```tsx
+import { NotificationMenu } from "@/components/docs/notification"
 
-## Customizing
+export default function App() {
+  return (
+    <div className="flex justify-end p-4 min-h-[400px]">
+      <NotificationMenu
+        avatarSrc="/img.png"
+        userLabel="John Doe"
+        userSubLabel="john@example.com"
+        menuItems={[
+          { id: "profile", label: "Profile" },
+          { id: "settings", label: "Settings" },
+        ]}
+        workspaces={[
+          { id: "ws1", label: "Personal" },
+          { id: "ws2", label: "Team" },
+        ]}
+        onLogout={() => console.log("Logout")}
+      />
+    </div>
+  )
+}
+```
 
-
-## API Surface
+## API
 
 <DocsTable
-  headers={["Component", "Props", "Notes"]}
+  headers={["Prop", "Type", "Description"]}
   rows={[
-    [
-      <code key="slidcard">Slidcard</code>,
-      "—",
-      "Renders the opinionated stack of Skeleton cards. Clone it when you want the exact hero layout.",
-    ],
-    [
-      <code key="skeleton">Skeleton</code>,
-      <span key="skeleton-props" className="flex flex-wrap gap-2">
-        <code>title</code>
-        <code>desc</code>
-        <code>time</code>
-        <code>variant</code>
-        <code>icon</code>
-        <code>children?</code>
-        <code>className?</code>
-      </span>,
-      "Use directly when you need a single card with custom content or stacking order.",
-    ],
-    [
-      <code key="slider">Slider</code>,
-      <span key="slider-props" className="flex flex-wrap gap-2">
-        <code>title</code>
-        <code>className?</code>
-      </span>,
-      "Tiny rounded pills that highlight sub-tasks or target channels.",
-    ],
-    [
-      <code key="badge">Badge</code>,
-      <span key="badge-props" className="flex flex-wrap gap-2">
-        <code>variant</code>
-        <code>time</code>
-        <code>className?</code>
-      </span>,
-      "Wraps the dual-icon time indicator. Unknown variants fall back to a neutral palette.",
-    ],
-    [
-      <code key="footer">CardFooter</code>,
-      <span key="footer-props" className="flex flex-wrap gap-2">
-        <code>desc?</code>
-        <code>icon?</code>
-      </span>,
-      "Persistent CTA area—the icon button already carries hover states.",
-    ],
+    [<code key="avatarSrc">avatarSrc</code>, "string", "URL of the user's avatar image."],
+    [<code key="userLabel">userLabel</code>, "string", "Main text label (e.g., user name)."],
+    [<code key="userSubLabel">userSubLabel</code>, "string", "Secondary text label (e.g., email)."],
+    [<code key="menuItems">menuItems</code>, "NotificationMenuItem[]", "Array of menu items to display."],
+    [<code key="workspaces">workspaces</code>, "NotificationWorkspaceItem[]", "Optional array of workspaces."],
+    [<code key="onCreateWorkspace">onCreateWorkspace</code>, "() => void", "Callback for creating a new workspace."],
+    [<code key="onLogout">onLogout</code>, "() => void", "Callback for the logout action."],
+    [<code key="open">open</code>, "boolean", "Controlled open state."],
+    [<code key="onOpenChange">onOpenChange</code>, "(open: boolean) => void", "Callback for open state changes."],
   ]}
 />
-
-## Tips
-
-- Pair it with a muted gradient or photo background—the transparent edges let the card feel layered.
-- Because transforms are hard-coded, keep the component on GPU-accelerated surfaces for smoother animation.
-- Respect pointer events: only the footer icon is clickable by default, so wrap the entire block with a link if you want a single action.
-

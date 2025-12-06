@@ -5,7 +5,7 @@ import { IconFolders, IconGear, IconLock, IconSquareKanban, IconUsers } from "nu
 export default function Example() {
     return (
         <NotificationMenu
-            avatarSrc="https://images.unsplash.com/photo-1760625525684-3564699070a5?auto=format&fit=crop&w=600&q=60"
+            avatarSrc="/img.png"
             userLabel="@email"
             userSubLabel="Personal"
             workspaces={[
@@ -13,11 +13,11 @@ export default function Example() {
             ]}
             onCreateWorkspace={() => console.log("create workspace")}
             menuItems={[
-                { id: "personal-info", icon: <IconFolders size={14} />, label: "Personal info" },
-                { id: "account-security", icon: <IconLock size={14} />, label: "Account Security" },
-                { id: "templates", icon: <IconSquareKanban />, label: "Templates" },
-                { id: "manage-users", icon: <IconUsers />, label: "Manage users" },
-                { id: "settings", icon: <IconGear />, label: "Settings" },
+                { id: "personal-info", icon: <IconFolders size={12} />, label: "Personal info" },
+                { id: "account-security", icon: <IconLock size={12} />, label: "Account Security" },
+                { id: "templates", icon: <IconSquareKanban size={12} />, label: "Templates" },
+                { id: "manage-users", icon: <IconUsers size={12} />, label: "Manage users" },
+                { id: "settings", icon: <IconGear size={12} />, label: "Settings" },
             ]}
             onLogout={() => console.log("logout")}
         />

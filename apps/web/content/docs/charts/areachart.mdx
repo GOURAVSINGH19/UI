@@ -1,0 +1,124 @@
+---
+title: "Area Chart"
+description: "A reusable area chart component for displaying analytics data."
+---
+
+import { AnalyticsLineChart } from "@/components/charts/AreaChart"
+
+<ComponentPreviewTabs
+  component={
+    <div className="flex justify-center items-center min-h-[350px] w-full p-8 bg-zinc-950 rounded-lg">
+      <AnalyticsLineChart />
+    </div>
+  }
+/>
+
+## Installation
+
+<Tabs defaultValue="manual">
+
+<TabsList>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>
+
+Copy the code from `apps/web/components/charts/AreaChart.tsx` to your project.
+
+</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { AnalyticsLineChart } from "@/components/charts/AreaChart"
+
+export function Example() {
+  return (
+    <AnalyticsLineChart />
+  )
+}
+```
+
+## Examples
+
+### Negative Change
+
+```tsx
+<AnalyticsLineChart 
+    title="Bounce Rate" 
+    value="42.5%" 
+    change="5.2%" 
+    changeType="negative" 
+    chartConfig={{ color: "#ef4444" }} 
+/>
+```
+
+<div className="flex justify-center items-center min-h-[350px] w-full p-8 bg-zinc-950 rounded-lg my-4">
+    <AnalyticsLineChart 
+        title="Bounce Rate" 
+        value="42.5%" 
+        change="5.2%" 
+        changeType="negative" 
+        chartConfig={{ color: "#ef4444" }} 
+    />
+</div>
+
+### Custom Data
+
+```tsx
+const data = [
+    { name: 'Mon', value: 100 },
+    { name: 'Tue', value: 300 },
+    { name: 'Wed', value: 200 },
+    { name: 'Thu', value: 500 },
+    { name: 'Fri', value: 400 },
+];
+
+<AnalyticsLineChart 
+    title="Weekly Visits" 
+    description="Last 5 Days"
+    data={data}
+    value="1.5k" 
+    change="10%" 
+    changeType="positive" 
+/>
+```
+
+<div className="flex justify-center items-center min-h-[350px] w-full p-8 bg-zinc-950 rounded-lg my-4">
+    <AnalyticsLineChart 
+        title="Weekly Visits" 
+        description="Last 5 Days"
+        data={[
+            { name: 'Mon', value: 100 },
+            { name: 'Tue', value: 300 },
+            { name: 'Wed', value: 200 },
+            { name: 'Thu', value: 500 },
+            { name: 'Fri', value: 400 },
+        ]}
+        value="1.5k" 
+        change="10%" 
+        changeType="positive" 
+    />
+</div>
+
+## API Reference
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `data` | `{ name: string; value: number }[]` | `defaultData` | Array of data points for the chart. |
+| `title` | `string` | `"MAU"` | The title of the chart metric. |
+| `description` | `string` | `"JAN 2025"` | Subtitle or description text. |
+| `value` | `string` | `"5.24k"` | The main metric value displayed. |
+| `change` | `string` | `"25%"` | The percentage change text. |
+| `changeType` | `"positive" \| "negative" \| "neutral"` | `"positive"` | Determines the color and icon of the change indicator. |
+| `chartConfig` | `{ color?: string }` | `{ color: "#8b5cf6" }` | Configuration options for the chart, e.g., line color. |

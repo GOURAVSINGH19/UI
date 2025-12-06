@@ -50,21 +50,21 @@ export const docsConfig: DocsConfig = {
                     href: "/docs/components/slidecard",
                     items: [],
                 },
-                // {
-                //     title: "Slider",
-                //     href: "/docs/components/slider",
-                //     items: [],
-                // },
+                {
+                    title: "Topup",
+                    href: "/docs/components/Topup",
+                    items: [],
+                },
             ],
         },
         {
             title: "Charts",
             items: [
                 {
-                    title: "Bar Chart",
-                    href: "/docs/charts/barchart",
+                    title: "Activity Chart",
+                    href: "/docs/charts/activitychart",
                     items: []
-                }
+                },
             ]
         }
     ],
