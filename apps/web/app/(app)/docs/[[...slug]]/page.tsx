@@ -37,10 +37,6 @@ function findNeighboursFromConfig(currentUrl: string) {
   }
 }
 
-export const dynamic = "force-static"
-export const dynamicParams = false
-export const revalidate = 60
-
 export function generateStaticParams() {
   return source.generateParams()
 }
