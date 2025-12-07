@@ -39,7 +39,7 @@ const Card = () => {
                 <div className='relative  mask-b-from-50%  mask-r-from-50% mask-l-from-50% mask-t-from-50%'>
                     <Pattern />
                     <div className='flex items-center gap-4 justify-center h-40 animate-marquee'>
-                        {icons.map((items,_) => {
+                        {icons.map((items) => {
                             return (
                                 <div key={items.circle} className={cn("rounded-full bg-neutral-400 flex items-center justify-center size-10")}>
                                     {items.icons}

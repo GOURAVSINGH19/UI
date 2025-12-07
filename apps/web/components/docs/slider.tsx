@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
-import { motion } from "motion/react";
+import { motion, type PanInfo } from "motion/react";
 import { useRef, useState } from "react";
 import NumberFlow from "@number-flow/react";
 
@@ -15,7 +15,7 @@ export const SliderScore = ({
     const [value, setValue] = useState(initial);
     const barContainerRef = useRef<HTMLDivElement>(null);
 
-    const handleDrag = (_: any, info: any) => {
+    const handleDrag = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         if (!barContainerRef.current) return;
 
         const rect = barContainerRef.current.getBoundingClientRect();
