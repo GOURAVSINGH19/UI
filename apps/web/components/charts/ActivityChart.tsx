@@ -47,7 +47,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
     };
 
     return (
-        <div className="w-full bg-white text-black p-6 rounded-md ring-2 ring-white/30 font-sans">
+        <div className="w-full bg-white text-black p-6 rounded-md ring-2 ring-white/30 font-sans overflow-hidden lg:overflow-visible">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                 <div>
                     <h2 className="text-xl font-bold text-gray-900">Activity Statistic</h2>
@@ -55,7 +55,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
                         Track your progress in active courses
                     </p>
                 </div>
-                <div className="flex items-center gap-6">
+                <div className="flex sm:items-center sm:flex-row items-start flex-col gap-6">
                     <div className="flex gap-2 bg-gray-200 rounded-lg p-1 ring-1 ring-black/15">
                         {["7D", "1M", "6M", "1Y"].map((period, i) => (
                             <button
@@ -104,11 +104,11 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
 
                 <div className="absolute inset-0 w-full h-[85%] border-t border-b border-dashed border-gray-100 pointer-events-none" style={{ top: '7.5%' }} />
 
-                <div className="flex justify-between items-end w-full h-full px-2 sm:px-4">
+                <div className="flex justify-between items-end gap-10 w-full h-full px-2 sm:px-4 overflow-scroll lg:overflow-visible">
                     {displayData.map((item, index) => (
                         <div
                             key={index}
-                            className="relative flex flex-col justify-end items-center group h-full w-full"
+                            className="relative flex flex-col justify-end items-center group h-full w-full "
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
@@ -141,7 +141,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
                                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        className="absolute bottom-[80%] left-1/2 -translate-x-1/2 z-20 mb-2"
+                                        className="absolute bottom-[40%] sm:bottom-[40%] lg:bottom-[80%] left-1/2 -translate-x-1/2 z-20 mb-2"
                                     >
                                         <div
                                             className="bg-[#23252A] ring-1 ring-white/20 text-white text-[10px] p-2.5 rounded-lg w-32 flex flex-col gap-1.5 relative overflow-hidden"

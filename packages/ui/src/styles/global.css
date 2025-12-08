@@ -11,7 +11,7 @@
 @custom-variant dark (&:is(.dark *));
 
 * {
-  font-family: serif;
+  font-family: Geist, sans-serif;
 }
 
 :root {
