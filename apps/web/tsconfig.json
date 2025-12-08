@@ -8,7 +8,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -16,7 +18,10 @@
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.js",
-    ".next/types/**/*.ts"
-, "components/docs/notification.tsx", "content/docs/components/slider.mdx"  ],
-  "exclude": ["node_modules"]
+    ".next/types/**/*.ts",
+    "components/docs/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
