@@ -116,7 +116,7 @@ export default async function Page(props: {
     >
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="h-(--top-spacing) shrink-0" />
-        <div className="mx-auto flex w-full max-w-5xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 lg:py-8 lg:px-4 dark:text-neutral-300 bg-[#171717] border-1 border-[var(--bg-light)]  rounded-md">
+        <div className="mx-auto flex w-full max-w-5xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 lg:py-8 lg:px-4 dark:text-neutral-300 bg-[#101010] rounded-md ring-[.5px] ring-white/20">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between">
@@ -168,10 +168,10 @@ export default async function Page(props: {
             <MDX components={mdxComponents} />
           </div>
         </div>
-        <div className="mx-auto hidden h-16 w-full  items-center justify-between gap-2 px-4 sm:flex md:px-0">
+        <div className="w-full hidden h-16 max-w-screen-xl items-center justify-between px-4 sm:flex md:px-2">
           {neighbours.previous &&
             <Link href={neighbours.previous.url}>
-              <button className='rounded-full py-2 px-6 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+              <button className='rounded-full py-2 px-4 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-s)] cursor-pointer hover:shadow-[var(--shadow-m)]'>
                 <ArrowLeft className="w-4 h-4 text-neutral-400" />
                 <span className='text-sm text-[#ffffff68]'>{neighbours.previous.name}</span>
               </button>
@@ -179,7 +179,7 @@ export default async function Page(props: {
           }
           {neighbours.next &&
             <Link href={neighbours.next.url}>
-              <button className='rounded-full mr-10 py-2 px-8  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
+              <button className='rounded-full  py-2 px-6  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-s)] cursor-pointer hover:shadow-[var(--shadow-m)]'>
                 <span className='text-sm text-[#ffffff68]'>{neighbours.next?.name}</span>
                 <ArrowRight className="w-4 h-4 text-neutral-400" />
               </button>

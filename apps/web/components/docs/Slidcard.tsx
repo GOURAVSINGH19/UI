@@ -67,7 +67,7 @@ export const Skeleton = ({
     desc: string
 }) => {
     return (
-        <div className={cn("max-w-[85%] bg-neutral-200 md:h-28 my-auto shadow-lg mx-auto w-full rounded-lg border-netural-200 dark:border-netural-700", "perspective-distant mask-r-from-95% mask-b-from-20% mask-b-to-200% flex flex-col gap-2", className)} style={{ padding: 6, margin: "auto", transform: "rotateX(30deg) rotateY(-20deg) rotateZ(24deg) scale(1.1) " }}>
+        <div className={cn("max-w-[85%] bg-neutral-200 md:h-28 my-auto shadow-lg mx-auto w-full rounded-lg border-netural-200 dark:border-netural-700", "mask-r-from-95% mask-b-from-20% mask-b-to-200% flex flex-col gap-2", className)} style={{ padding: 6, margin: "auto", transform: "rotateX(30deg) rotateY(-20deg) rotateZ(24deg) scale(1.1) " }}>
             <div className="text-sm flex gap-3 items-center relative">
                 {icon}
                 <span className="ml-2 text-sm font-medium text-black">{title}</span>
@@ -119,11 +119,11 @@ export const Badge = ({ variant, className, time }: { variant: "danger" | "succe
 
 export const CardFooter = ({ desc, icon }: { desc?: string, icon?: React.ReactElement }) => {
     return (
-        <div className="w-full mx-auto h-20 absolute bottom-0 z-20  border-neutral-200 flex items-center justify-between pointer-events-none" style={{ padding: "0 8px 0 8px" }} >
-            <p className="w-3/2 text-lg text-black font-bold leading-tight text-balance">
+        <div className="w-full mx-auto h-20 absolute bottom-0 z-20  border-neutral-200 flex items-center justify-between pointer-events-none p-[0_14px_0_14px]" >
+            <p className="w-3/2 text-md text-black font-semibold leading-tight text-balance">
                 {desc}
             </p>
-            <p className="w-fit h-fit border text-black rounded-full border-neutral-900 pointer-events-auto hover:rotate-90 duration-300 cursor-pointer" style={{ marginRight: 10, padding: 3 }}>
+            <p className="w-fit h-fit border text-[.6px] text-neutral-700 rounded-full border-neutral-800 pointer-events-auto duration-300 cursor-pointer p-[.5] mr-2">
                 {icon}
             </p>
         </div>

@@ -84,7 +84,7 @@ export function NotificationMenu(props: NotificationProps) {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -10, scale: 0.97 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
-                            className={cn("absolute top-12 right-2 w-[60vw] sm:w-[20vw]  min-h-[56vh] bg-[var(--bg-dark)] ring-[.5px] ring-white/50 rounded-sm overflow-hidden", className)}
+                            className={cn("absolute top-12 right-2 w-[60vw] sm:w-[26vw]  min-h-[56vh] bg-[var(--bg-dark)] ring-[.5px] ring-white/50 rounded-sm overflow-hidden", className)}
                             role="menu"
                         >
                             <div className="upper_col relative">

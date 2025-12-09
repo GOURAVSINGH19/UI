@@ -35,7 +35,7 @@ const Navbar = () => {
             <nav className=" max-w-screen-xl mx-auto p-[.8rem] md:px-[2rem]  rounded-[1rem] gap-10 flex justify-between items-center">
                 <div className="font-semibold w-fit md:block">
                     <Link href="/">
-                        <p>_Ghibli_</p>
+                        <p>Uiin</p>
                     </Link>
                 </div>
                 <div className="flex items-center gap-4">
