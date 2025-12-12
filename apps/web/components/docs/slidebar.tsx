@@ -40,7 +40,7 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ items = [], className, initia
         } else {
             setIndicator({ width: 0, left: 0 })
         }
-    }, [active, items])
+    }, [active])
 
     return (
         <div className={cn("relative mt-10 flex justify-center", className)}>

@@ -55,6 +55,11 @@ export const docsConfig: DocsConfig = {
                     href: "/docs/components/Topup",
                     items: [],
                 },
+                {
+                    title: "Uploader",
+                    href: "/docs/components/Upload",
+                    items: []
+                },
             ],
         },
         {

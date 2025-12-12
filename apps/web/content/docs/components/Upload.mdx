@@ -1,0 +1,97 @@
+---
+title: "Upload"
+description: "A file upload component with drag and drop support and progress indication."
+---
+
+import { FileUpload } from "../../../components/docs/Uploading"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+import { ComponentPreviewTabs } from "../../../components/ComponentPreview"
+import { ComponentSource } from "../../../components/ComponentSource"
+
+## Preview
+
+<ComponentPreviewTabs
+  component={<FileUpload />}
+  source={
+    <ComponentSource
+      src="components/docs/Uploading.tsx"
+      title="Uploading.tsx"
+      language="tsx"
+    />
+  }
+/>
+
+## Usage
+
+```tsx
+import { FileUpload } from "@/components/docs/Uploading"
+
+export default function App() {
+  const handleFilesSelected = (files: File[]) => {
+    console.log("Files selected:", files)
+  }
+
+  const handleUpload = async (files: File[]) => {
+    console.log("Uploading files:", files)
+  }
+
+  return (
+    <FileUpload
+      onFilesSelected={handleFilesSelected}
+      onUpload={handleUpload}
+      acceptedFormats="image/jpeg,image/png,image/svg+xml"
+      maxFileSize={5 * 1024 * 1024}
+    />
+  )
+}
+```
+
+## API Surface
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Description"]}
+  rows={[
+    [
+      <code key="onFilesSelected">onFilesSelected</code>,
+      "(files: File[]) => void",
+      "—",
+      "Callback when files are selected or dropped."
+    ],
+    [
+      <code key="onUpload">onUpload</code>,
+      "(files: File[]) => Promise<void>",
+      "—",
+      "Async callback for handling the upload process."
+    ],
+    [
+      <code key="maxFileSize">maxFileSize</code>,
+      "number",
+      "5MB",
+      "Maximum allowed file size in bytes."
+    ],
+    [
+      <code key="acceptedFormats">acceptedFormats</code>,
+      "string[] | string",
+      "Images",
+      "Comma-separated string or array of accepted MIME types."
+    ],
+    [
+      <code key="multiple">multiple</code>,
+      "boolean",
+      "true",
+      "Whether to allow multiple file selection."
+    ],
+    [
+      <code key="showProgress">showProgress</code>,
+      "boolean",
+      "true",
+      "Whether to show the progress bar."
+    ],
+     [
+      <code key="onUploadSuccess">onUploadSuccess</code>,
+      "() => void",
+      "—",
+      "Callback when upload completes successfully."
+    ],
+  ]}
+/>

@@ -35,8 +35,8 @@ export function ComponentPreviewTabs({
         <div className="flex items-center justify-between">
           {!hideCode && (
             <TabsList>
-              <TabsTrigger value="preview">Preview</TabsTrigger>
-              <TabsTrigger value="code">Code</TabsTrigger>
+              <TabsTrigger className="cursor-pointer" value="preview">Preview</TabsTrigger>
+              <TabsTrigger className="cursor-pointer" value="code">Code</TabsTrigger>
             </TabsList>
           )}
         </div>
@@ -55,7 +55,7 @@ export function ComponentPreviewTabs({
               <div
                 data-align={align}
                 className={cn(
-                  "preview flex overflow-y-auto min-h-80 w-full justify-center p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start overflow-hidden "
+                  "preview flex overflow-y-auto min-h-80 w-full justify-center p-2 lg:p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start overflow-hidden "
                 )}
               >
                 {component}

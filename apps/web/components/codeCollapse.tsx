@@ -29,7 +29,7 @@ export function CodeCollapsibleWrapper({
         <div className="absolute top-1.5 right-9 z-10 flex items-center">
           <Button
             size="sm"
-            className="text-muted-foreground h-7 rounded-md px-2"
+            className="text-neutral-900 h-7 rounded-md px-2 cursor-pointer"
           >
             {isOpened ? "Collapse" : "Expand"}
           </Button>

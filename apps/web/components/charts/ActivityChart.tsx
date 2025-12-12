@@ -47,7 +47,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
     };
 
     return (
-        <div className="w-full bg-white text-black p-6 rounded-md ring-2 ring-white/30 font-sans overflow-hidden lg:overflow-visible">
+        <div className="w-full bg-white text-black p-6 rounded-md ring-2 ring-white/30 font-sans ">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                 <div>
                     <h2 className="text-xl font-bold text-gray-900">Activity Statistic</h2>
@@ -96,7 +96,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
                 </div>
             </div>
 
-            <div className="relative h-[240px] w-full flex items-end justify-between pl-8 pb-6">
+            <div className="relative h-[240px] w-full flex items-end justify-between pl-8 pb-6 overflow-x-scroll">
                 <div className="absolute left-0 top-0 bottom-6 flex flex-col justify-between text-xs text-gray-500 font-medium z-10 pointer-events-none">
                     <span>100</span>
                     <span>0</span>
@@ -104,36 +104,40 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
 
                 <div className="absolute inset-0 w-full h-[85%] border-t border-b border-dashed border-gray-100 pointer-events-none" style={{ top: '7.5%' }} />
 
-                <div className="flex justify-between items-end gap-10 w-full h-full px-2 sm:px-4 overflow-scroll lg:overflow-visible">
+                <div className="flex justify-between items-end gap-3 sm:gap-6 w-full h-full px-2 sm:px-4">
                     {displayData.map((item, index) => (
                         <div
                             key={index}
-                            className="relative flex flex-col justify-end items-center group h-full w-full "
+                            className="relative flex flex-col justify-end items-center group h-full w-full"
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
-                            <div className="flex items-end gap-1 sm:gap-2 h-full">
-                                <motion.div
-                                    initial={{ height: 0 }}
-                                    animate={{ height: `${getHeight(item.examPassed)}%` }}
-                                    transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }}
-                                    className="w-6 sm:w-8 rounded-t-md bg-[#8b5cf6] relative overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-                                >
-                                    <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:4px_4px]" />
-                                </motion.div>
-                                <motion.div
-                                    initial={{ height: 0 }}
-                                    animate={{ height: `${getHeight(item.lessonTaken)}%` }}
-                                    transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 + 0.1 }}
-                                    className="w-6 sm:w-8 rounded-t-md bg-[#60a5fa] cursor-pointer hover:opacity-90 transition-opacity"
-                                >
-                                    <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:4px_4px]" />
-                                </motion.div>
+                            <div className="flex flex-col items-end sm:gap-2 h-full">
+                                <div className="flex items-end gap-1 h-full">
+                                    <div className={cn("w-6 sm:w-8 rounded-t-md flex items-end h-full bg-neutral-200/60 cursor-pointer hover:opacity-90 transition-opacity", "bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:4px_4px]")}>
+                                        <motion.div
+                                            initial={{ height: 0 }}
+                                            animate={{ height: `${getHeight(item.examPassed)}%` }}
+                                            transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 }}
+                                            className={cn("w-6 sm:w-8 rounded-t-md bg-[#8b5cf6] cursor-pointer hover:opacity-90 transition-opacity", "bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:4px_4px]")}
+                                        >
+                                        </motion.div>
+                                    </div>
+                                    <div className={cn("w-6 sm:w-8 rounded-t-md flex items-end h-full bg-neutral-200/60 cursor-pointer hover:opacity-90 transition-opacity", "bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:4px_4px]")}>
+                                        <motion.div
+                                            initial={{ height: 0 }}
+                                            animate={{ height: `${getHeight(item.lessonTaken)}%` }}
+                                            transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.05 + 0.1 }}
+                                            className={cn("w-6 sm:w-8 rounded-t-md bg-[#60a5fa] cursor-pointer hover:opacity-90 transition-opacity", "bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:4px_4px]")}
+                                        >
+                                        </motion.div>
+                                    </div>
+                                </div>
+                                <span className="text-[10px] text-gray-500 font-medium tracking-wide">
+                                    {item.day}
+                                </span>
                             </div>
 
-                            <span className="absolute -bottom-6 text-[10px] text-gray-500 font-medium tracking-wide">
-                                {item.day}
-                            </span>
 
                             <AnimatePresence>
                                 {hoveredIndex === index && (
@@ -141,7 +145,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
                                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        className="absolute bottom-[40%] sm:bottom-[40%] lg:bottom-[80%] left-1/2 -translate-x-1/2 z-20 mb-2"
+                                        className="absolute bottom-[40%] sm:bottom-[60%] lg:bottom-[80%] left-1/2 -translate-x-1/2 z-[200] mb-2"
                                     >
                                         <div
                                             className="bg-[#23252A] ring-1 ring-white/20 text-white text-[10px] p-2.5 rounded-lg w-32 flex flex-col gap-1.5 relative overflow-hidden"
@@ -149,7 +153,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
                                             <p className="text-gray-400 border-b border-gray-800 pb-1 mb-1 font-medium">{item.day}</p>
                                             <div className="flex justify-between items-center">
                                                 <div className="flex items-center gap-1.5">
-                                                    <div className="w-2 h-2 rounded-[2px] bg-[#8b5cf6] relative overflow-hidden">
+                                                    <div className="w-2 h-2 rounded-[2px] bg-[#8b5cf6] relative">
                                                         <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.2)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.2)_75%,transparent_75%,transparent)] bg-[length:2px_2px]" />
                                                     </div>
                                                     <span>{firstName}</span>
@@ -172,6 +176,6 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
                     ))}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
