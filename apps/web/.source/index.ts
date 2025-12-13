@@ -1,14 +1,14 @@
 // @ts-nocheck -- skip type checking
 import * as docs_9 from "../content/docs/introduction/index.mdx?collection=docs"
-import * as docs_8 from "../content/docs/installation/index.mdx?collection=docs"
-import * as docs_7 from "../content/docs/components/Upload.mdx?collection=docs"
-import * as docs_6 from "../content/docs/components/Topup.mdx?collection=docs"
-import * as docs_5 from "../content/docs/components/slider.mdx?collection=docs"
-import * as docs_4 from "../content/docs/components/slidecard.mdx?collection=docs"
-import * as docs_3 from "../content/docs/components/menu.mdx?collection=docs"
-import * as docs_2 from "../content/docs/components/button.mdx?collection=docs"
-import * as docs_1 from "../content/docs/components/bar.mdx?collection=docs"
+import * as docs_8 from "../content/docs/components/Upload.mdx?collection=docs"
+import * as docs_7 from "../content/docs/components/Topup.mdx?collection=docs"
+import * as docs_6 from "../content/docs/components/slider.mdx?collection=docs"
+import * as docs_5 from "../content/docs/components/slidecard.mdx?collection=docs"
+import * as docs_4 from "../content/docs/components/menu.mdx?collection=docs"
+import * as docs_3 from "../content/docs/components/button.mdx?collection=docs"
+import * as docs_2 from "../content/docs/components/bar.mdx?collection=docs"
+import * as docs_1 from "../content/docs/installation/index.mdx?collection=docs"
 import * as docs_0 from "../content/docs/charts/activitychart.mdx?collection=docs"
 import { _runtime } from "fumadocs-mdx/runtime/next"
 import * as _source from "../source.config"
-export const docs = _runtime.docs<typeof _source.docs>([{ info: {"path":"charts/activitychart.mdx","fullPath":"content\\docs\\charts\\activitychart.mdx"}, data: docs_0 }, { info: {"path":"components/bar.mdx","fullPath":"content\\docs\\components\\bar.mdx"}, data: docs_1 }, { info: {"path":"components/button.mdx","fullPath":"content\\docs\\components\\button.mdx"}, data: docs_2 }, { info: {"path":"components/menu.mdx","fullPath":"content\\docs\\components\\menu.mdx"}, data: docs_3 }, { info: {"path":"components/slidecard.mdx","fullPath":"content\\docs\\components\\slidecard.mdx"}, data: docs_4 }, { info: {"path":"components/slider.mdx","fullPath":"content\\docs\\components\\slider.mdx"}, data: docs_5 }, { info: {"path":"components/Topup.mdx","fullPath":"content\\docs\\components\\Topup.mdx"}, data: docs_6 }, { info: {"path":"components/Upload.mdx","fullPath":"content\\docs\\components\\Upload.mdx"}, data: docs_7 }, { info: {"path":"installation/index.mdx","fullPath":"content\\docs\\installation\\index.mdx"}, data: docs_8 }, { info: {"path":"introduction/index.mdx","fullPath":"content\\docs\\introduction\\index.mdx"}, data: docs_9 }], [])
+export const docs = _runtime.docs<typeof _source.docs>([{ info: {"path":"charts/activitychart.mdx","fullPath":"content\\docs\\charts\\activitychart.mdx"}, data: docs_0 }, { info: {"path":"installation/index.mdx","fullPath":"content\\docs\\installation\\index.mdx"}, data: docs_1 }, { info: {"path":"components/bar.mdx","fullPath":"content\\docs\\components\\bar.mdx"}, data: docs_2 }, { info: {"path":"components/button.mdx","fullPath":"content\\docs\\components\\button.mdx"}, data: docs_3 }, { info: {"path":"components/menu.mdx","fullPath":"content\\docs\\components\\menu.mdx"}, data: docs_4 }, { info: {"path":"components/slidecard.mdx","fullPath":"content\\docs\\components\\slidecard.mdx"}, data: docs_5 }, { info: {"path":"components/slider.mdx","fullPath":"content\\docs\\components\\slider.mdx"}, data: docs_6 }, { info: {"path":"components/Topup.mdx","fullPath":"content\\docs\\components\\Topup.mdx"}, data: docs_7 }, { info: {"path":"components/Upload.mdx","fullPath":"content\\docs\\components\\Upload.mdx"}, data: docs_8 }, { info: {"path":"introduction/index.mdx","fullPath":"content\\docs\\introduction\\index.mdx"}, data: docs_9 }], [])
