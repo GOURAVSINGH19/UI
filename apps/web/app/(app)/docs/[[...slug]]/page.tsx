@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { mdxComponents } from "@/mdx-conponent"
+import { mdxComponents } from "@/mdx-component"
 import {
   ArrowLeft,
   ArrowRight,

@@ -19,7 +19,7 @@
     "clsx": "^2.1.1",
     "eslint": "^9.32.0",
     "framer-motion": "^12.23.24",
-    "fumadocs-ui": "^15.0.4",
+    "fumadocs-ui": "^16.0.5",
     "gsap": "^3.13.0",
     "lucide-react": "^0.475.0",
     "next-themes": "^0.4.6",
