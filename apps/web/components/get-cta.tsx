@@ -11,6 +11,7 @@ export function GetAISDKAgentsCta({ className }: React.ComponentProps<"div">) {
           className
         )}
       >
+        
         <div className="p-6 space-y-4">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-gradient-to-br from-[oklch(0.7_0.25_320)]/10 to-blue-500/10 dark:from-[oklch(0.7_0.25_320)]/20 dark:to-[#B357C5]">
@@ -21,14 +22,12 @@ export function GetAISDKAgentsCta({ className }: React.ComponentProps<"div">) {
             </div>
           </div>
   
-          {/* Description */}
           <p className="text-sm  leading-snug max-w-[60ch] tracking-tight ">
             Real world vercel <VerifiedIcon className="size-4 inline-block mr-1" />
             <span className="font-medium">AI SDK v.6</span> Patterns you can copy
             and paste.
           </p>
   
-          {/* Features */}
           <div className="space-y-2 text-foreground/80 leading-snug tracking-wide text-sm ">
             <div className="flex items-center gap-3">
               <Layers className="h-4 w-4 text-[oklch(0.7_0.25_320)] dark:text-[oklch(0.8_0.25_320)] flex-shrink-0" />
@@ -44,7 +43,6 @@ export function GetAISDKAgentsCta({ className }: React.ComponentProps<"div">) {
             </div>
           </div>
   
-          {/* CTA Button */}
           <Button
             size="sm"
             className={cn(

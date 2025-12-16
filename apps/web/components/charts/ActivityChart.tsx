@@ -145,7 +145,7 @@ export default function ActivityChart({ data = defaultData, firstName = "Exam Pa
                                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                        className="absolute bottom-[40%] sm:bottom-[60%] lg:bottom-[80%] left-1/2 -translate-x-1/2 z-[200] mb-2"
+                                        className="absolute bottom-[40%] sm:bottom-[60%] lg:bottom-[56%] left-1/2 -translate-x-1/2 z-[200] mb-2"
                                     >
                                         <div
                                             className="bg-[#23252A] ring-1 ring-white/20 text-white text-[10px] p-2.5 rounded-lg w-32 flex flex-col gap-1.5 relative overflow-hidden"

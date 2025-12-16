@@ -7,6 +7,6 @@
       "@workspace/ui/public/*": ["./public/*"]
     }
   },
-  "include": ["src/**/*", "../../apps/web/components/copy-button.tsx"],
+  "include": ["src/**/*", "../../apps/web/components/copy-button.tsx", "../../apps/web/templates"],
   "exclude": ["node_modules", "dist"]
 }

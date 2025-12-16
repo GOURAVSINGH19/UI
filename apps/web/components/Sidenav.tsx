@@ -16,9 +16,12 @@ export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
     <div className="w-full">
       {items.map((item, index) => (
         <div key={index} className={cn("pb-4")}>
-          <h4 className={cn("mb-1 rounded-md px-2 py-1 text-md font-medium text-black", className)}>
-            {item.title}
-          </h4>
+          <div className="flex gap-2 items-center px-2 py-1">
+            <h4 className={cn("mb-1 rounded-md text-md font-medium text-black", className)}>
+              {item.title}
+              <sup className="ml-1 text-[10px] text-red-400">{item.label}</sup>
+            </h4>
+          </div>
           {item?.items?.length && (
             <DocsSidebarNavItems items={item.items} pathname={pathname} />
           )}
@@ -118,3 +121,4 @@ function NavItem({ item, pathname, className }: NavItemProps) {
     </span>
   )
 }
+
