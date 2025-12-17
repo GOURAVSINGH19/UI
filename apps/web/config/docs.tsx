@@ -1,6 +1,5 @@
-
 import { SidebarNavItem } from "@/types/nav"
-
+import { IconFile, IconFolders, IconSquareChartLine, IconStarSparkle } from "nucleo-glass"
 type CodeThemeName = "default" | "min" | "vitesse" | "slack" | "nord" | "dracula" | "one-dark-pro" | "catppuccin"
 
 interface DocsConfig {
@@ -23,9 +22,8 @@ export const docsConfig: DocsConfig = {
                     title: "Installation",
                     href: "/docs/installation",
                     items: [],
-                }
+                },
             ],
-
         },
         {
             title: "Components",
@@ -61,6 +59,7 @@ export const docsConfig: DocsConfig = {
                     items: []
                 },
             ],
+            icon: <IconFolders size={16} />
         },
         {
             title: "Charts",
@@ -70,7 +69,30 @@ export const docsConfig: DocsConfig = {
                     href: "/docs/charts/activitychart",
                     items: []
                 },
-            ]
+            ],
+            icon: <IconSquareChartLine size={16} />
+        },
+        // {
+        //     title: "Templates",
+        //     items: [
+        //         {
+        //             title: "Template 1",
+        //             href: "/docs/template/template",
+        //             items: []
+        //         },
+        //     ],
+        //     icon: <IconFile size={16} />
+        // },
+        {
+            title: "Style",
+            items: [
+                {
+                    title: "Style",
+                    href: "/docs/style/style",
+                    items: []
+                },
+            ],
+            icon: <IconStarSparkle size={14} />
         }
     ],
 }

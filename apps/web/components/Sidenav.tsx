@@ -16,7 +16,10 @@ export function DocsSidebarNav({ items, className }: DocsSidebarNavProps) {
     <div className="w-full">
       {items.map((item, index) => (
         <div key={index} className={cn("pb-4")}>
-          <div className="flex gap-2 items-center px-2 py-1">
+          <div className="flex gap-1 items-center px-2 py-1">
+            <span className="mb-1.5">
+              {item.icon}
+            </span>
             <h4 className={cn("mb-1 rounded-md text-md font-medium text-black", className)}>
               {item.title}
               <sup className="ml-1 text-[10px] text-red-400">{item.label}</sup>
