@@ -1,5 +1,5 @@
 import { SidebarNavItem } from "@/types/nav"
-import { IconFile, IconFolders, IconSquareChartLine, IconStarSparkle } from "nucleo-glass"
+import { IconCube, IconFile, IconFolders, IconSquareChartLine, IconStarSparkle } from "nucleo-glass"
 type CodeThemeName = "default" | "min" | "vitesse" | "slack" | "nord" | "dracula" | "one-dark-pro" | "catppuccin"
 
 interface DocsConfig {
@@ -23,6 +23,12 @@ export const docsConfig: DocsConfig = {
                     href: "/docs/installation",
                     items: [],
                 },
+                {
+                    title: "Style",
+                    href: "/docs/style/style",
+                    items: [],
+                    icon: <IconStarSparkle size={14} />
+                }
             ],
         },
         {
@@ -72,27 +78,26 @@ export const docsConfig: DocsConfig = {
             ],
             icon: <IconSquareChartLine size={16} />
         },
-        // {
-        //     title: "Templates",
-        //     items: [
-        //         {
-        //             title: "Template 1",
-        //             href: "/docs/template/template",
-        //             items: []
-        //         },
-        //     ],
-        //     icon: <IconFile size={16} />
-        // },
         {
-            title: "Style",
+            title: "Templates",
             items: [
                 {
-                    title: "Style",
-                    href: "/docs/style/style",
+                    title: "Template 1",
+                    href: "/docs/template/template",
                     items: []
                 },
             ],
-            icon: <IconStarSparkle size={14} />
-        }
+            icon: <IconFile size={16} />
+        }, {
+            title: "3D",
+            items: [
+                {
+                    title: "ScrollAnimation",
+                    href: "/docs/THREE/ScrollAnimation",
+                    items: []
+                },
+            ],
+            icon: <IconCube size={16} />
+        },
     ],
 }

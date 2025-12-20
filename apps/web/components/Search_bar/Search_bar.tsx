@@ -30,7 +30,7 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
 
     const allItems = useMemo(() => {
         const items: Array<{ title: string; href: string; category: string }> = [];
-        
+
         docsConfig.sidebarNav.forEach((section) => {
             const flattenItems = (navItems: SidebarNavItem[], category: string) => {
                 navItems.forEach((item) => {
@@ -46,10 +46,10 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
                     }
                 });
             };
-            
+
             flattenItems(section.items, section.title);
         });
-        
+
         return items;
     }, []);
 
@@ -57,9 +57,9 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
         if (!Search.trim()) {
             return [];
         }
-        
+
         const searchLower = Search.toLowerCase().trim();
-        return allItems.filter(item => 
+        return allItems.filter(item =>
             item.title.toLowerCase().includes(searchLower) ||
             item.category.toLowerCase().includes(searchLower)
         );
@@ -67,14 +67,14 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
 
     const groupedResults = useMemo(() => {
         const groups: Record<string, Array<{ title: string; href: string }>> = {};
-        
+
         filteredItems.forEach(item => {
             if (!groups[item.category]) {
                 groups[item.category] = [];
             }
             groups[item.category].push({ title: item.title, href: item.href });
         });
-        
+
         return groups;
     }, [filteredItems]);
 
@@ -91,12 +91,19 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
                     <span className='text-sm text-[#ffffff68]'>Esc</span>
                 </p>
             </div>
-            <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 4, animationDuration: 100 }} className='p-[1rem] rounded-t-md bg-[var(--bg)] mt-2 shadow-[var(--shadow-m)]'>
+            <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 4 }}
+                className="p-[1rem] rounded-t-md bg-[var(--bg)] mt-2 shadow-[var(--shadow-m)] flex flex-col h-full"
+            >
                 <div className='relative'>
                     <input ref={Inputref} type="text" value={Search} onChange={(e) => setSearch(e.target.value)} placeholder='Search...' className='w-full py-2 px-2 rounded-lg bg-[var(--bg)] shadow-[var(--shadow-m)] outline-none border-none text-[var(--foreground)]' />
                     <X onClick={() => setSearch("")} className='hover:scale-[.9] cursor-pointer absolute right-[1rem] top-[50%] -translate-y-[50%] w-4' />
                 </div>
-                <div className="min-h-full h-60 scrollbar-hide overflow-y-auto  flex flex-col items-start justify-start text-[12px] text-[#ffffff54] mt-4" style={{ scrollbarWidth: "none" }}>
+                <div
+                    className="flex-1 overflow-y-auto scrollbar-hide overscroll-contain flex flex-col items-start justify-start text-[12px] text-[#ffffff54] mt-4"
+                    style={{ scrollbarWidth: "none" }}
+                >
                     {Search.trim() ? (
                         filteredItems.length > 0 ? (
                             <>
@@ -105,8 +112,8 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
                                     <div key={category} className='w-full mb-4'>
                                         <h2 className='text-xs text-[#ffffff68] mb-2 uppercase tracking-wider'>{category}</h2>
                                         {items.map((item) => (
-                                            <Link 
-                                                key={item.href} 
+                                            <Link
+                                                key={item.href}
                                                 href={item.href}
                                                 onClick={handleItemClick}
                                             >
@@ -131,8 +138,8 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
                                 <div key={section.title} className='w-full mb-2'>
                                     <h2 className='text-xs text-[#ffffff68] mb-2 uppercase tracking-wider'>{section.title}</h2>
                                     {section.items.filter(item => item.href).map((item) => (
-                                        <Link 
-                                            key={item.href} 
+                                        <Link
+                                            key={item.href}
                                             href={item.href!}
                                             onClick={handleItemClick}
                                         >

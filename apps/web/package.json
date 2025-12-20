@@ -11,6 +11,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@mdx-js/react": "^3.1.1",
     "@number-flow/react": "^0.5.10",
     "@types/mdx": "^2.0.13",

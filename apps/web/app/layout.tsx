@@ -3,6 +3,7 @@ import "@workspace/ui/global.css"
 import { Providers } from "@/app/providers"
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import Navbar from "@/components/Navbar";
+import { LenisProvider } from "./leisprovider/lenisProvider";
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -27,15 +28,16 @@ export default function RootLayout({
       >
         <Navbar />
         <RootProvider search={{
-          enabled: false
+          enabled: false,
         }}
         >
           <Providers>
+            <LenisProvider/>
             <div className="relative z-10 flex min-h-screen flex-col ">
               {children}
             </div>
           </Providers>
-        </RootProvider>
+      </RootProvider>
       </body>
     </html>
   )
