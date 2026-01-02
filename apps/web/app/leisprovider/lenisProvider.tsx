@@ -16,6 +16,6 @@ export const LenisProvider = () => {
         }
     }, [])
     return (
-        <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+        <ReactLenis root options={{ autoRaf: false, allowNestedScroll: true }} ref={lenisRef} />
     )
 }

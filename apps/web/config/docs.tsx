@@ -55,6 +55,11 @@ export const docsConfig: DocsConfig = {
                     items: [],
                 },
                 {
+                    title:"SliderScore",
+                    href: "/docs/components/SliderScore",
+                    items: [],
+                },
+                {
                     title: "Topup",
                     href: "/docs/components/Topup",
                     items: [],
@@ -79,11 +84,11 @@ export const docsConfig: DocsConfig = {
             icon: <IconSquareChartLine size={16} />
         },
         {
-            title: "Templates",
+            title: "ScrollAnimation",
             items: [
                 {
                     title: "Template 1",
-                    href: "/docs/template/template",
+                    href: "/docs/scrollanimation/template",
                     items: []
                 },
             ],
@@ -92,7 +97,7 @@ export const docsConfig: DocsConfig = {
             title: "3D",
             items: [
                 {
-                    title: "ScrollAnimation",
+                    title: "3D_Animation",
                     href: "/docs/THREE/ScrollAnimation",
                     items: []
                 },

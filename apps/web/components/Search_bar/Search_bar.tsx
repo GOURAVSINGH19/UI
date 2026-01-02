@@ -84,10 +84,10 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
         }
     }
     return (
-        <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 4, animationDuration: 800 }} className='w-[90%] md:w-[80%] lg:w-[50%] mx-auto absolute bottom-0 h-[60dvh] left-[50%] -translate-x-[50%]  bg-neutral-800 px-4 pt-[1rem] rounded-t-2xl'>
+        <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 4, animationDuration: 800 }} className='w-[90%] md:w-[80%] lg:w-[60%] mx-auto absolute bottom-1 h-[60dvh] left-[50%] -translate-x-[50%] bg-neutral-800  px-4 pt-[1rem] rounded-t-2xl'>
             <div className='w-full'>
-                <p onClick={handleclick} onKeyDown={handlenavigate} tabIndex={0} className='rounded-full  px-6 py-3 bg-[var(--bg)] flex items-start gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
-                    <CornerUpLeft className='w-4 h-4' />
+                <p onClick={handleclick} onKeyDown={handlenavigate} tabIndex={0} className='rounded-full  px-4 py-2 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)] '>
+                    <CornerUpLeft className='w-3 h-3' />
                     <span className='text-sm text-[#ffffff68]'>Esc</span>
                 </p>
             </div>
@@ -101,7 +101,7 @@ const Search_bar = ({ Open }: { Open: Dispatch<SetStateAction<boolean>> }) => {
                     <X onClick={() => setSearch("")} className='hover:scale-[.9] cursor-pointer absolute right-[1rem] top-[50%] -translate-y-[50%] w-4' />
                 </div>
                 <div
-                    className="flex-1 overflow-y-auto scrollbar-hide overscroll-contain flex flex-col items-start justify-start text-[12px] text-[#ffffff54] mt-4"
+                    className="flex-1 overflow-y-auto scrollbar-hide overscroll-contain flex flex-col items-start justify-start text-[12px] text-[#ffffff54] mt-4 mb-5"
                     style={{ scrollbarWidth: "none" }}
                 >
                     {Search.trim() ? (

@@ -1,5 +1,5 @@
 'use client'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Github } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { motion } from 'motion/react'
@@ -113,11 +113,12 @@ const Home = () => {
                     </Link>
                 </motion.div>
                 <motion.div variants={buttonVariants}>
-                    <Link href="/components">
+                    <Link href="https://github.com/GOURAVSINGH19/UI" target="_blank">
                         <button className=' px-3 py-2 ring-[.5px] ring-white/20 flex items-center justify-center bg-[var(--bg)]  rounded-full gap-2 w-max shadow-[var(--shadow-s)] cursor-pointer hover:shadow-[var(--shadow-m)] duration-600 ease-inOut'>
                             <p className='text-sm'>
-                                Components
+                                GitHub
                             </p>
+                            <Github className='w-3 h-3' />
                         </button>
                     </Link>
                 </motion.div>

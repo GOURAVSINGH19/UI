@@ -4,7 +4,6 @@ import { DocsSidebarNav } from "@/components/Sidenav"
 import type { SidebarNavItem } from "@/types/nav"
 import { cn } from "@workspace/ui/lib/utils"
 
-// Basic usage example
 const basicNav: SidebarNavItem[] = [
   {
     title: "Getting Started",
@@ -15,7 +14,6 @@ const basicNav: SidebarNavItem[] = [
   },
 ]
 
-// With labels (new, recent, updated)
 const labelsNav: SidebarNavItem[] = [
   {
     title: "Components",
@@ -28,7 +26,6 @@ const labelsNav: SidebarNavItem[] = [
   },
 ]
 
-// With nested items (multi-level)
 const nestedNav: SidebarNavItem[] = [
   {
     title: "Guides",
@@ -51,7 +48,6 @@ const nestedNav: SidebarNavItem[] = [
   },
 ]
 
-// Complete example with all properties
 const completeNav: SidebarNavItem[] = [
   {
     title: "Workspace",

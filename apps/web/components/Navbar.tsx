@@ -32,7 +32,7 @@ const Navbar = () => {
 
     return (
         <header className="w-full fixed top-[.5rem] left-0 z-50 text-sm">
-            <nav className=" max-w-screen-xl mx-auto p-[.8rem] md:px-[2rem]  rounded-[1rem] gap-10 flex justify-between items-center">
+            <nav className=" max-w-screen-xl mx-auto p-[.8rem] md:px-5  rounded-[1rem] gap-10 flex justify-between items-center">
                 <div className="font-semibold w-fit md:block">
                     <Link href="/">
                         <p>Uiin</p>
@@ -48,16 +48,11 @@ const Navbar = () => {
                             <div className="bg-[var(--bg-light)]  flex items-center justify-center rounded-sm px-[8px] py-[2px] ">K</div>
                         </div>
                     </div>
-                    <Link href='https://github.com/GOURAVSINGH19/UI' target="_blank">
-                        <button className='rounded-sm py-2 px-2 ring-[.5px] ring-white/40 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
-                            <Github className='w-3 h-3' />
-                        </button>
-                    </Link>
                 </div>
             </nav>
             {
                 Open &&
-                <div className='fixed inset-0 h-screen z-[20000] backdrop-blur-[1px]'>
+                <div className='fixed inset-0 h-screen z-[20000] backdrop-blur-[2px]'>
                     <SearchBar Open={setOpen} />
                 </div>
             }

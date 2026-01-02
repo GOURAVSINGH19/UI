@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@workspace/ui/lib/utils";
-import { FileUpload } from "./docs/Uploading";
 import Image from "next/image";
+import { ThreedScrollAnimation } from "./3D/Lapes";
 
 const LatestComponent = () => {
     return (
@@ -25,7 +25,9 @@ const LatestComponent = () => {
                         <h4 className="text-black">New component</h4>
                     </div>
                     <div className="flex flex-col justify-start pb-2 pl-4 pt-14 md:items-start mt-4 ml-2"></div>
-                    <FileUpload />
+                </div>
+                <div className="mx-auto w-[40vw]"> 
+                    <ThreedScrollAnimation />
                 </div>
             </div>
         </motion.section>

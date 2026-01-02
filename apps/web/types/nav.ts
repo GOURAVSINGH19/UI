@@ -6,10 +6,9 @@ export interface NavItem {
   label?: string
   icon?: React.ReactNode
 }
+
 export interface NavItemWithChildren extends NavItem {
   items: NavItemWithChildren[]
 }
-
-export interface MainNavItem extends NavItem { }
 
 export interface SidebarNavItem extends NavItemWithChildren { }
