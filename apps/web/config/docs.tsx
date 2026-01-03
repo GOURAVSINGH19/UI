@@ -35,6 +35,11 @@ export const docsConfig: DocsConfig = {
             title: "Components",
             items: [
                 {
+                    title: "BounceTextReveal",
+                    href: "/docs/components/BounceTextReveal",
+                    items: []
+                },
+                {
                     title: "Buttons",
                     href: "/docs/components/button",
                     items: []
@@ -55,7 +60,7 @@ export const docsConfig: DocsConfig = {
                     items: [],
                 },
                 {
-                    title:"SliderScore",
+                    title: "SliderScore",
                     href: "/docs/components/SliderScore",
                     items: [],
                 },

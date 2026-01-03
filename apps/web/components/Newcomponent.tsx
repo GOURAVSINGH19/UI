@@ -26,7 +26,7 @@ const LatestComponent = () => {
                     </div>
                     <div className="flex flex-col justify-start pb-2 pl-4 pt-14 md:items-start mt-4 ml-2"></div>
                 </div>
-                <div className="mx-auto w-[40vw]"> 
+                <div className="mx-auto w-full lg:w-[40vw]"> 
                     <ThreedScrollAnimation />
                 </div>
             </div>

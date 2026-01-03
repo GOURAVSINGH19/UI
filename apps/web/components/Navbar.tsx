@@ -32,7 +32,7 @@ const Navbar = () => {
 
     return (
         <header className="w-full fixed top-[.5rem] left-0 z-50 text-sm">
-            <nav className=" max-w-screen-xl mx-auto p-[.8rem] md:px-5  rounded-[1rem] gap-10 flex justify-between items-center">
+            <nav className=" max-w-screen-2xl mx-auto p-[.8rem] md:px-5  rounded-[1rem] gap-10 flex justify-between items-center">
                 <div className="font-semibold w-fit md:block">
                     <Link href="/">
                         <p>Uiin</p>
