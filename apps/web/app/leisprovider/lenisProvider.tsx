@@ -16,6 +16,6 @@ export const LenisProvider = () => {
         }
     }, [])
     return (
-        <ReactLenis root options={{ autoRaf: false, allowNestedScroll: true }} ref={lenisRef} />
+        <ReactLenis root options={{ autoRaf: true, allowNestedScroll: true, syncTouch: false, smoothWheel: true, lerp: .1 }} ref={lenisRef} />
     )
 }
