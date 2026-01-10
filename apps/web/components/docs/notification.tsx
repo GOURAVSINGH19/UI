@@ -84,7 +84,7 @@ export function NotificationMenu(props: NotificationProps) {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -10, scale: 0.97 }}
                             transition={{ duration: 0.3, ease: "easeOut" }}
-                            className={cn("absolute top-12 right-2 w-[60vw] sm:w-[26vw]  min-h-[56vh] bg-[var(--bg-dark)] ring-[.5px] ring-white/50 rounded-sm overflow-hidden", className)}
+                            className={cn("absolute top-12 right-2 w-[60vw] sm:w-[26vw]  min-h-[53vh] bg-[var(--bg-dark)] ring-[.5px] ring-white/50 rounded-sm overflow-hidden", className)}
                             role="menu"
                         >
                             <div className="upper_col relative">
@@ -123,9 +123,9 @@ export function NotificationMenu(props: NotificationProps) {
                                                 <div key={ws.id} className="mb-2 flex items-center justify-between gap-4">
                                                     <div className="flex items-center justify-start gap-2">
                                                         {ws.avatar ?? (
-                                                            <div className="w-4 h-4 bg-purple-400 rounded-sm flex justify-center items-center" />
+                                                            <div className="w-5 h-5 bg-purple-400 rounded-xs flex justify-center items-center" />
                                                         )}
-                                                        <p className="text-[12px] text-neutral-300">{ws.label}</p>
+                                                        <p className="text-[14px] text-neutral-300">{ws.label}</p>
                                                     </div>
                                                 </div>
                                             ))}
@@ -135,10 +135,10 @@ export function NotificationMenu(props: NotificationProps) {
                                                     onClick={onCreateWorkspace}
                                                     className="mb-2 flex items-center justify-start gap-2"
                                                 >
-                                                    <div className="w-4 h-4 cursor-pointer bg-[var(--bg-light)] rounded-sm flex justify-center items-center">
-                                                        +
+                                                    <div className="w-5 h-5 cursor-pointer bg-[var(--bg-light)] rounded-xs flex justify-center items-center">
+                                                        <span className="text-[14px]">+</span>
                                                     </div>
-                                                    <p className="text-[12px] cursor-pointer text-neutral-300">Create new</p>
+                                                    <p className="text-[14px] cursor-pointer text-neutral-300">Create new</p>
                                                 </button>
                                             )}
                                         </div>

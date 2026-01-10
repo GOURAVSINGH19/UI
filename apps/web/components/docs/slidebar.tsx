@@ -46,12 +46,12 @@ const NavbarLinks: React.FC<NavbarLinksProps> = ({ items = [], className, initia
         <div className={cn("relative mt-10 flex justify-center", className)}>
             <div
                 ref={containerRef}
-                className="relative flex space-x-4 bg-[var(--bg)] shadow-[inset_0_.5px_.5px_#ffffff30,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] px-2 py-1 rounded-sm"
+                className="relative flex space-x-4 bg-black  shadow-[inset_0_.5px_.5px_#ffffff30,0_1px_2px_2px_#00000030,0_2px_2px_#00000015]  px-2 py-1 rounded-sm"
             >
                 <motion.div
                     className="absolute top-1 bottom-1 bg-[var(--bg-light)] shadow-[inset_0_.5px_.5px_#ffffff30,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] rounded-sm z-0"
                     animate={{ width: indicator.width, left: indicator.left }}
-                    transition={{ type: "spring", stiffness: 100, damping: 30 }}
+                    transition={{ type: "keyframes", stiffness: 100, damping: 30 }}
                     style={{ position: "absolute" }}
                 />
 
