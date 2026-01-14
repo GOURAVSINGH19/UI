@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { cn } from "@workspace/ui/lib/utils";
 import Image from "next/image";
-import { ThreedScrollAnimation } from "./3D/Lapes";
 
 const LatestComponent = () => {
     return (
@@ -27,7 +26,6 @@ const LatestComponent = () => {
                     <div className="flex flex-col justify-start pb-2 pl-4 pt-14 md:items-start mt-4 ml-2"></div>
                 </div>
                 <div className="mx-auto w-full lg:w-[40vw]"> 
-                    <ThreedScrollAnimation />
                 </div>
             </div>
         </motion.section>
