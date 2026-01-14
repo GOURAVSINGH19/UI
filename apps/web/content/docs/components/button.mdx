@@ -1,0 +1,58 @@
+---
+title: Button
+description: Opinionated button styles for primary actions
+---
+
+import { Button } from "@workspace/ui/components/ui/button"
+import { ButtonVariantPlayground } from "../../../components/docs/ButtonVariantPlayground"
+import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  component={<ButtonVariantPlayground />}
+  source={
+    <ComponentSource
+      src="components/docs/ButtonVariantPlayground.tsx"
+      title="ButtonVariantPlayground.tsx"
+      language="tsx"
+    />
+  }
+/>
+
+## API Surface
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [
+      <code key="variant">variant</code>,
+      <code key="variant-type">"default" | "outline" | "ghost" | "destructive"</code>,
+      <code key="variant-default">"default"</code>,
+      "Extends the shadcn variants with design-token driven colors.",
+    ],
+    [
+      <code key="size">size</code>,
+      <code key="size-type">"sm" | "default" | "lg" | "icon"</code>,
+      <code key="size-default">"default"</code>,
+      "Provides consistent spacing and typography across breakpoints.",
+    ],
+    [
+      <code key="asChild">asChild</code>,
+      <code key="asChild-type">boolean</code>,
+      <code key="asChild-default">false</code>,
+      "Forward rendering to another component such as Link.",
+    ],
+  ]}
+/>
+
+All other props pass straight through to the native `button` element, so you can
+set `type="submit"`, `disabled`, `aria-*` attributes, and event handlers as
+needed.
+
+## Accessibility
+
+- Always pair icon-only buttons with `aria-label`
+- Disabled buttons set `aria-disabled` and skip pointer events, so rely on the
+  `onClick` guard server-side as well
+- Focus ring follows the theme accent color and respects reduced motion
