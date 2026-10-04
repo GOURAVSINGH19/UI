@@ -1,0 +1,63 @@
+---
+title: Folder
+description: A folder whose papers rise and fan out as the front flap tilts open.
+category: Animations
+---
+
+import { FolderDemo } from "../../../components/docs/FolderDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  component={<FolderDemo />}
+  source={
+    <ComponentSource
+      src="components/docs/FolderDemo.tsx"
+      title="FolderDemo.tsx"
+      language="tsx"
+    />
+  }
+/>
+
+## Usage
+
+Hover or click to open. Each paper springs out with a small delay after the one
+before it, so they fan out instead of moving as a block.
+
+```tsx
+import { Folder } from "@workspace/ui/components/ui/folder"
+
+export function Files() {
+  return <Folder color="#e0a030" flap={["#f3c25e", "#eab14a"]} />
+}
+```
+
+Control it yourself with `open` and `onOpenChange`, for example to open the
+folder while something is being dragged over it.
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<Folder open={open} onOpenChange={setOpen} />
+```
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">open</code>, <code key="b">boolean</code>, "—", "Controlled state. Leave unset to open on hover and click."],
+    [<code key="a">onOpenChange</code>, <code key="b">(open: boolean) =&gt; void</code>, "—", "Called on hover, leave and click."],
+    [<code key="a">color</code>, <code key="b">string</code>, <code key="c">"#5b8def"</code>, "Back panel and tab colour."],
+    [<code key="a">flap</code>, <code key="b">[string, string]</code>, <code key="c">["#7aa5f7", "#6495f2"]</code>, "Front flap gradient, top to bottom."],
+    [<code key="a">papers</code>, <code key="b">FolderPaper[]</code>, "3 papers", "Each paper's open rotation, x offset and colour."],
+    [<code key="a">className</code>, <code key="b">string</code>, "—", "Applied to the outer wrapper."],
+  ]}
+/>
+
+## Accessibility
+
+- The folder is a real `button` with `aria-expanded` and a label that switches
+  between “Open folder” and “Close folder”
+- Keyboard users toggle it with Enter or Space

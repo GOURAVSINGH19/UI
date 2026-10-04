@@ -1,21 +1,47 @@
-import Svg from "@/components/svg";
 import Home from "../components/Home";
 import Footer from "@/components/Footer";
-import LatestComponent from "@/components/Newcomponent";
+import ComponentList from "@/components/ComponentList";
 import { Techsection } from "@/components/Tech";
-import { BounceTextReveal } from "@/components/docs/BounceTextReveal";
+import { GridFrame, GridSection } from "@/components/grid/Grid";
+import { GithubCta } from "@/components/GithubCta";
+import { Sponsors } from "@/components/home/Sponsors";
+import { Resources } from "@/components/home/Resources";
+import { Faq } from "@/components/home/Faq";
+
+// Shared padding for every home row: 16px on phones, the frame padding from md up.
+const row = "px-gutter md:px-[var(--ui-frame-pad)]";
 
 const ComponentLibraryDemo = () => {
   return (
-    <main className="w-screen h-full bg_svg">
-      <Svg />
-      <div className=" z-[10] max-w-screen-sm w-full md:max-w-screen-xl mx-auto md:p-[.8rem] px-[.5rem] md:px-[2rem]">
-        <Home />
-        <LatestComponent />
-        <Techsection />
+    // The frame starts under the fixed navbar; each block is one grid row.
+    <GridFrame className="max-w-[var(--ui-frame-width)] flex-1 pt-14">
+      <main>
+        <GridSection className={`${row} pt-20 pb-14 md:pt-24`}>
+          <Home />
+        </GridSection>
+        <GridSection className={`${row} py-8`}>
+          <Techsection />
+        </GridSection>
+        <GridSection className={`${row} py-12`}>
+          <ComponentList />
+        </GridSection>
+        <GridSection className={`${row} py-12`}>
+          <Resources />
+        </GridSection>
+        <GridSection className={`${row} py-12`}>
+          <Sponsors />
+        </GridSection>
+        <GridSection className={`${row} py-12`}>
+          <Faq />
+        </GridSection>
+        <GridSection className={`${row} py-12`}>
+          <GithubCta />
+        </GridSection>
+      </main>
+      <GridSection as="footer" className={`${row} pt-12 pb-8`}>
         <Footer />
-      </div>
-    </main>
+      </GridSection>
+    </GridFrame>
   );
 };
 

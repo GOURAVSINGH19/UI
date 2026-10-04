@@ -1,0 +1,86 @@
+---
+title: Organic Growth
+description: Wrap any element and vines, leaves and flowers grow out of its edges on hover or focus.
+category: Effects
+badge: New
+blog: https://singhgourav.vercel.app/blog/building-organic-growth
+---
+
+import { OrganicGrowthDemo } from "../../../components/docs/OrganicGrowthDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  component={<OrganicGrowthDemo />}
+  source={
+    <ComponentSource
+      src="components/docs/OrganicGrowthDemo.tsx"
+      title="OrganicGrowthDemo.tsx"
+      language="tsx"
+    />
+  }
+/>
+
+## Usage
+
+Hover the card or focus a field and the plant grows; leave and it retracts.
+Pass `active` to keep it grown, for example after a form is sent.
+
+```tsx
+import OrganicGrowth from "@workspace/ui/components/ui/organic-growth"
+
+export function Card() {
+  return (
+    <OrganicGrowth padding={70}>
+      <div className="rounded-2xl border p-6">Hover me</div>
+    </OrganicGrowth>
+  )
+}
+```
+
+Each vine is described by a `Sprout`: which edge it grows from, where along that
+edge, which way it bends, how long it is, and how it ends.
+
+```tsx
+const sprouts: Sprout[] = [
+  { edge: "top", t: 0.2, side: -1, length: 60, end: "curl" },
+  { edge: "right", t: 0.5, side: 1, length: 80, end: "bloom", blooms: [0.5] },
+]
+```
+
+The plant is built from a seeded random generator, so the same `seed` always
+gives the same arrangement. Colours read `--og-*` CSS variables, or pass a
+`palette` to override them.
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">active</code>, <code key="b">boolean</code>, "—", "Force grown or retracted; ignores hover and focus while set."],
+    [<code key="a">trigger</code>, <code key="b">"hover" | "focus" | "hover-focus" | "manual"</code>, <code key="c">"hover-focus"</code>, "What grows the vines when active is unset."],
+    [<code key="a">sprouts</code>, <code key="b">Sprout[]</code>, "14 vines", "Where vines grow, see Usage."],
+    [<code key="a">seed</code>, <code key="b">number</code>, <code key="c">2</code>, "Change it for a different arrangement."],
+    [<code key="a">padding</code>, <code key="b">number</code>, <code key="c">1</code>, "Room (px) around the element for vines to grow into."],
+    [<code key="a">tuck</code>, <code key="b">number</code>, <code key="c">18</code>, "How far (px) vines start hidden under the edge."],
+    [<code key="a">speed</code>, <code key="b">number</code>, <code key="c">0.8</code>, "Above 1 grows faster, below 1 slower."],
+    [<code key="a">stagger</code>, <code key="b">number</code>, <code key="c">0.01</code>, "Delay (s) between sprouts starting."],
+    [<code key="a">palette</code>, <code key="b">Partial&lt;GrowthPalette&gt;</code>, "—", "Stem, leaf, petal and pollen colours, plus flowerScale."],
+    [<code key="a">onGrowChange</code>, <code key="b">(grown: boolean) =&gt; void</code>, "—", "Fires whenever the plant grows or retracts."],
+  ]}
+/>
+
+## Accessibility
+
+- The plant is a decorative `aria-hidden` SVG behind your content, which stays
+  fully interactive
+- With `prefers-reduced-motion`, vines fade in instead of growing
+- On touch screens, tapping the element grows it and tapping elsewhere retracts it
+
+## Further reading
+
+[How I Built OrganicGrowth](https://singhgourav.vercel.app/blog/building-organic-growth),
+a 7-minute walkthrough of the recipe behind the vines: Bézier stems,
+`stroke-dashoffset` timing for the leaves, and the seeded random generator that
+keeps every plant repeatable.

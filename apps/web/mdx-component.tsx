@@ -23,6 +23,7 @@ import { ComponentSource } from "./components/ComponentSource"
 import { Callout } from "./components/Callout"
 import { DocsCopyPage } from "./components/doc-copy-page"
 import { DocsTableOfContents } from "./components/doc-toc"
+import { GridCross } from "./components/grid/Grid"
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
@@ -44,17 +45,22 @@ export const mdxComponents = {
           .replace(/\?/g, "")
           .toLowerCase()}
         className={cn(
-          "font-heading mt-8 scroll-m-28 text-xl font-medium tracking-tight first:mt-0 lg:mt-8 [&+p]:!mt-4 *:[code]:text-xl",
+          // A full-width grid line across the column, bleeding through the content padding.
+          "relative mt-12 -mx-gutter grid-line border-t px-gutter pt-10 scroll-m-20 font-serif text-2xl text-ui-heading first:mt-0 md:-mx-10 md:px-10 [&+p]:!mt-4 *:[code]:text-xl",
           className
         )}
         {...props}
-      />
+      >
+        <GridCross className="-top-[4px] -left-[5px]" />
+        <GridCross className="-top-[4px] -right-[5px]" />
+        {props.children}
+      </h2>
     )
   },
   h3: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
-        "font-heading mt-8 scroll-m-28 text-lg font-medium tracking-tight *:[code]:text-xl",
+        "mt-8 scroll-m-20 text-lg font-medium tracking-tight text-ui-heading *:[code]:text-xl",
         className
       )}
       {...props}
