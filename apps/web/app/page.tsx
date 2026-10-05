@@ -4,7 +4,7 @@ import ComponentList from "@/components/ComponentList";
 import { Techsection } from "@/components/Tech";
 import { GridFrame, GridSection } from "@/components/grid/Grid";
 import { GithubCta } from "@/components/GithubCta";
-import { Sponsors } from "@/components/home/Sponsors";
+// import { Sponsors } from "@/components/home/Sponsors";
 import { Resources } from "@/components/home/Resources";
 import { Faq } from "@/components/home/Faq";
 
@@ -28,9 +28,9 @@ const ComponentLibraryDemo = () => {
         <GridSection className={`${row} py-12`}>
           <Resources />
         </GridSection>
-        <GridSection className={`${row} py-12`}>
+        {/* <GridSection className={`${row} py-12`}>
           <Sponsors />
-        </GridSection>
+        </GridSection> */}
         <GridSection className={`${row} py-12`}>
           <Faq />
         </GridSection>
