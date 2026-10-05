@@ -8,8 +8,8 @@ import { Breadcrumbs } from "@/components/browser/Breadcrumbs"
 import { GridSection } from "@/components/grid/Grid"
 
 export const metadata: Metadata = {
-    title: "All components — Uiin",
-    description: "Browse every free, open source React component in Uiin.",
+    title: "All components",
+    description: "Browse every free, open source React component in Kinetik.",
 }
 
 const AllComponents = () => {
@@ -26,7 +26,7 @@ const AllComponents = () => {
                         <span className="font-sans text-sm text-ui-hint tabular-nums">{components.length}</span>
                     </h1>
                     <p className="mt-heading-text max-w-xl text-base leading-relaxed tracking-tight text-ui-caption">
-                        Every piece of Uiin in one place, sorted into {categories.length}{" "}
+                        Every piece of Kinetik in one place, sorted into {categories.length}{" "}
                         {categories.length === 1 ? "category" : "categories"}. Open one to see it
                         live, tweak its variants, and grab the source.
                     </p>

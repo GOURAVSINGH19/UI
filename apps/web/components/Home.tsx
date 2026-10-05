@@ -23,11 +23,11 @@ const Home = () => {
         >
             <motion.div variants={fadeUp}>
                 <Link
-                    href="/docs/components/button"
-                    className='group inline-flex items-center gap-2 rounded-full border border-ui-border bg-ui-subtle py-1 pr-3 pl-1 text-xs text-ui-secondary transition-colors hover:border-ui-border-strong'
+                    href="/docs/components/simple-search"
+                    className='group btn btn-secondary h-7 gap-2 pr-3 pl-1 text-xs'
                 >
                     <span className='rounded-full bg-ui-inverse px-2 py-0.5 text-[10px] font-medium text-ui-on-inverse'>New</span>
-                    Button component
+                    Simple Search component
                     <ArrowRight className='size-3 transition-transform group-hover:translate-x-0.5' />
                 </Link>
             </motion.div>
@@ -44,7 +44,7 @@ const Home = () => {
                 variants={fadeUp}
                 className='mt-heading-text text-base tracking-tight text-ui-body'
             >
-                Uiin is a set of free, open source React components built with
+                Kinetik is a set of free, open source React components built with
                 Tailwind CSS and Motion. Copy them into your project, make them
                 yours, and ship consistent UI without starting from scratch.
             </motion.p>
@@ -52,7 +52,8 @@ const Home = () => {
             <motion.div variants={fadeUp} className='mt-8 flex flex-wrap items-center gap-3'>
                 <Link
                     href="/components"
-                    className='inline-flex h-9 items-center gap-2 rounded-full bg-ui-inverse px-4 text-sm text-ui-on-inverse transition-opacity hover:opacity-85'
+                    data-press
+                    className='btn btn-primary h-9 px-4 text-sm'
                 >
                     Browse components
                     <ArrowRight className='size-3.5' />

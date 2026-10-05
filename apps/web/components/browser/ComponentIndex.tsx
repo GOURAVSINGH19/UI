@@ -40,10 +40,10 @@ export function ComponentIndex({ components }: { components: ComponentEntry[] })
                 />
             </label>
 
-            <div className="mt-10 space-y-10">
+            <div className="mt-10 space-y-4">
                 {groups.map((group) => (
                     <section key={group.name} aria-labelledby={categoryId(group.name)}>
-                        <div className="flex items-baseline justify-between border-b border-ui-border pb-2">
+                        <div className="flex items-baseline justify-between border-b border-ui-border border-dashed pb-2">
                             <h2 id={categoryId(group.name)} className="scroll-mt-20 text-sm font-medium text-ui-heading">
                                 {group.name}
                             </h2>
@@ -54,7 +54,7 @@ export function ComponentIndex({ components }: { components: ComponentEntry[] })
 
                         <ul>
                             {group.items.map((component) => (
-                                <li key={component.href} className="border-b border-ui-border-subtle">
+                                <li key={component.href} className="">
                                     <Link
                                         href={component.href}
                                         className="group grid grid-cols-[2.25rem_minmax(0,1fr)_auto] items-start gap-x-3 py-4"

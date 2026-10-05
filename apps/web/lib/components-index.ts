@@ -4,7 +4,6 @@ import type { ComponentEntry } from "@/lib/component-groups"
 export { groupByCategory } from "@/lib/component-groups"
 export type { ComponentCategory, ComponentEntry } from "@/lib/component-groups"
 
-// Every MDX page under content/docs/components is a listed component.
 export function getComponents(): ComponentEntry[] {
   return source
     .getPages()

@@ -13,30 +13,17 @@ import {
     useState,
 } from "react";
 
-/* ============================================================================
- * Types
- * ========================================================================== */
 
 export type Edge = "top" | "right" | "bottom" | "left";
 export type SproutEnd = "curl" | "bloom" | "none";
 
 export interface Sprout {
-    /** Which edge of the wrapped element the vine grows from. */
     edge: Edge;
-    /** Position along that edge, 0 = start (left/top), 1 = end (right/bottom). */
     t: number;
-    /** Which way the vine bends along the edge: 1 = right/down, -1 = left/up. */
     side: 1 | -1;
-    /** Rough vine length in px (scaled down on narrow elements). */
     length: number;
-    /** What the tip ends in. Defaults to "curl". */
     end?: SproutEnd;
-    /** Grow a smaller side branch. Defaults to true when length > 110. */
     branch?: boolean;
-    /**
-     * Extra flowers along the stalk, as positions from 0 (base) to 1 (tip), e.g. [0.45, 0.75].
-     * They open as the vine grows past them and are a little smaller than a tip bloom.
-     */
     blooms?: number[];
 }
 
@@ -48,7 +35,6 @@ export interface GrowthPalette {
     petals?: string[];
     petalStroke: string;
     pollen: string;
-    /** Multiplier for flower size. 1 = default, 1.5 = 50% bigger, 0.7 = smaller. */
     flowerScale?: number;
 }
 
@@ -56,49 +42,35 @@ export type GrowthTrigger = "hover" | "focus" | "hover-focus" | "manual";
 
 export interface OrganicGrowthProps {
     children: ReactNode;
-    /** Force grown / retracted. When set, internal hover/focus state is ignored. */
     active?: boolean;
-    /** What grows the vines when `active` is not set. Default "hover-focus". */
     trigger?: GrowthTrigger;
-    /** Where vines sprout. Defaults to a balanced set around all four edges. */
     sprouts?: Sprout[];
-    /** Same seed = same plant every time. Change it for a different arrangement. */
     seed?: number;
-    /** Room (px) around the element for vines to grow into. Default 140. */
     padding?: number;
-    /** How far (px) vines start hidden under the element's edge. Default 18. */
     tuck?: number;
-    /** >1 grows faster, <1 slower. Default 1. */
     speed?: number;
-    /** Delay (s) between each sprout starting. Default 0.07. */
     stagger?: number;
-    /** Override any colour. Defaults read CSS variables (--og-*) with fallbacks. */
     palette?: Partial<GrowthPalette>;
-    /** Fires whenever the plant grows or retracts. */
     onGrowChange?: (grown: boolean) => void;
     className?: string;
     style?: CSSProperties;
 }
 
 export const DEFAULT_SPROUTS: Sprout[] = [
-    // Top Edge
     { edge: "top", t: 0.08, side: -1, length: 10, end: "curl", branch: true, blooms: [1] },
     { edge: "top", t: 0.32, side: 1, length: 30, end: "bloom", blooms: [0.45] },
     { edge: "top", t: 0.58, side: -1, length: 85, end: "curl" },
     { edge: "top", t: 0.85, side: 1, length: 80, end: "bloom", blooms: [0.55], branch: true },
 
-    // Right Edge
     { edge: "right", t: 0.15, side: -1, length: 45, end: "bloom", blooms: [0.5] },
     { edge: "right", t: 0.50, side: 1, length: 90, end: "curl" },
     { edge: "right", t: 0.82, side: -1, length: 55, end: "bloom", branch: true },
 
-    // Bottom Edge
     { edge: "bottom", t: 0.12, side: -1, length: 60, end: "curl", branch: true },
     { edge: "bottom", t: 0.38, side: 1, length: 95, end: "bloom", blooms: [0.5] },
     { edge: "bottom", t: 0.65, side: -1, length: 30, end: "curl" },
     { edge: "bottom", t: 0.88, side: 1, length: 50, end: "bloom", blooms: [0.4, 0.75], branch: true },
 
-    // Left Edge
     { edge: "left", t: 0.18, side: 1, length: 90, end: "curl" },
     { edge: "left", t: 0.48, side: -1, length: 40, end: "bloom", blooms: [0.45], branch: true },
     { edge: "left", t: 0.80, side: 1, length: 20, end: "bloom" },
@@ -148,7 +120,6 @@ const cubic = (p0: Vec, p1: Vec, p2: Vec, p3: Vec, t: number): Vec => {
     };
 };
 
-/** Park–Miller PRNG so a given seed always produces the same plant. */
 function createRandom(seed: number) {
     let s = Math.max(1, Math.floor(Math.abs(seed)) % 2147483647);
     return () => {
@@ -171,7 +142,6 @@ function measure(pts: Vec[]): Polyline {
     return { pts, cum, total: cum[cum.length - 1] };
 }
 
-/** Point + heading (degrees) at a distance along a polyline. */
 function pointAt(poly: Polyline, dist: number): { p: Vec; angle: number } {
     const d = Math.min(Math.max(dist, 0), poly.total);
     let i = 1;
@@ -219,7 +189,6 @@ export interface BloomShape {
     x: number;
     y: number;
     delay: number;
-    /** 1 for tip blooms; smaller for flowers along the stalk. */
     scale: number;
     color?: string;
 }
@@ -261,7 +230,6 @@ function growVine(
         y: -bend.y * len * 0.35 + heading.y * len * 0.05 + jitter(),
     });
 
-    // Sample the stem so we can place leaves without touching the DOM.
     const pts: Vec[] = [start];
     for (let i = 0; i <= 40; i++) pts.push(cubic(S, c1, c2, E, i / 40));
     const stemPoly = measure(pts.slice());
@@ -293,7 +261,6 @@ function growVine(
         thin: depth > 0,
     });
 
-    // Leaves — each one appears as the stroke reaches it.
     const stemLen = stemPoly.total;
     const from = tuck + 6;
     const count = Math.max(2, Math.round(stemLen / 24));
@@ -325,7 +292,6 @@ function growVine(
         });
     }
 
-    // Flowers along the stalk: each pops once the stroke has grown past its spot.
     for (const t of a.blooms ?? []) {
         const at = from + (stemLen - from) * Math.min(Math.max(t, 0), 1);
         const { p } = pointAt(stemPoly, at);
@@ -457,7 +423,6 @@ export function OrganicGrowth({
         onGrowChange?.(grown);
     }, [grown, onGrowChange]);
 
-    // Touch: tapping the element grows it; tapping elsewhere retracts.
     useEffect(() => {
         if (!listensHover) return;
         const onDown = (e: PointerEvent) => {
@@ -492,7 +457,6 @@ export function OrganicGrowth({
                     petalColors,
                 })
                 : null,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         [size, sproutKey, seed, padding, tuck, speed, stagger, leafKey, petalKey],
     );
 
@@ -512,8 +476,6 @@ export function OrganicGrowth({
     );
 
     const stemStyle = (s: StemShape): CSSProperties => ({
-        // Gap slightly longer than the dash, and hidden offset just past it, so neither end of the
-        // path lands on a dash boundary (a round cap there would leave a stray dot when retracted).
         strokeDasharray: `${s.length} ${s.length + 4}`,
         strokeDashoffset: grown || reduced ? 0 : s.length + 2,
         transition: reduced

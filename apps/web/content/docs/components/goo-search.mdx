@@ -12,13 +12,16 @@ import { DocsTable } from "../../../components/docs/DocsSurface"
 <ComponentPreviewTabs
   align="start"
   component={<GooSearchDemo />}
-  source={
-    <ComponentSource
-      src="components/docs/GooSearchDemo.tsx"
-      title="GooSearchDemo.tsx"
-      language="tsx"
-    />
-  }
+  source={<ComponentCode path="components/ui/goo-search.tsx" src="../../packages/ui/src/components/ui/goo-search.tsx" tokens />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/goo-search.tsx"
+  dependencies="framer-motion lucide-react"
+  tokens
+  example={"import { GooSearch } from \"@/components/ui/goo-search\"\n\n<GooSearch\n  items={[{ title: \"Button\", href: \"/docs/button\", category: \"Components\" }]}\n  onOpen={(item) => console.log(item.href)}\n/>"}
 />
 
 ## Usage
@@ -28,7 +31,7 @@ As the panel grows, the gap between them springs open so the results look like
 they pull away from the input.
 
 ```tsx
-import { GooSearch } from "@workspace/ui/components/ui/goo-search"
+import { GooSearch } from "@/components/ui/goo-search"
 
 const items = [
   { title: "Button", href: "/docs/components/button", category: "Components" },

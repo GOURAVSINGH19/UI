@@ -13,13 +13,15 @@ import { DocsTable } from "../../../components/docs/DocsSurface"
 
 <ComponentPreviewTabs
   component={<OrganicGrowthDemo />}
-  source={
-    <ComponentSource
-      src="components/docs/OrganicGrowthDemo.tsx"
-      title="OrganicGrowthDemo.tsx"
-      language="tsx"
-    />
-  }
+  source={<ComponentCode path="components/ui/organic-growth.tsx" src="../../packages/ui/src/components/ui/organic-growth.tsx" utils={false} />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/organic-growth.tsx"
+  utils={false}
+  example={"import OrganicGrowth from \"@/components/ui/organic-growth\"\n\n<OrganicGrowth padding={70}>\n  <div className=\"rounded-2xl border p-6\">Hover me</div>\n</OrganicGrowth>"}
 />
 
 ## Usage
@@ -28,7 +30,7 @@ Hover the card or focus a field and the plant grows; leave and it retracts.
 Pass `active` to keep it grown, for example after a form is sent.
 
 ```tsx
-import OrganicGrowth from "@workspace/ui/components/ui/organic-growth"
+import OrganicGrowth from "@/components/ui/organic-growth"
 
 export function Card() {
   return (

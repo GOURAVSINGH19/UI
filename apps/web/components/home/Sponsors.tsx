@@ -1,7 +1,7 @@
 import { ArrowUpRight, Plus } from "lucide-react"
 import { site } from "@/lib/site"
 
-const SPONSOR_MAIL = `mailto:${site.email}?subject=${encodeURIComponent("Sponsoring Uiin")}`
+const SPONSOR_MAIL = `mailto:${site.email}?subject=${encodeURIComponent("Sponsoring Kinetik")}`
 
 /** Sponsor slot. No sponsors yet, so it is an honest invitation rather than a fake logo wall. */
 export function Sponsors() {
@@ -10,7 +10,7 @@ export function Sponsors() {
             <p className="eyebrow">Sponsors</p>
             <h2 className="mt-2 font-serif text-3xl leading-tight text-ui-heading">Back the work.</h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-ui-caption">
-                Uiin is free and built in spare time. Sponsors help pay for the hours that go
+                Kinetik is free and built in spare time. Sponsors help pay for the hours that go
                 into every component, and get their brand shown right here.
             </p>
 
@@ -24,7 +24,7 @@ export function Sponsors() {
                     </span>
                     <span>
                         <span className="block text-sm font-medium text-ui-heading">Your brand here</span>
-                        <span className="block text-xs text-ui-caption">Be the first sponsor of Uiin</span>
+                        <span className="block text-xs text-ui-caption">Be the first sponsor of Kinetik</span>
                     </span>
                 </span>
                 <span className="flex items-center gap-1 text-xs text-ui-caption transition-colors group-hover:text-ui-heading">

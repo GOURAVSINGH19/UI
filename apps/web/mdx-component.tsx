@@ -17,6 +17,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/componen
 import { CopyButton } from "./components/copy-button"
 import { getIconForLanguageExtension } from "@workspace/ui/components/ui/icons"
 import { ComponentPreviewTabs } from "./components/ComponentPreview"
+import { ComponentCode, ComponentSetup } from "./components/docs/ComponentSetup"
 import { CodeCollapsibleWrapper } from "./components/codeCollapse"
 import { CodeTabs } from "./components/CodeTabs"
 import { ComponentSource } from "./components/ComponentSource"
@@ -24,8 +25,12 @@ import { Callout } from "./components/Callout"
 import { DocsCopyPage } from "./components/doc-copy-page"
 import { DocsTableOfContents } from "./components/doc-toc"
 import { GridCross } from "./components/grid/Grid"
+import { CodeWindow } from "./components/docs/CodeWindow"
+import { CodeWindowDemo } from "./components/docs/CodeWindowDemo"
 
 export const mdxComponents = {
+  ComponentCode,
+  ComponentSetup,
   h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
     <h1
       className={cn(
@@ -295,6 +300,8 @@ export const mdxComponents = {
   CodeCollapsibleWrapper,
   DocsCopyPage,
   DocsTableOfContents,
+  CodeWindow,
+  CodeWindowDemo,
   // ComponentsList,
   Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
     <Link

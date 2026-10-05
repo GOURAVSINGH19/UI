@@ -120,7 +120,7 @@ export default async function Page(props: {
             <ComponentBadge label={doc.badge} className="font-sans text-xs" />
           </h1>
           {doc.description && (
-            <p className="mt-heading-text max-w-2xl text-base leading-relaxed tracking-tight text-ui-caption">{doc.description}</p>
+            <p className=" max-w-2xl text-base leading-relaxed tracking-tight text-ui-caption">{doc.description}</p>
           )}
           {doc.blog && (
             <a

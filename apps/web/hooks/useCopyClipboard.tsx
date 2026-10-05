@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { cue } from "@/lib/sound"
 
 export function useCopyToClipboard({
   timeout = 2000,
@@ -20,6 +21,7 @@ export function useCopyToClipboard({
 
     navigator.clipboard.writeText(value).then(() => {
       setIsCopied(true)
+      cue("success", { emphasis: "subtle" })
 
       if (onCopy) {
         onCopy()

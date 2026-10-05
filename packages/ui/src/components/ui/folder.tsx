@@ -5,11 +5,8 @@ import { motion } from "framer-motion"
 import { cn } from "@workspace/ui/lib/utils"
 
 export interface FolderPaper {
-  /** Fan-out rotation in degrees when open. */
   rotate: number
-  /** Horizontal offset in px when open. */
   x: number
-  /** Paper colour. */
   color: string
 }
 
@@ -20,18 +17,14 @@ const DEFAULT_PAPERS: FolderPaper[] = [
 ]
 
 export interface FolderProps {
-  /** Controlled open state. Leave unset to open on hover / click. */
   open?: boolean
   onOpenChange?: (open: boolean) => void
-  /** Back panel + tab colour. */
   color?: string
-  /** Front flap gradient, top to bottom. */
   flap?: [string, string]
   papers?: FolderPaper[]
   className?: string
 }
 
-/** A folder whose papers rise and fan out as the front flap tilts open. */
 export function Folder({
   open: controlledOpen,
   onOpenChange,

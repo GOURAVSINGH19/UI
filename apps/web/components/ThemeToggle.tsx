@@ -13,6 +13,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         <button
             type="button"
             aria-label="Toggle theme"
+            data-cuelume-toggle
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className={cn(
                 "relative inline-flex size-8 cursor-pointer items-center justify-center rounded-full text-ui-secondary transition-colors hover:bg-ui-muted hover:text-ui-heading focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ui-border",

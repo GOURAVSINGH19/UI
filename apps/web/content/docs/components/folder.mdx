@@ -11,13 +11,15 @@ import { DocsTable } from "../../../components/docs/DocsSurface"
 
 <ComponentPreviewTabs
   component={<FolderDemo />}
-  source={
-    <ComponentSource
-      src="components/docs/FolderDemo.tsx"
-      title="FolderDemo.tsx"
-      language="tsx"
-    />
-  }
+  source={<ComponentCode path="components/ui/folder.tsx" src="../../packages/ui/src/components/ui/folder.tsx" />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/folder.tsx"
+  dependencies="framer-motion"
+  example={"import { Folder } from \"@/components/ui/folder\"\n\n<Folder color=\"#e0a030\" flap={[\"#f3c25e\", \"#eab14a\"]} />"}
 />
 
 ## Usage
@@ -26,7 +28,7 @@ Hover or click to open. Each paper springs out with a small delay after the one
 before it, so they fan out instead of moving as a block.
 
 ```tsx
-import { Folder } from "@workspace/ui/components/ui/folder"
+import { Folder } from "@/components/ui/folder"
 
 export function Files() {
   return <Folder color="#e0a030" flap={["#f3c25e", "#eab14a"]} />

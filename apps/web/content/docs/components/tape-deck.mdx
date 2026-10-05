@@ -1,0 +1,90 @@
+---
+title: Tape Deck
+description: A 3D shelf of cassette tapes. Hover lifts one, click pulls it out and plays a little beat.
+category: Media
+badge: New
+blog: https://singhgourav.vercel.app/blog/building-tape-deck
+---
+
+import { TapeDeckDemo } from "../../../components/docs/TapeDeckDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  component={<TapeDeckDemo />}
+  source={<ComponentCode path="components/ui/tape-deck.tsx" src="../../packages/ui/src/components/ui/tape-deck.tsx" utils={false} />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/tape-deck.tsx"
+  utils={false}
+  example={"import { TapeDeck, TapeCover } from \"@/components/ui/tape-deck\"\n\n<TapeDeck\n  tapes={[\n    { id: \"one\", title: \"Night Bus\", artist: \"Lowercase Lions\",\n      cover: <TapeCover background=\"#2fc0c9\" text=\"NIGHT BUS\" /> },\n  ]}\n/>"}
+/>
+
+No packages to install: it is one file with its own styles, plain React and the Web Audio API.
+
+## Usage
+
+Give it a list of tapes. A `cover` can be the built-in `TapeCover`, an `<img>`, or any JSX.
+Without a `src`, each tape plays a small generated beat at its `bpm`.
+
+```tsx
+import { TapeDeck, TapeCover, type TapeItem } from "@/components/ui/tape-deck"
+
+const tapes: TapeItem[] = [
+  {
+    id: "imgnest",
+    title: "ImgNest",
+    artist: "Next.js · PostgreSQL",
+    cover: <TapeCover background="#2fc0c9" color="#0b2e33" text={"IMG\nNEST"} side="A" />,
+  },
+  {
+    id: "craftui",
+    title: "CraftUI",
+    artist: "React component library",
+    cover: <img src="/covers/craftui.png" alt="" />,
+    src: "/audio/craftui.mp3",
+  },
+]
+
+export function Shelf() {
+  return <TapeDeck tapes={tapes} className="h-[600px]" />
+}
+```
+
+To restyle it, override `--fg`, `--muted`, `--line` and `--bg` on the deck. To keep music playing after a
+tape closes, create a player with `useTapePlayer` outside and pass it as `player`.
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">tapes</code>, <code key="b">TapeItem[]</code>, "—", "The tapes on the shelf, in order."],
+    [<code key="a">className</code>, <code key="b">string</code>, "—", "Size and theme overrides. Default height is clamp(520px, 80vh, 820px)."],
+    [<code key="a">player</code>, <code key="b">TapePlayer</code>, "—", "Outside player. Without one the deck plays tapes itself."],
+    [<code key="a">defaultSelected</code>, <code key="b">number</code>, "—", "Index of a tape to open on mount."],
+  ]}
+/>
+
+<DocsTable
+  headers={["TapeItem", "Type", "Notes"]}
+  rows={[
+    [<code key="a">id</code>, <code key="b">string</code>, "Unique. Also varies the generated beat."],
+    [<code key="a">title</code>, <code key="b">string</code>, "First line under the open tape."],
+    [<code key="a">artist</code>, <code key="b">string</code>, "Second line."],
+    [<code key="a">cover</code>, <code key="b">ReactNode</code>, "Fills the label: TapeCover, an img or your own markup."],
+    [<code key="a">src</code>, <code key="b">string?</code>, "Audio file. Without it a small beat plays."],
+    [<code key="a">bpm</code>, <code key="b">number?</code>, "Tempo of the beat and reel speed. Defaults to 100."],
+  ]}
+/>
+
+## Accessibility
+
+- Every tape is a focusable button; Enter or Space opens it
+- ← → move along the shelf, or between tapes once one is open; Space plays or pauses; Escape closes
+- Vertical page scroll is left alone: only horizontal scroll or drag moves the shelf
+- With reduced motion on, tapes jump into place and the reels stop spinning

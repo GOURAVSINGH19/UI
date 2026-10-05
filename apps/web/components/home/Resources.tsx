@@ -1,34 +1,58 @@
+import type { ComponentType, SVGProps } from "react"
 import { ArrowUpRight } from "lucide-react"
-import { resources } from "@/lib/site"
+import { Icons, NextjsIcon } from "@workspace/ui/components/ui/icons"
+import { cn } from "@workspace/ui/lib/utils"
+import { resources, site } from "@/lib/site"
 
-const domain = (href: string) => new URL(href).hostname.replace(/^www\./, "")
+// Real marks where we have them; everything else gets a serif monogram in the same circle.
+const logos: Partial<Record<string, { Icon: ComponentType<SVGProps<SVGSVGElement>>; className?: string }>> = {
+    "Next.js": { Icon: NextjsIcon, className: "rounded-full bg-black" },
+    "Tailwind CSS": { Icon: Icons.tailwind, className: "text-sky-500" },
+}
 
-/** The tools Uiin is built with, as a small grid of cards (1px gaps draw the grid lines). */
+function Logo({ name }: { name: string }) {
+    const logo = logos[name]
+    return (
+        <span
+            aria-hidden="true"
+            className="flex size-6 shrink-0 items-center justify-center rounded-full border border-ui-border bg-ui-bg text-ui-heading"
+        >
+            {logo ? (
+                <logo.Icon className={cn("size-3.5", logo.className)} />
+            ) : (
+                <span className="font-serif text-[13px] leading-none italic">{name.charAt(0)}</span>
+            )}
+        </span>
+    )
+}
+
+/** The tools the library is built with, as a row of link badges. Core stack first. */
 export function Resources() {
+    const ordered = [...resources].sort((a, b) => Number(Boolean(b.core)) - Number(Boolean(a.core)))
+
     return (
         <div>
             <p className="eyebrow">Resources</p>
             <h2 className="mt-2 font-serif text-3xl leading-tight text-ui-heading">Built on good tools.</h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-ui-caption">
-                The open source projects that make Uiin possible. Worth a look if you are
-                building something similar.
+                {site.name} stands on a small, boring-in-a-good-way stack. Next.js, Tailwind CSS and Motion do the
+                heavy lifting; the rest handle docs, scrolling and icons.
             </p>
 
-            <ul className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-ui-border bg-ui-border sm:grid-cols-2">
-                {resources.map((resource) => (
-                    <li key={resource.name} className="bg-ui-bg">
+            <ul className="mt-6 flex flex-wrap gap-2">
+                {ordered.map((resource) => (
+                    <li key={resource.name}>
                         <a
                             href={resource.href}
                             target="_blank"
                             rel="noreferrer"
-                            className="group flex h-full items-start justify-between gap-3 px-4 py-3.5 transition-colors hover:bg-ui-subtle"
+                            title={`${resource.name}: ${resource.use}`}
+                            className="group btn btn-secondary h-9 gap-2 pr-3 pl-1.5 text-sm"
                         >
-                            <span className="min-w-0">
-                                <span className="block text-sm font-medium text-ui-heading">{resource.name}</span>
-                                <span className="block text-xs text-ui-caption">{resource.use}</span>
-                                <span className="mt-1.5 block font-mono text-[11px] text-ui-hint">{domain(resource.href)}</span>
-                            </span>
-                            <ArrowUpRight className="mt-0.5 size-3.5 shrink-0 text-ui-hint transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ui-heading" />
+                            <Logo name={resource.name} />
+                            <span className="text-ui-heading">{resource.name}</span>
+                            {resource.core && <span className="text-xs text-ui-hint">{resource.category}</span>}
+                            <ArrowUpRight className="size-3 text-ui-hint transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ui-heading" />
                         </a>
                     </li>
                 ))}

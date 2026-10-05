@@ -65,27 +65,18 @@ function HintButton({
 
 export type GooSearchProps = {
   items: GooSearchItem[]
-  /** Called for Enter / the open hint, and for clicks when results are buttons. */
   onOpen: (item: GooSearchItem) => void
-  /** Shows the "esc to close" hint and runs after a result link is clicked. */
   onClose?: () => void
-  /** Render results as real links instead of buttons. */
   linkResults?: boolean
-  /** Component used for internal result links, e.g. Next's `Link`. Defaults to `<a>`. */
   linkAs?: React.ElementType
   placeholder?: string
   initialQuery?: string
   maxResultsHeight?: number
-  /** Smaller input row for tight spaces. */
   compact?: boolean
   label?: string
   className?: string
 }
 
-/**
- * Command search whose results panel "melts" out of the input: both surfaces
- * are drawn as blobs behind an SVG goo filter and share the same springs.
- */
 export function GooSearch({
   items,
   onOpen,
@@ -123,7 +114,6 @@ export function GooSearch({
     )
   }, [items, trimmed])
 
-  // Grouped for display, but indexed in flat order so arrow keys walk the list top to bottom.
   const groups = useMemo(() => {
     const map = new Map<string, Array<GooSearchItem & { index: number }>>()
     results.forEach((item, index) => {
@@ -146,7 +136,6 @@ export function GooSearch({
     itemRefs.current[activeIndex]?.scrollIntoView({ block: "nearest" })
   }, [activeIndex])
 
-  // The background input blob mirrors the real input block's height.
   useLayoutEffect(() => {
     const block = inputBlockRef.current
     if (!block) return
@@ -155,7 +144,6 @@ export function GooSearch({
     return () => observer.disconnect()
   }, [])
 
-  // Grow/shrink the results panel; the gooey background blob shares the same motion values.
   useLayoutEffect(() => {
     const contentHeight = trimmed ? (resultsContentRef.current?.scrollHeight ?? 0) : 0
     const isOpen = contentHeight > 0
@@ -250,7 +238,6 @@ export function GooSearch({
             )}
           </div>
 
-          {/* Keyboard hints, also clickable. */}
           <div className="flex items-center gap-4 border-t border-ui-border px-4 py-2 text-xs text-ui-caption">
             <span className="flex items-center gap-1.5">
               <HintButton label="Previous result" onClick={() => move(-1)} disabled={!hasResults}>

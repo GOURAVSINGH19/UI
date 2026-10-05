@@ -1,8 +1,6 @@
 import { getComponents, groupByCategory } from "@/lib/components-index"
 import { BrowserSidebar } from "./BrowserSidebar"
 
-// Three-column frame shared by /components and every component page.
-// Children render the <main> column and, optionally, an <OnThisPage /> aside.
 export function BrowserShell({ children }: { children: React.ReactNode }) {
     const categories = groupByCategory(getComponents())
 

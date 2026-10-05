@@ -5,9 +5,11 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@workspace/ui/lib/utils"
 import { ThemeToggle } from "./ThemeToggle"
+import { SoundToggle } from "./SoundToggle"
 import { CommandSearch } from "./search/CommandSearch"
 import { GridCross } from "./grid/Grid"
 import type { ComponentEntry } from "@/lib/component-groups"
+import { site } from "@/lib/site"
 
 const Navbar = ({ components }: { components: ComponentEntry[] }) => {
     // On the home page the grid rails continue up through the navbar.
@@ -28,20 +30,21 @@ const Navbar = ({ components }: { components: ComponentEntry[] }) => {
                     </>
                 )}
                 <Link href="/" className="font-serif text-xl leading-none text-ui-heading">
-                    Uiin
+                    {site.name}
                 </Link>
 
                 <div className="flex items-center gap-1.5">
                     <CommandSearch components={components} />
 
                     <Link
-                        href="https://github.com/GOURAVSINGH19/UI"
+                        href={site.repo}
                         target="_blank"
                         aria-label="GitHub"
                         className="inline-flex size-8 items-center justify-center rounded-full text-ui-secondary transition-colors hover:bg-ui-muted hover:text-ui-heading"
                     >
                         <Github className="size-4" />
                     </Link>
+                    <SoundToggle />
                     <ThemeToggle />
                 </div>
             </nav>

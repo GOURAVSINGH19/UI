@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Check, Copy, Github, Linkedin, Mail } from "lucide-react"
+import { cue } from "@/lib/sound"
 import { Icons } from "@workspace/ui/components/ui/icons"
 import { site, socials } from "@/lib/site"
 
@@ -22,16 +23,18 @@ function CopyEmail() {
     return (
         <button
             type="button"
+            data-sound="off"
             onClick={async () => {
                 try {
                     await navigator.clipboard.writeText(site.email)
+                    cue("success", { emphasis: "subtle" })
                     setCopied(true)
                     setTimeout(() => setCopied(false), 1600)
                 } catch {
                     window.location.href = `mailto:${site.email}`
                 }
             }}
-            className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-ui-border bg-ui-bg py-1.5 pr-3 pl-2.5 text-sm text-ui-strong transition-colors hover:border-ui-border-strong"
+            className="group btn btn-secondary h-8 gap-2 pr-3 pl-2.5 text-sm text-ui-strong"
         >
             <Mail className="size-3.5 text-ui-caption" />
             {site.email}

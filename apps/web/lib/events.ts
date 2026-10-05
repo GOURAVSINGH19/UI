@@ -1,4 +1,5 @@
 import va from "@vercel/analytics"
+import posthog from "posthog-js"
 import { z } from "zod"
 
 const eventSchema = z.object({
@@ -16,5 +17,6 @@ export function trackEvent(input: Event): void {
   const event = eventSchema.parse(input)
   if (event) {
     va.track(event.name, event.properties)
+    posthog.capture(event.name, event.properties ?? undefined)
   }
 }

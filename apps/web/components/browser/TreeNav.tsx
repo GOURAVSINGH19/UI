@@ -1,3 +1,8 @@
+"use client"
+
+import { useId } from "react"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+import { ChevronRight } from "lucide-react"
 import { cn } from "@workspace/ui/lib/utils"
 
 export interface TreeNavItem {
@@ -28,13 +33,16 @@ const stroke = "transition-[stroke] duration-300"
 
 /**
  * Tree-style navigation: a root row, a vertical rail, and one curved branch per
- * item. The rail lights up from the root down to the active item.
+ * item. The rail lights up from the root down to the active item. Pass `open` +
+ * `onOpenChange` to make the root a button that folds the branches away.
  */
 export function TreeNav({
     root,
     items,
     linkAs: LinkComponent = "a",
     className,
+    open,
+    onOpenChange,
 }: {
     /** Root row. Put a 15px icon first so the rail starts under its centre. */
     root?: React.ReactNode
@@ -42,81 +50,121 @@ export function TreeNav({
     /** Component for the links, e.g. Next's `Link`. Defaults to `<a>`. */
     linkAs?: React.ElementType
     className?: string
+    /** Controlled open state; makes the tree collapsible when set with `onOpenChange`. */
+    open?: boolean
+    onOpenChange?: (open: boolean) => void
 }) {
     const activeIndex = items.findIndex((item) => item.active)
     const anyActive = activeIndex >= 0
+    const collapsible = open !== undefined && onOpenChange !== undefined
+    const expanded = !collapsible || open
+    const listId = useId()
+    const reduceMotion = useReducedMotion()
+
+    const rootRail = items.length > 0 && (
+        // Joins the root icon to the first row's rail.
+        <span
+            aria-hidden
+            className="absolute top-[calc(50%+9px)] bottom-0 left-[7px] w-px transition-[background-color,opacity] duration-300"
+            style={{ background: anyActive ? ON : OFF, opacity: expanded ? 1 : 0 }}
+        />
+    )
 
     return (
         <div className={className}>
-            {root && (
+            {root && collapsible && (
+                <button
+                    type="button"
+                    aria-expanded={expanded}
+                    aria-controls={listId}
+                    onClick={() => onOpenChange(!expanded)}
+                    className="group/root relative flex h-8 w-full cursor-pointer items-center gap-2 rounded-sm text-left text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ui-border"
+                >
+                    {root}
+                    <ChevronRight
+                        aria-hidden
+                        className={cn(
+                            "size-3.5 shrink-0 text-ui-hint transition-transform duration-300 ease-out group-hover/root:text-ui-heading",
+                            expanded && "rotate-90"
+                        )}
+                    />
+                    {rootRail}
+                </button>
+            )}
+            {root && !collapsible && (
                 <div className="relative flex h-8 items-center gap-2 text-sm">
                     {root}
-                    {/* Joins the root icon to the first row's rail. */}
-                    {items.length > 0 && (
-                        <span
-                            aria-hidden
-                            className="absolute top-[calc(50%+9px)] bottom-0 left-[7px] w-px transition-colors duration-300"
-                            style={{ background: anyActive ? ON : OFF }}
-                        />
-                    )}
+                    {rootRail}
                 </div>
             )}
 
-            <ul>
-                {items.map((item, i) => {
-                    const isActive = i === activeIndex
-                    const isLast = i === items.length - 1
-                    const aboveLit = anyActive && i <= activeIndex
-                    const belowLit = anyActive && i < activeIndex
+            <AnimatePresence initial={false}>
+                {expanded && (
+                    <motion.ul
+                        key="items"
+                        id={listId}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={reduceMotion ? { duration: 0 } : { duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                    >
+                        {items.map((item, i) => {
+                            const isActive = i === activeIndex
+                            const isLast = i === items.length - 1
+                            const aboveLit = anyActive && i <= activeIndex
+                            const belowLit = anyActive && i < activeIndex
 
-                    return (
-                        <li key={item.key} className="relative">
-                            <svg
-                                aria-hidden
-                                width={24}
-                                height={ROW_H}
-                                viewBox={`0 0 24 ${ROW_H}`}
-                                fill="none"
-                                className="pointer-events-none absolute top-0 left-0"
-                            >
-                                {/* Rail from the row above down to where the curve starts. */}
-                                <path d={`M${RAIL} 0V${MID - R}`} strokeWidth={1} className={stroke} style={{ stroke: aboveLit ? ON : OFF }} />
-                                {/* Rail on to the next row. */}
-                                {!isLast && (
-                                    <path d={`M${RAIL} ${MID - R}V${ROW_H}`} strokeWidth={1} className={stroke} style={{ stroke: belowLit ? ON : OFF }} />
-                                )}
-                                {/* The branch: a quarter curve into the row, then a short tail. */}
-                                <path
-                                    d={`M${RAIL} ${MID - R}Q${RAIL} ${MID} ${RAIL + R} ${MID}H${RAIL + R + 4}`}
-                                    strokeWidth={isActive ? 1.5 : 1}
-                                    strokeLinecap="round"
-                                    className={stroke}
-                                    style={{ stroke: isActive ? ON : OFF }}
-                                />
-                                <circle
-                                    cx={RAIL + R + 6}
-                                    cy={MID}
-                                    r={2.5}
-                                    className="transition-opacity duration-300"
-                                    style={{ fill: ON, opacity: isActive ? 1 : 0 }}
-                                />
-                            </svg>
+                            return (
+                                <li key={item.key} className="relative">
+                                    <svg
+                                        aria-hidden
+                                        width={24}
+                                        height={ROW_H}
+                                        viewBox={`0 0 24 ${ROW_H}`}
+                                        fill="none"
+                                        className="pointer-events-none absolute top-0 left-0"
+                                    >
+                                        {/* Rail from the row above down to where the curve starts. */}
+                                        <path d={`M${RAIL} 0V${MID - R}`} strokeWidth={1} className={stroke} style={{ stroke: aboveLit ? ON : OFF }} />
+                                        {/* Rail on to the next row. */}
+                                        {!isLast && (
+                                            <path d={`M${RAIL} ${MID - R}V${ROW_H}`} strokeWidth={1} className={stroke} style={{ stroke: belowLit ? ON : OFF }} />
+                                        )}
+                                        {/* The branch: a quarter curve into the row, then a short tail. */}
+                                        <path
+                                            d={`M${RAIL} ${MID - R}Q${RAIL} ${MID} ${RAIL + R} ${MID}H${RAIL + R + 4}`}
+                                            strokeWidth={isActive ? 1.5 : 1}
+                                            strokeLinecap="round"
+                                            className={stroke}
+                                            style={{ stroke: isActive ? ON : OFF }}
+                                        />
+                                        <circle
+                                            cx={RAIL + R + 6}
+                                            cy={MID}
+                                            r={2.5}
+                                            className="transition-opacity duration-300"
+                                            style={{ fill: ON, opacity: isActive ? 1 : 0 }}
+                                        />
+                                    </svg>
 
-                            <LinkComponent
-                                href={item.href}
-                                aria-current={isActive ? "location" : undefined}
-                                className={cn(
-                                    "flex h-8 min-w-0 items-center gap-2 pl-7 text-sm transition-colors",
-                                    isActive ? "font-medium text-ui-heading" : "text-ui-caption hover:text-ui-heading"
-                                )}
-                            >
-                                <span className="truncate">{item.label}</span>
-                                {item.trailing}
-                            </LinkComponent>
-                        </li>
-                    )
-                })}
-            </ul>
+                                    <LinkComponent
+                                        href={item.href}
+                                        aria-current={isActive ? "location" : undefined}
+                                        className={cn(
+                                            "flex h-8 min-w-0 items-center gap-2 pl-7 text-sm transition-colors",
+                                            isActive ? "font-medium text-ui-heading" : "text-ui-caption hover:text-ui-heading"
+                                        )}
+                                    >
+                                        <span className="truncate">{item.label}</span>
+                                        {item.trailing}
+                                    </LinkComponent>
+                                </li>
+                            )
+                        })}
+                    </motion.ul>
+                )}
+            </AnimatePresence>
         </div>
     )
 }

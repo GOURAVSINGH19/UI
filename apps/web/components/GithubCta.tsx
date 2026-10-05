@@ -17,12 +17,12 @@ export function GithubCta() {
                     Free, open source, yours.
                 </h2>
                 <p className="mt-2 max-w-sm text-sm leading-relaxed text-ui-caption">
-                    Grab the code on GitHub. If Uiin saves you some time, a star helps
+                    Grab the code on GitHub. If Kinetik saves you some time, a star helps
                     other people find it.
                 </p>
             </div>
 
-            <span className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-ui-border bg-ui-bg py-2 pr-3 pl-2.5 text-sm text-ui-strong transition-colors group-hover:border-ui-border-strong sm:self-auto">
+            <span className="btn btn-secondary h-9 gap-2 self-start pr-3 pl-2.5 text-sm text-ui-strong sm:self-auto">
                 <Heart className="size-4 text-rose-500 transition-transform duration-300 group-hover:scale-110 group-hover:fill-rose-500" />
                 <Github className="size-4" />
                 Star on GitHub

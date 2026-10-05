@@ -1,10 +1,8 @@
 import Home from "../components/Home";
 import Footer from "@/components/Footer";
 import ComponentList from "@/components/ComponentList";
-import { Techsection } from "@/components/Tech";
 import { GridFrame, GridSection } from "@/components/grid/Grid";
 import { GithubCta } from "@/components/GithubCta";
-// import { Sponsors } from "@/components/home/Sponsors";
 import { Resources } from "@/components/home/Resources";
 import { Faq } from "@/components/home/Faq";
 
@@ -19,18 +17,12 @@ const ComponentLibraryDemo = () => {
         <GridSection className={`${row} pt-20 pb-14 md:pt-24`}>
           <Home />
         </GridSection>
-        <GridSection className={`${row} py-8`}>
-          <Techsection />
-        </GridSection>
         <GridSection className={`${row} py-12`}>
           <ComponentList />
         </GridSection>
         <GridSection className={`${row} py-12`}>
           <Resources />
         </GridSection>
-        {/* <GridSection className={`${row} py-12`}>
-          <Sponsors />
-        </GridSection> */}
         <GridSection className={`${row} py-12`}>
           <Faq />
         </GridSection>

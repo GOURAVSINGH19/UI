@@ -1,12 +1,5 @@
 import { cn } from "@workspace/ui/lib/utils"
 
-/*
- * Layout grid: vertical rails frame a column, horizontal lines split it into
- * sections, and a small "+" marks every point where a section line meets a rail.
- * Colours and line style come from the --ui-grid-* tokens.
- */
-
-/** A small "+" centred on a grid intersection. Position it with top/bottom/left/right classes. */
 export function GridCross({ className }: { className?: string }) {
     return (
         <span

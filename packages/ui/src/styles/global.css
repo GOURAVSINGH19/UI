@@ -191,3 +191,27 @@ body {
   border-radius: 8px;
   background-size: 200% auto;
 }
+
+/* Full-file code blocks on component pages (ComponentSetup): line numbers in a gutter. */
+.code-file pre {
+  margin: 0;
+  padding: 0 1rem 0 0 !important;
+  background: transparent !important;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.code-file code {
+  counter-reset: line;
+}
+
+.code-file .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2.5rem;
+  margin-right: 1.25rem;
+  text-align: right;
+  color: rgb(255 255 255 / 0.25);
+  user-select: none;
+}
