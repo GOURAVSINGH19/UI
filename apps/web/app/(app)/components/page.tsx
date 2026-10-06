@@ -1,27 +1,48 @@
-import { docsConfig } from "@/config/docs"
-import Link from "next/link"
+import type { Metadata } from "next"
+import { getComponents, groupByCategory } from "@/lib/components-index"
+import { categoryId } from "@/lib/component-groups"
+import { BrowserShell } from "@/components/browser/BrowserShell"
+import { ComponentIndex } from "@/components/browser/ComponentIndex"
+import { OnThisPage } from "@/components/browser/OnThisPage"
+import { Breadcrumbs } from "@/components/browser/Breadcrumbs"
+import { GridSection } from "@/components/grid/Grid"
 
-const Allcomponents = () => {
+export const metadata: Metadata = {
+    title: "All components",
+    description: "Browse every free, open source React component in Kinetik.",
+}
+
+const AllComponents = () => {
+    const components = getComponents()
+    const categories = groupByCategory(components)
 
     return (
-        <div className="px-6 py-8 md:py-16 lg:py-24">
-            <h1 className="text-2xl font-semibold mb-6">All Components</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {docsConfig.sidebarNav.map((c) => (
-                    <div key={c.title} className=" w-[30vw] h-[40vh] rounded-md border border-neutral-800/60 bg-[var(--bg-dark,rgba(0,0,0,0.2))] p-4 hover:bg-[var(--bg,rgba(29, 28, 28, 0.49))] transition-colors">
-                        {c.href ? (
-                                <Link href={c.href} className="text-base font-medium text-white hover:underline">
-                                    {c.title}
-                                </Link>
-                        ) : (
-                            <span className="text-base font-medium text-white">{c.title}</span>
-                        )}
-                        <p className="mt-1 text-xs text-neutral-400">{c.label}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <BrowserShell>
+            <main className="min-w-0">
+                <header id="overview" className="scroll-mt-20 px-gutter pt-10 pb-12 md:px-10 md:pt-14">
+                    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Components" }]} />
+                    <h1 className="mt-6 flex items-baseline gap-3 font-serif text-4xl leading-tight text-ui-heading">
+                        Components
+                        <span className="font-sans text-sm text-ui-hint tabular-nums">{components.length}</span>
+                    </h1>
+                    <p className="mt-heading-text max-w-xl text-base leading-relaxed tracking-tight text-ui-caption">
+                        Every piece of Kinetik in one place, sorted into {categories.length}{" "}
+                        {categories.length === 1 ? "category" : "categories"}. Open one to see it
+                        live, tweak its variants, and grab the source.
+                    </p>
+                </header>
+
+                <GridSection id="components" top className="scroll-mt-20 px-gutter py-10 md:px-10">
+                    <ComponentIndex components={components} />
+                </GridSection>
+            </main>
+
+            <OnThisPage
+                title="Components"
+                sections={categories.map((category) => ({ id: categoryId(category.name), title: category.name }))}
+            />
+        </BrowserShell>
     )
 }
 
-export default Allcomponents
+export default AllComponents

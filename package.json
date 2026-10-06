@@ -1,6 +1,7 @@
 {
-  "name": "uiin",
+  "name": "kinetik",
   "version": "0.0.1",
+  "license": "MIT",
   "private": true,
   "author":{
     "name":"Gourav Singh",

@@ -1,39 +1,24 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen } from "lucide-react"
 import { mdxComponents } from "@/mdx-component"
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowBigUp,
-} from "lucide-react"
 
 import { source } from "@/lib/source"
+import { getComponents } from "@/lib/components-index"
 import { absoluteUrl } from "@workspace/ui/lib/utils"
-import { Badge } from "@workspace/ui/components/ui/badge"
-import { docsConfig } from "@/config/docs"
+import { OnThisPage } from "@/components/browser/OnThisPage"
+import { Breadcrumbs } from "@/components/browser/Breadcrumbs"
+import { ComponentBadge } from "@/components/browser/ComponentBadge"
+import { GridSection } from "@/components/grid/Grid"
 
-function flattenNav(items: any[]): Array<{ url: string; name: string }> {
-  const result: Array<{ url: string; name: string }> = []
-  for (const item of items) {
-    if (item.href) {
-      result.push({ url: item.href, name: item.title })
-    }
-    if (item.items && item.items.length > 0) {
-      result.push(...flattenNav(item.items))
-    }
-  }
-  return result
-}
-
-function findNeighboursFromConfig(currentUrl: string) {
-  const pages = docsConfig.sidebarNav.flatMap(section => flattenNav(section.items))
-  const currentIndex = pages.findIndex(p => p.url === currentUrl)
-
-  if (currentIndex === -1) return { previous: null, next: null }
-
+// Prev/next follow the same A–Z order as the /components list.
+function findNeighbours(currentUrl: string) {
+  const pages = getComponents()
+  const index = pages.findIndex((p) => p.href === currentUrl)
+  if (index === -1) return { previous: null, next: null }
   return {
-    previous: currentIndex > 0 ? pages[currentIndex - 1] : null,
-    next: currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null,
+    previous: pages[index - 1] ?? null,
+    next: pages[index + 1] ?? null,
   }
 }
 
@@ -61,6 +46,8 @@ export async function generateMetadata(props: {
     notFound()
   }
 
+  const ogImage = `/og?title=${encodeURIComponent(doc.title)}&description=${encodeURIComponent(doc.description)}`
+
   return {
     title: doc.title,
     description: doc.description,
@@ -69,25 +56,13 @@ export async function generateMetadata(props: {
       description: doc.description,
       type: "article",
       url: absoluteUrl(page.url),
-      images: [
-        {
-          url: `/og?title=${encodeURIComponent(
-            doc.title
-          )}&description=${encodeURIComponent(doc.description)}`,
-        },
-      ],
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: "summary_large_image",
       title: doc.title,
       description: doc.description,
-      images: [
-        {
-          url: `/og?title=${encodeURIComponent(
-            doc.title
-          )}&description=${encodeURIComponent(doc.description)}`,
-        },
-      ],
+      images: [{ url: ogImage }],
       creator: "@Gourav",
     },
   }
@@ -104,88 +79,85 @@ export default async function Page(props: {
 
   const doc = page.data
   const MDX = doc.body
+  const neighbours = findNeighbours(page.url)
 
-  const neighbours = findNeighboursFromConfig(page.url)
-  //@ts-ignore
-  const links = doc.links as { doc?: string; api?: string } | undefined
+  const sections = [
+    ...doc.toc
+      .filter((item) => item.depth <= 2)
+      .map((item) => ({ id: item.url.replace(/^#/, ""), title: item.title })),
+  ]
+
+  const pagerLink =
+    "inline-flex h-8 items-center gap-1.5 rounded-md border border-ui-border px-3 text-xs text-ui-secondary transition-colors hover:bg-ui-muted hover:text-ui-heading"
 
   return (
-    <div
-      data-slot="docs"
-      className="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full pt-4"
-    >
-      <div className="flex min-w-0 flex-1 flex-col">
-        <div className="h-(--top-spacing) shrink-0" />
-        <div className="mx-auto flex w-full max-w-6xl min-w-0 flex-1 flex-col gap-8 px-4 py-6 text-neutral-800 lg:py-8 lg:px-4 dark:text-neutral-300 bg-[#101010] rounded-md ring-[.5px] ring-white/20">
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <h1 className="scroll-m-20 text-2xl lg:text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
-                  {doc.title}
-                </h1>
-                <div className="docs-nav fixed inset-x-0 bottom-0 isolate z-50 flex items-center gap-2 px-6 py-4 backdrop-blur-sm static sm:z-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:pt-1.5 sm:backdrop-blur-none">
-                  {neighbours.previous &&
-                    <Link href={neighbours.previous.url}>
-                      <button className='rounded-full py-2 px-2 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
-                        <ArrowLeft className="w-3 h-3 text-neutral-400" />
-                      </button>
-                    </Link>
-                  }
-                  {neighbours.next &&
-                    <Link href={neighbours.next.url}>
-                      <button className='rounded-full py-2 px-2  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-m)] cursor-pointer hover:shadow-[var(--shadow-l)]'>
-                        <ArrowRight className="w-3 h-3 text-neutral-400" />
-                      </button>
-                    </Link>}
-                </div>
-              </div>
-              {doc.description && (
-                <p className="text-muted-foreground text-[1.05rem] text-balance sm:text-base">
-                  {doc.description}
-                </p>
+    <>
+      <main data-slot="docs" className="min-w-0">
+        <header id="overview" className="scroll-mt-20 px-gutter pt-10 pb-12 md:px-10 md:pt-14">
+          <div className="flex items-center justify-between gap-4">
+            <Breadcrumbs
+              items={[
+                { label: "Components", href: "/components" },
+                ...(doc.category ? [{ label: doc.category }] : []),
+                { label: doc.title },
+              ]}
+            />
+            <div className="flex items-center gap-1">
+              {neighbours.previous && (
+                <Link href={neighbours.previous.href} aria-label={`Previous: ${neighbours.previous.title}`} className={pagerLink}>
+                  <ArrowLeft className="size-3" />
+                </Link>
+              )}
+              {neighbours.next && (
+                <Link href={neighbours.next.href} aria-label={`Next: ${neighbours.next.title}`} className={pagerLink}>
+                  <ArrowRight className="size-3" />
+                </Link>
               )}
             </div>
-            {links ? (
-              <div className="flex items-center space-x-2 pt-4">
-                {links?.doc && (
-                  <Badge variant="secondary">
-                    <Link href={links.doc} target="_blank" rel="noreferrer">
-                      Docs <ArrowBigUp />
-                    </Link>
-                  </Badge>
-                )}
-                {links?.api && (
-                  <Badge variant="secondary">
-                    <Link href={links.api} target="_blank" rel="noreferrer">
-                      API Reference <ArrowBigUp />
-                    </Link>
-                  </Badge>
-                )}
-              </div>
-            ) : null}
           </div>
-          <div className="w-full flex-1 *:data-[slot=alert]:first:mt-0]">
-            <MDX components={mdxComponents} />
-          </div>
+          <h1 className="mt-6 flex flex-wrap items-center gap-3 font-serif text-4xl leading-tight text-ui-heading">
+            {doc.title}
+            <ComponentBadge label={doc.badge} className="font-sans text-xs" />
+          </h1>
+          {doc.description && (
+            <p className=" max-w-2xl text-base leading-relaxed tracking-tight text-ui-caption">{doc.description}</p>
+          )}
+          {doc.blog && (
+            <a
+              href={doc.blog}
+              target="_blank"
+              rel="noreferrer"
+              className="group mt-6 inline-flex items-center gap-2 rounded-full border border-ui-border py-1.5 pr-3 pl-2.5 text-sm text-ui-strong transition-colors hover:bg-ui-muted"
+            >
+              <BookOpen className="size-3.5 text-ui-caption" />
+              Read how it&apos;s built
+              <ArrowUpRight className="size-3.5 text-ui-caption transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          )}
+        </header>
+
+        {/* Each "##" in the MDX opens a new grid row (see the h2 in mdx-component). */}
+        <div className="px-gutter pb-12 text-[15px] text-ui-body md:px-10">
+          <MDX components={mdxComponents} />
         </div>
-        <div className="w-full hidden h-16 max-w-screen-xl items-center justify-between px-4 sm:flex md:px-2">
-          {neighbours.previous &&
-            <Link href={neighbours.previous.url}>
-              <button className='rounded-full py-2 px-4 button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-s)] cursor-pointer hover:shadow-[var(--shadow-m)]'>
-                <ArrowLeft className="w-4 h-4 text-neutral-400" />
-                <span className='text-sm text-[#ffffff68]'>{neighbours.previous.name}</span>
-              </button>
-            </Link>
-          }
-          {neighbours.next &&
-            <Link href={neighbours.next.url}>
-              <button className='rounded-full  py-2 px-6  button-3 bg-[var(--bg)] flex items-center gap-2 w-max shadow-[var(--shadow-s)] cursor-pointer hover:shadow-[var(--shadow-m)]'>
-                <span className='text-sm text-[#ffffff68]'>{neighbours.next?.name}</span>
-                <ArrowRight className="w-4 h-4 text-neutral-400" />
-              </button>
-            </Link>}
-        </div>
-      </div>
-    </div >
+
+        {(neighbours.previous || neighbours.next) && (
+          <GridSection as="nav" top className="flex items-center justify-between gap-4 px-gutter py-5 md:px-10">
+            {neighbours.previous ? (
+              <Link href={neighbours.previous.href} className={pagerLink}>
+                <ArrowLeft className="size-3" /> {neighbours.previous.title}
+              </Link>
+            ) : <span />}
+            {neighbours.next && (
+              <Link href={neighbours.next.href} className={pagerLink}>
+                {neighbours.next.title} <ArrowRight className="size-3" />
+              </Link>
+            )}
+          </GridSection>
+        )}
+      </main>
+
+      <OnThisPage title={doc.title} sections={sections} />
+    </>
   )
 }

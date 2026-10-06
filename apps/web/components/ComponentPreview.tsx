@@ -43,7 +43,7 @@ export function ComponentPreviewTabs({
       </Tabs>
       <div
         data-tab={tab}
-        className="data-[tab=code]:border-code relative rounded-xl border md:-mx-1"
+        className="relative rounded-xl border data-[tab=code]:border-0 md:-mx-1"
       >
         {
           tab === "preview" ? (
@@ -55,7 +55,9 @@ export function ComponentPreviewTabs({
               <div
                 data-align={align}
                 className={cn(
-                  "preview flex overflow-y-auto min-h-80 relative w-full justify-center p-2 lg:p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start overflow-hidden "
+                  "preview flex overflow-y-auto min-h-80 relative w-full justify-center p-2 lg:p-10 data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start overflow-hidden rounded-xl",
+                  // Soft diagonal stripes behind the component, like opensourceui.in.
+                  "bg-[repeating-linear-gradient(135deg,transparent_0_9px,color-mix(in_oklch,var(--ui-text-heading)_5%,transparent)_9px_10px)]"
                 )}
               >
                 {component}
@@ -65,7 +67,7 @@ export function ComponentPreviewTabs({
             <div
               data-slot="code"
               data-active={tab === "code"}
-              className="overflow-auto data-[active=true]:block bg-[var(--bg)] rounded-lg p-4"
+              className="data-[active=true]:block"
             >
               {source}
             </div>

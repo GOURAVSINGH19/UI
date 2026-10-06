@@ -1,0 +1,92 @@
+---
+title: Simple Search
+description: The clean ⌘K search this site uses, with a rotating placeholder, results that blur in and a filter menu.
+category: Inputs
+badge: New
+---
+
+import { SimpleSearchDemo } from "../../../components/docs/SimpleSearchDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  align="start"
+  component={<SimpleSearchDemo />}
+  source={<ComponentCode path="components/ui/simple-search.tsx" src="../../packages/ui/src/components/ui/simple-search.tsx" tokens />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/simple-search.tsx"
+  dependencies="framer-motion lucide-react tw-animate-css"
+  tokens
+  example={"import { SimpleSearch } from \"@/components/ui/simple-search\"\n\n<SimpleSearch\n  items={[{ title: \"Button\", href: \"/docs/button\", group: \"Components\" }]}\n  onSelect={(item) => router.push(item.href!)}\n/>"}
+/>
+
+## Usage
+
+This is the same search as the one in this site's navbar. Press <kbd>⌘K</kbd> / <kbd>Ctrl K</kbd> to try it on real pages.
+
+Pass it a flat list of items. Each item belongs to a `group`, which is used for the
+result headings and the filter menu. While the field is empty, the placeholder cycles
+through your item titles.
+
+```tsx
+import { useRouter } from "next/navigation"
+import { SimpleSearch, type SimpleSearchItem } from "@/components/ui/simple-search"
+
+const items: SimpleSearchItem[] = [
+  { title: "Home", href: "/", group: "Pages" },
+  { title: "Button", href: "/docs/button", group: "Components", badge: "New" },
+  { title: "Theming", href: "/docs/theming", group: "Guides", description: "Colours and dark mode" },
+]
+
+export function Search() {
+  const router = useRouter()
+  return <SimpleSearch items={items} onSelect={(item) => item.href && router.push(item.href)} />
+}
+```
+
+To open it from your own button, control it with `open` and `onOpenChange` and set
+`showTrigger={false}`.
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">items</code>, <code key="b">SimpleSearchItem[]</code>, "—", "Matched by title, group, description and keywords."],
+    [<code key="a">onSelect</code>, <code key="b">(item) =&gt; void</code>, "—", "Runs on Enter or click, after the dialog closes."],
+    [<code key="a">hotkey</code>, <code key="b">string | false</code>, <code key="c">"k"</code>, "Letter that toggles the dialog with ⌘ / Ctrl."],
+    [<code key="a">open</code>, <code key="b">boolean</code>, "—", "Controlled open state. Pair with onOpenChange."],
+    [<code key="a">onOpenChange</code>, <code key="b">(open) =&gt; void</code>, "—", "Runs whenever the dialog opens or closes."],
+    [<code key="a">showTrigger</code>, <code key="b">boolean</code>, <code key="c">true</code>, "Render the built-in search button."],
+    [<code key="a">showFilter</code>, <code key="b">boolean</code>, <code key="c">true</code>, "Show the group filter in the footer."],
+    [<code key="a">onFilterChange</code>, <code key="b">(group, direction) =&gt; void</code>, "—", "Hook for analytics or sounds when the filter changes."],
+    [<code key="a">label</code>, <code key="b">string</code>, <code key="c">"Search"</code>, "Accessible name for the dialog and input."],
+    [<code key="a">inputProps</code>, <code key="b">InputHTMLAttributes</code>, "—", "Extra props for the input, e.g. data attributes."],
+  ]}
+/>
+
+<DocsTable
+  headers={["SimpleSearchItem", "Type", "Notes"]}
+  rows={[
+    [<code key="a">title</code>, <code key="b">string</code>, "Shown and searched."],
+    [<code key="a">group</code>, <code key="b">string</code>, "Result heading and filter option."],
+    [<code key="a">href</code>, <code key="b">string?</code>, "Not used by the component; handy in onSelect."],
+    [<code key="a">description</code>, <code key="b">string?</code>, "Second line, also searched."],
+    [<code key="a">badge</code>, <code key="b">string?</code>, "Small pill after the title, e.g. New."],
+    [<code key="a">keywords</code>, <code key="b">string?</code>, "Extra hidden words to match."],
+  ]}
+/>
+
+## Accessibility
+
+- The input is a `combobox` that controls a `listbox`; the highlighted result is
+  exposed with `aria-activedescendant`
+- ↑ ↓ move through results across groups, Enter opens, Escape closes and returns
+  focus to the trigger
+- The filter menu is its own `listbox` with arrow keys; Escape closes just the menu
+- Animations are skipped when the visitor prefers reduced motion

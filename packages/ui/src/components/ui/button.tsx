@@ -1,29 +1,34 @@
+"use client"
+
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import { Slot, Slottable } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@workspace/ui/lib/utils"
+import { FlickeringGrid } from "@workspace/ui/components/ui/flickering-grid"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "relative isolate inline-flex shrink-0 cursor-pointer items-center justify-center gap-1.5 overflow-hidden rounded-full border font-medium whitespace-nowrap outline-none transition-[color,background-color,border-color,box-shadow] duration-150 focus-visible:shadow-[0_0_0_3px_color-mix(in_oklch,var(--ui-text-heading)_25%,transparent)] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-xs ring-1 ring-white/60 duration-600 ease-inOut hover:bg-primary/95 ",
+          "border-[color-mix(in_oklch,var(--ui-bg-inverse),black_30%)] bg-ui-inverse bg-linear-to-b from-white/15 to-transparent text-ui-on-inverse shadow-[inset_0_1px_0_0_rgb(255_255_255/0.25)] hover:bg-[color-mix(in_oklch,var(--ui-bg-inverse),var(--ui-bg)_12%)] dark:border-[color-mix(in_oklch,var(--ui-bg-inverse),black_18%)] dark:from-transparent dark:from-55% dark:to-black/5 dark:shadow-[inset_0_1px_0_0_rgb(255_255_255/0.9),inset_0_-1px_0_0_rgb(0_0_0/0.08)]",
+        secondary:
+          "border-[color-mix(in_oklch,var(--ui-text-heading)_15%,transparent)] bg-ui-subtle text-ui-secondary shadow-[inset_0_1px_0_0_rgb(255_255_255/0.7)] hover:bg-[color-mix(in_oklch,var(--ui-bg-subtle),var(--ui-text-heading)_5%)] hover:text-ui-heading dark:shadow-[inset_0_1px_0_0_rgb(255_255_255/0.08)]",
+        outline: "border-ui-border bg-transparent text-ui-heading hover:border-ui-border-strong hover:bg-ui-subtle",
+        ghost: "border-transparent bg-transparent text-ui-secondary hover:bg-ui-muted hover:text-ui-heading",
         destructive:
-          "bg-destructive text-white shadow-[inset_0_.2px_.2px_red,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border bg-background shadow-[inset_0_.5px_.5px_#ffffff30,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border-red-800 bg-red-600 bg-linear-to-b from-white/15 to-transparent text-white shadow-[inset_0_1px_0_0_rgb(255_255_255/0.25)] hover:bg-red-600/90",
+        link: "border-transparent text-ui-heading underline-offset-4 hover:underline",
         primary:
-          "bg-secondary text-secondary-foreground shadow-[inset_0_.5px_.5px_#ffffff30,0_1px_2px_2px_#00000030,0_2px_2px_#00000015] hover:bg-secondary/80",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border-[color-mix(in_oklch,var(--ui-text-heading)_15%,transparent)] bg-ui-subtle text-ui-secondary shadow-[inset_0_1px_0_0_rgb(255_255_255/0.7)] hover:bg-[color-mix(in_oklch,var(--ui-bg-subtle),var(--ui-text-heading)_5%)] hover:text-ui-heading dark:shadow-[inset_0_1px_0_0_rgb(255_255_255/0.08)]",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-8 rounded-full",
+        default: "h-8 px-3.5 text-[13px]",
+        sm: "h-7 gap-1 px-2.5 text-xs",
+        lg: "h-10 px-5 text-sm",
+        icon: "size-8 p-0",
       },
     },
     defaultVariants: {
@@ -33,25 +38,97 @@ const buttonVariants = cva(
   }
 )
 
+type ButtonProps = React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+    flicker?: boolean
+    flickerColor?: string
+    flickerSize?: number
+  }
+
 function Button({
   className,
   variant,
   size,
   asChild = false,
+  flicker = false,
+  flickerColor,
+  flickerSize = 3,
+  children,
+  onPointerEnter,
+  onPointerMove,
+  onPointerLeave,
+  ref,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
-  }) {
+}: ButtonProps) {
   const Comp = asChild ? Slot : "button"
+  const [hovered, setHovered] = React.useState(false)
+  const [animating, setAnimating] = React.useState(false)
+  const fadeTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
+
+  React.useEffect(() => () => clearTimeout(fadeTimer.current), [])
+
+  const track = (e: React.PointerEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    e.currentTarget.style.setProperty("--flicker-x", `${e.clientX - rect.left}px`)
+    e.currentTarget.style.setProperty("--flicker-y", `${e.clientY - rect.top}px`)
+  }
 
   return (
     <Comp
+      ref={ref}
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }), "overflow-hidden")}
+      className={cn(buttonVariants({ variant, size, className }))}
+      onPointerEnter={(e: React.PointerEvent<HTMLButtonElement>) => {
+        if (flicker) {
+          track(e)
+          clearTimeout(fadeTimer.current)
+          setHovered(true)
+          setAnimating(true)
+        }
+        onPointerEnter?.(e)
+      }}
+      onPointerMove={(e: React.PointerEvent<HTMLButtonElement>) => {
+        if (flicker) track(e)
+        onPointerMove?.(e)
+      }}
+      onPointerLeave={(e: React.PointerEvent<HTMLButtonElement>) => {
+        if (flicker) {
+          setHovered(false)
+          fadeTimer.current = setTimeout(() => setAnimating(false), 400)
+        }
+        onPointerLeave?.(e)
+      }}
       {...props}
-    />
+    >
+      {flicker && (
+        <span
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute inset-0 -z-10 transition-opacity duration-300 ease-out motion-reduce:hidden",
+            hovered ? "opacity-100" : "opacity-0"
+          )}
+          style={{
+            maskImage:
+              "radial-gradient(circle 70px at var(--flicker-x, 50%) var(--flicker-y, 50%), black, transparent)",
+            WebkitMaskImage:
+              "radial-gradient(circle 70px at var(--flicker-x, 50%) var(--flicker-y, 50%), black, transparent)",
+          }}
+        >
+          <FlickeringGrid
+            color={flickerColor}
+            squareSize={flickerSize}
+            gridGap={Math.max(1, Math.round(flickerSize * 0.6))}
+            flickerChance={3}
+            maxOpacity={0.7}
+            active={animating}
+          />
+        </span>
+      )}
+      <Slottable>{children}</Slottable>
+    </Comp>
   )
 }
 
 export { Button, buttonVariants }
+export type { ButtonProps }

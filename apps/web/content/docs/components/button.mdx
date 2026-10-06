@@ -1,6 +1,7 @@
 ---
 title: Button
-description: Opinionated button styles for primary actions
+description: Pill buttons with depth, plus an optional flicker grid that follows the cursor in any colour.
+category: Buttons
 ---
 
 import { Button } from "@workspace/ui/components/ui/button"
@@ -11,13 +12,17 @@ import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
 
 <ComponentPreviewTabs
   component={<ButtonVariantPlayground />}
-  source={
-    <ComponentSource
-      src="components/docs/ButtonVariantPlayground.tsx"
-      title="ButtonVariantPlayground.tsx"
-      language="tsx"
-    />
-  }
+  source={<ComponentCode path="components/ui/button.tsx" src="../../packages/ui/src/components/ui/button.tsx" tokens also={[{ src: "../../packages/ui/src/components/ui/flickering-grid.tsx", path: "components/ui/flickering-grid.tsx" }]} />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/button.tsx"
+  dependencies="class-variance-authority @radix-ui/react-slot"
+  tokens
+  also={["components/ui/flickering-grid.tsx"]}
+  example={"import { Button } from \"@/components/ui/button\"\n\n<Button>Get started</Button>\n\n<Button variant=\"secondary\" flicker flickerColor=\"#38bdf8\" flickerSize={4}>\n  Hover me\n</Button>"}
 />
 
 ## API Surface
@@ -25,24 +30,12 @@ import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
 <DocsTable
   headers={["Prop", "Type", "Default", "Notes"]}
   rows={[
-    [
-      <code key="variant">variant</code>,
-      <code key="variant-type">"default" | "outline" | "ghost" | "destructive"</code>,
-      <code key="variant-default">"default"</code>,
-      "Extends the shadcn variants with design-token driven colors.",
-    ],
-    [
-      <code key="size">size</code>,
-      <code key="size-type">"sm" | "default" | "lg" | "icon"</code>,
-      <code key="size-default">"default"</code>,
-      "Provides consistent spacing and typography across breakpoints.",
-    ],
-    [
-      <code key="asChild">asChild</code>,
-      <code key="asChild-type">boolean</code>,
-      <code key="asChild-default">false</code>,
-      "Forward rendering to another component such as Link.",
-    ],
+    [<code key="a">variant</code>, <code key="b">"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"</code>, <code key="c">"default"</code>, "Filled pill, soft pill, bordered, bare, red, or a text link."],
+    [<code key="a">size</code>, <code key="b">"sm" | "default" | "lg" | "icon"</code>, <code key="c">"default"</code>, "28, 32 or 40 px tall; icon is a 32 px circle."],
+    [<code key="a">flicker</code>, <code key="b">boolean</code>, <code key="c">false</code>, "A grid of squares flickers around the cursor while it moves over the button, then fades out."],
+    [<code key="a">flickerColor</code>, <code key="b">string</code>, "text colour", "Any CSS colour for the squares, e.g. #38bdf8 or var(--brand)."],
+    [<code key="a">flickerSize</code>, <code key="b">number</code>, <code key="c">3</code>, "Side of each flicker square in px; the gap between squares scales with it."],
+    [<code key="a">asChild</code>, <code key="b">boolean</code>, <code key="c">false</code>, "Render your own element, e.g. a Link, with the button styles."],
   ]}
 />
 
@@ -55,4 +48,5 @@ needed.
 - Always pair icon-only buttons with `aria-label`
 - Disabled buttons set `aria-disabled` and skip pointer events, so rely on the
   `onClick` guard server-side as well
-- Focus ring follows the theme accent color and respects reduced motion
+- Focus ring follows the theme colours
+- The flicker grid is decorative (`aria-hidden`) and is hidden when the visitor prefers reduced motion

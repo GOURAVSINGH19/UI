@@ -1,0 +1,78 @@
+---
+title: Gooey Search
+description: A command search whose results melt out of the input, with grouped results and full keyboard control.
+category: Inputs
+---
+
+import { GooSearchDemo } from "../../../components/docs/GooSearchDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  align="start"
+  component={<GooSearchDemo />}
+  source={<ComponentCode path="components/ui/goo-search.tsx" src="../../packages/ui/src/components/ui/goo-search.tsx" tokens />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/goo-search.tsx"
+  dependencies="framer-motion lucide-react"
+  tokens
+  example={"import { GooSearch } from \"@/components/ui/goo-search\"\n\n<GooSearch\n  items={[{ title: \"Button\", href: \"/docs/button\", category: \"Components\" }]}\n  onOpen={(item) => console.log(item.href)}\n/>"}
+/>
+
+## Usage
+
+The input and the results panel are drawn as two blobs behind an SVG goo filter.
+As the panel grows, the gap between them springs open so the results look like
+they pull away from the input.
+
+```tsx
+import { GooSearch } from "@/components/ui/goo-search"
+
+const items = [
+  { title: "Button", href: "/docs/components/button", category: "Components" },
+  { title: "Theming", href: "/docs/theming", category: "Guides" },
+]
+
+export function Search() {
+  return (
+    <GooSearch
+      items={items}
+      onOpen={(item) => console.log(item.href)}
+      placeholder="Search components…"
+    />
+  )
+}
+```
+
+To render results as real links, set `linkResults` and pass your router's link
+component, e.g. `linkAs={Link}` from `next/link`.
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">items</code>, <code key="b">GooSearchItem[]</code>, "—", "Searched by title, category and keywords. Results are grouped by category."],
+    [<code key="a">onOpen</code>, <code key="b">(item) =&gt; void</code>, "—", "Runs on Enter, the open hint, or a click when results are buttons."],
+    [<code key="a">onClose</code>, <code key="b">() =&gt; void</code>, "—", "Adds an “esc to close” hint and runs on Escape."],
+    [<code key="a">linkResults</code>, <code key="b">boolean</code>, <code key="c">false</code>, "Render results as links instead of buttons."],
+    [<code key="a">linkAs</code>, <code key="b">ElementType</code>, <code key="c">"a"</code>, "Component for internal links, e.g. Next's Link."],
+    [<code key="a">placeholder</code>, <code key="b">string</code>, <code key="c">"Search…"</code>, "Input placeholder."],
+    [<code key="a">initialQuery</code>, <code key="b">string</code>, <code key="c">""</code>, "Start with results already open."],
+    [<code key="a">maxResultsHeight</code>, <code key="b">number</code>, <code key="c">340</code>, "The panel scrolls past this height (px)."],
+    [<code key="a">compact</code>, <code key="b">boolean</code>, <code key="c">false</code>, "Shorter input row for tight spaces."],
+    [<code key="a">label</code>, <code key="b">string</code>, <code key="c">"Search"</code>, "Accessible name for the input."],
+  ]}
+/>
+
+## Accessibility
+
+- The input is a `combobox` that controls a `listbox`; the highlighted result is
+  exposed with `aria-activedescendant`
+- Arrow keys move through results across groups, Enter opens the active one
+- Every keyboard hint is also a button, so the component works without a keyboard
