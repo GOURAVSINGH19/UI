@@ -11,44 +11,38 @@ import { TreeNav } from "./TreeNav"
 import { site } from "@/lib/site"
 
 const sectionLabel = "eyebrow mb-3 px-3"
-const CLOSED_KEY = "kinetik:sidebar-closed"
 
-/** Which categories are folded away. Remembered per browser; every category starts open. */
-function useClosedCategories(activeCategory: string | undefined) {
-    const [closed, setClosed] = useState<string[]>([])
+function useOpenCategory(categories: ComponentCategory[], activeCategory: string | undefined) {
+    const [openCategory, setOpenCategory] = useState<string | null>(() => {
+        return activeCategory ?? categories[0]?.name ?? null
+    })
 
     useEffect(() => {
-        try {
-            const saved = JSON.parse(localStorage.getItem(CLOSED_KEY) ?? "[]")
-            if (Array.isArray(saved)) setClosed(saved.filter((name): name is string => typeof name === "string"))
-        } catch { }
-    }, [])
-
-    // The page you're on is never hidden: landing inside a closed category opens it.
-    useEffect(() => {
-        if (activeCategory) setClosed((list) => (list.includes(activeCategory) ? list.filter((n) => n !== activeCategory) : list))
+        if (activeCategory) {
+            setOpenCategory(activeCategory)
+        }
     }, [activeCategory])
 
-    const setOpen = (name: string, open: boolean) =>
-        setClosed((list) => {
-            const next = open ? list.filter((n) => n !== name) : [...new Set([...list, name])]
-            try {
-                localStorage.setItem(CLOSED_KEY, JSON.stringify(next))
-            } catch { }
-            return next
-        })
+    const toggleOpen = (name: string, open: boolean) => {
+        if (open) {
+            setOpenCategory(name)
+        } else {
+            setOpenCategory((curr) => (curr === name ? null : curr))
+        }
+    }
 
-    return { isOpen: (name: string) => !closed.includes(name), setOpen }
+    return {
+        isOpen: (name: string) => openCategory === name,
+        setOpen: toggleOpen,
+    }
 }
 
 export function BrowserSidebar({ categories }: { categories: ComponentCategory[] }) {
     const pathname = usePathname()
-    
-    // Filter out Media category
     const visibleCategories = categories.filter(category => category.name !== "Media")
-    
+
     const activeCategory = visibleCategories.find((c) => c.items.some((item) => item.href === pathname))?.name
-    const { isOpen, setOpen } = useClosedCategories(activeCategory)
+    const { isOpen, setOpen } = useOpenCategory(visibleCategories, activeCategory)
 
     const navLink = (href: string, active: boolean) =>
         cn(
@@ -70,7 +64,7 @@ export function BrowserSidebar({ categories }: { categories: ComponentCategory[]
 
                 <p className={cn(sectionLabel, "mt-10")}>Components</p>
                 <div className="space-y-1 px-3">
-                    {categories.map((category) => {
+                    {visibleCategories.map((category) => {
                         const open = isOpen(category.name)
                         const FolderIcon = open ? FolderOpen : Folder
                         return (

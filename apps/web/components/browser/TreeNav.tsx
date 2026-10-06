@@ -77,6 +77,7 @@ export function TreeNav({
                     type="button"
                     aria-expanded={expanded}
                     aria-controls={listId}
+                    data-press="off"
                     onClick={() => onOpenChange(!expanded)}
                     className="group/root relative flex h-8 w-full cursor-pointer items-center gap-2 rounded-sm text-left text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ui-border"
                 >
@@ -125,13 +126,10 @@ export function TreeNav({
                                         fill="none"
                                         className="pointer-events-none absolute top-0 left-0"
                                     >
-                                        {/* Rail from the row above down to where the curve starts. */}
                                         <path d={`M${RAIL} 0V${MID - R}`} strokeWidth={1} className={stroke} style={{ stroke: aboveLit ? ON : OFF }} />
-                                        {/* Rail on to the next row. */}
                                         {!isLast && (
                                             <path d={`M${RAIL} ${MID - R}V${ROW_H}`} strokeWidth={1} className={stroke} style={{ stroke: belowLit ? ON : OFF }} />
                                         )}
-                                        {/* The branch: a quarter curve into the row, then a short tail. */}
                                         <path
                                             d={`M${RAIL} ${MID - R}Q${RAIL} ${MID} ${RAIL + R} ${MID}H${RAIL + R + 4}`}
                                             strokeWidth={isActive ? 1.5 : 1}
@@ -147,7 +145,6 @@ export function TreeNav({
                                             style={{ fill: ON, opacity: isActive ? 1 : 0 }}
                                         />
                                     </svg>
-
                                     <LinkComponent
                                         href={item.href}
                                         aria-current={isActive ? "location" : undefined}

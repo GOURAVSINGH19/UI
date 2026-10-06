@@ -20,10 +20,7 @@ export function SimpleSearchDemo() {
 
     return (
         <div className="flex w-full max-w-md flex-col gap-3 self-start pt-4">
-            {/* A tiny navbar so the trigger sits where it would on a real site. */}
             <div className="flex h-12 items-center justify-between rounded-full border border-ui-border bg-ui-bg pr-2.5 pl-4">
-                <span className="font-serif text-lg text-ui-heading">Acme</span>
-                {/* hotkey off here: this page's own navbar search already uses ⌘K. */}
                 <SimpleSearch items={ITEMS} onSelect={(item) => setPicked(item.title)} hotkey={false} label="Search the demo docs" />
             </div>
             <p role="status" className="px-1 text-xs text-ui-caption">

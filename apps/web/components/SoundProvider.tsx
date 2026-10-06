@@ -7,6 +7,8 @@ import { cue, initSound } from "@/lib/sound"
 // Things a person clicks. Anything matching gets the ripple; buttons also get the press.
 const INTERACTIVE = 'a[href], button, summary, [role="button"], [role="option"], [role="tab"], [data-cuelume-tap]'
 const PRESSABLE = 'button, [role="button"], [data-press]'
+// Opt out of the press scale, e.g. full-width rows where shrinking looks off.
+const NO_PRESS = '[data-press="off"]'
 // Elements that already make their own sound (cuelume attributes, or code that calls cue()).
 const HAS_OWN_SOUND =
     "[data-cuelume-tap], [data-cuelume-type], [data-cuelume-select], [data-cuelume-toggle], [data-cuelume-open], [data-cuelume-close], [data-cuelume-navigate], [data-sound='off'], [data-slot^='search-']"
@@ -66,7 +68,7 @@ export function SoundProvider() {
             ripple(e.clientX, e.clientY, getComputedStyle(target).color)
 
             const pressable = (e.target as Element).closest(PRESSABLE)
-            if (pressable && !pressed.has(pressable)) {
+            if (pressable && !pressable.matches(NO_PRESS) && !pressed.has(pressable)) {
                 // `scale` composes with any transform the element already has (Motion, Tailwind).
                 pressed.set(pressable, pressable.animate([{ scale: "1" }, { scale: "0.96" }], { duration: 110, easing: "ease-out", fill: "forwards" }))
                 const up = () => release(pressable)
