@@ -1,0 +1,71 @@
+---
+title: File Attachment
+description: Attachment previews for uploads, with a springy progress ring, a check on finish, cancel, retry and remove.
+category: Inputs
+badge: New
+---
+
+import { FileAttachmentDemo } from "../../../components/docs/FileAttachmentDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  align="start"
+  component={<FileAttachmentDemo />}
+  source={<ComponentCode path="components/ui/file-attachment" src="../../packages/ui/src/components/ui/file-attachment" tokens />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/file-attachment"
+  dependencies="framer-motion lucide-react"
+  tokens
+  example={"import { AttachmentList } from \"@/components/ui/file-attachment\"\n\n<AttachmentList items={files} onRemove={remove} />"}
+/>
+
+## Usage
+
+Images show as thumbnails that sharpen as they upload. Other files show as a chip with a
+coloured extension tile and a live “1.2 MB of 3.4 MB” line. When an upload finishes the
+ring pops into a check; when it fails the tile turns red with a retry button.
+
+```tsx
+import { AttachmentList, type Attachment } from "@/components/ui/file-attachment"
+
+const files: Attachment[] = [
+  { id: "1", name: "photo.png", size: 2_400_000, type: "image/png", url: previewUrl, progress: 0.4, status: "uploading" },
+  { id: "2", name: "report.pdf", size: 1_200_000, progress: 1, status: "done" },
+]
+
+<AttachmentList
+  items={files}
+  onCancel={(id) => abortUpload(id)}
+  onRetry={(id) => startUpload(id)}
+  onRemove={(id) => removeFile(id)}
+/>
+```
+
+You drive `progress` and `status` from your upload code. Leave `progress` undefined for a
+spinning ring when the size is unknown. `ProgressRing` and `AttachmentPreview` are exported
+on their own too.
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">items</code>, <code key="b">Attachment[]</code>, "—", "id, name, size, type, url, progress (0–1), status."],
+    [<code key="a">onCancel</code>, <code key="b">(id) =&gt; void</code>, "—", "Ring button while uploading."],
+    [<code key="a">onRetry</code>, <code key="b">(id) =&gt; void</code>, "—", "Shown when status is \"error\"."],
+    [<code key="a">onRemove</code>, <code key="b">(id) =&gt; void</code>, "—", "Corner button on hover once done or failed."],
+    [<code key="a">className</code>, <code key="b">string</code>, "—", "Classes for the list."],
+  ]}
+/>
+
+## Accessibility
+
+- Cancel, retry and remove are labelled buttons that name the file
+- A polite status line announces how many files are still uploading
+- Respects `prefers-reduced-motion`

@@ -3,9 +3,9 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { Folder, FolderOpen, LayoutGrid } from "lucide-react"
+import { Folder, FolderOpen, Github, LayoutGrid, Mail } from "lucide-react"
 import { cn } from "@workspace/ui/lib/utils"
-import type { ComponentCategory } from "@/lib/component-groups"
+import { HIDDEN_CATEGORIES, type ComponentCategory } from "@/lib/component-groups"
 import { ComponentBadge } from "./ComponentBadge"
 import { TreeNav } from "./TreeNav"
 import { site } from "@/lib/site"
@@ -39,7 +39,7 @@ function useOpenCategory(categories: ComponentCategory[], activeCategory: string
 
 export function BrowserSidebar({ categories }: { categories: ComponentCategory[] }) {
     const pathname = usePathname()
-    const visibleCategories = categories.filter(category => category.name !== "Media")
+    const visibleCategories = categories.filter((category) => !HIDDEN_CATEGORIES.includes(category.name))
 
     const activeCategory = visibleCategories.find((c) => c.items.some((item) => item.href === pathname))?.name
     const { isOpen, setOpen } = useOpenCategory(visibleCategories, activeCategory)
@@ -93,10 +93,29 @@ export function BrowserSidebar({ categories }: { categories: ComponentCategory[]
                 </div>
             </nav>
 
-            <p className="grid-line border-t px-7 py-4 text-xs text-ui-caption">
-                <span className="font-serif text-sm text-ui-heading">{site.name}</span>{" "}
-                <span className="tabular-nums">v0.0.1</span> · MIT
-            </p>
+            <div className="grid-line border-t px-4 py-4">
+                <div className="rounded-xl border border-ui-border bg-ui-subtle p-3.5">
+                    <p className="text-[13px] font-medium text-ui-heading">Free &amp; open source</p>
+                    <p className="mt-1 text-xs leading-relaxed text-ui-caption">
+                        <a href={site.license} target="_blank" rel="noreferrer" className="underline decoration-ui-border-strong underline-offset-2 hover:text-ui-heading">
+                            MIT licensed
+                        </a>
+                        . Ship it in any project; credit is optional.
+                    </p>
+                    <div className="mt-3 grid grid-cols-2 gap-2">
+                        <a href={site.repo} target="_blank" rel="noreferrer" data-press className="btn btn-secondary h-8 text-xs">
+                            <Github className="size-3.5" /> Star
+                        </a>
+                        <a href={`mailto:${site.email}`} data-press className="btn btn-blue h-8 text-xs">
+                            <Mail className="size-3.5" /> Say hi
+                        </a>
+                    </div>
+                </div>
+                <p className="mt-3 px-1 text-[11px] text-ui-hint">
+                    <span className="font-serif text-xs text-ui-caption">{site.name}</span>{" "}
+                    <span className="tabular-nums">v0.0.1</span> · by {site.author}
+                </p>
+            </div>
         </aside>
     )
 }

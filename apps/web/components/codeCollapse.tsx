@@ -3,7 +3,7 @@
 import * as React from "react"
 
 import { cn } from "@workspace/ui/lib/utils"
-import { Button } from "@workspace/ui/components/ui/button"
+import { Button } from "@workspace/ui/components/ui/button/index"
 import {
   Collapsible,
   CollapsibleContent,

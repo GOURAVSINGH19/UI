@@ -4,7 +4,7 @@ import * as React from "react"
 import { CheckIcon, ClipboardIcon } from "lucide-react"
 import { Event, trackEvent } from "../lib/events"
 import { cn } from "@workspace/ui/lib/utils"
-import { Button } from "@workspace/ui/components/ui/button"
+import { Button } from "@workspace/ui/components/ui/button/index"
 import {
   DropdownMenu,
   DropdownMenuContent,

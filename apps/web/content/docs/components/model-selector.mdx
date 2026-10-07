@@ -1,0 +1,79 @@
+---
+title: Model Selector
+description: A compact model picker for AI apps with glyphs, badges, a sliding highlight and an optional extended-thinking switch.
+category: Inputs
+badge: New
+---
+
+import { ModelSelectorDemo } from "../../../components/docs/ModelSelectorDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  align="start"
+  component={<ModelSelectorDemo />}
+  source={<ComponentCode path="components/ui/model-selector" src="../../packages/ui/src/components/ui/model-selector" tokens />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/model-selector"
+  dependencies="framer-motion lucide-react"
+  tokens
+  example={"import { ModelSelector } from \"@/components/ui/model-selector\"\n\n<ModelSelector models={[{ id: \"fast\", name: \"Fast\" }, { id: \"pro\", name: \"Pro\" }]} />"}
+/>
+
+## Usage
+
+The menu scales out of the trigger with a soft blur, a highlight slides between rows as
+you hover or arrow through them, and the trigger's label blurs over to the new model when
+you pick one.
+
+```tsx
+import { ModelSelector } from "@/components/ui/model-selector"
+
+const models = [
+  { id: "kinetik-2", name: "Kinetik 2", description: "Smartest for everyday work", badge: "New", color: "#7c5cff" },
+  { id: "kinetik-fast", name: "Kinetik Fast", description: "Quick answers", color: "#06b6d4" },
+]
+
+export function Picker() {
+  const [model, setModel] = useState("kinetik-2")
+  const [thinking, setThinking] = useState(false)
+  return (
+    <ModelSelector
+      models={models}
+      value={model}
+      onValueChange={setModel}
+      thinking={thinking}
+      onThinkingChange={setThinking}
+    />
+  )
+}
+```
+
+Use `side="top"` when it sits inside a prompt box at the bottom of the screen.
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">models</code>, <code key="b">ModelOption[]</code>, "—", "id, name, description, badge, color, icon, disabled."],
+    [<code key="a">value</code>, <code key="b">string</code>, "—", "Controlled model id."],
+    [<code key="a">defaultValue</code>, <code key="b">string</code>, "first model", "Starting model when uncontrolled."],
+    [<code key="a">onValueChange</code>, <code key="b">(id) =&gt; void</code>, "—", "Runs when a model is picked."],
+    [<code key="a">thinking</code>, <code key="b">boolean</code>, "—", "With onThinkingChange, adds an extended-thinking switch."],
+    [<code key="a">onThinkingChange</code>, <code key="b">(on) =&gt; void</code>, "—", "Runs when the switch flips."],
+    [<code key="a">side</code>, <code key="b">"top" | "bottom"</code>, <code key="c">"bottom"</code>, "Which side the menu opens on."],
+    [<code key="a">align</code>, <code key="b">"start" | "end"</code>, <code key="c">"start"</code>, "Menu edge that lines up with the trigger."],
+  ]}
+/>
+
+## Accessibility
+
+- The trigger opens a `listbox`; the highlighted row is exposed with `aria-activedescendant`
+- Arrow keys, Home and End move the highlight, skipping disabled models; Enter or Space picks
+- Escape closes and returns focus to the trigger; the thinking switch is a real `switch`

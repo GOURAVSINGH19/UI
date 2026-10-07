@@ -5,15 +5,16 @@ import { mdxComponents } from "@/mdx-component"
 
 import { source } from "@/lib/source"
 import { getComponents } from "@/lib/components-index"
+import { inSidebarOrder } from "@/lib/component-groups"
 import { absoluteUrl } from "@workspace/ui/lib/utils"
 import { OnThisPage } from "@/components/browser/OnThisPage"
 import { Breadcrumbs } from "@/components/browser/Breadcrumbs"
 import { ComponentBadge } from "@/components/browser/ComponentBadge"
 import { GridSection } from "@/components/grid/Grid"
 
-// Prev/next follow the same A–Z order as the /components list.
+// Prev/next follow the sidebar: category by category, so the arrows never jump around.
 function findNeighbours(currentUrl: string) {
-  const pages = getComponents()
+  const pages = inSidebarOrder(getComponents())
   const index = pages.findIndex((p) => p.href === currentUrl)
   if (index === -1) return { previous: null, next: null }
   return {

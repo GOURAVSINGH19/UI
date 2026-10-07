@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useLenis } from "lenis/react"
-import { SimpleSearch, type SimpleSearchItem } from "@workspace/ui/components/ui/simple-search"
+import { SimpleSearch, type SimpleSearchItem } from "@workspace/ui/components/ui/simple-search/index"
 import type { ComponentEntry } from "@/lib/component-groups"
 import { cue } from "@/lib/sound"
 

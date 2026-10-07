@@ -4,7 +4,7 @@ description: Pill buttons with depth, plus an optional flicker grid that follows
 category: Buttons
 ---
 
-import { Button } from "@workspace/ui/components/ui/button"
+import { Button } from "@workspace/ui/components/ui/button/index"
 import { ButtonVariantPlayground } from "../../../components/docs/ButtonVariantPlayground"
 import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
 
@@ -12,16 +12,15 @@ import { DocsPreview, DocsTable } from "../../../components/docs/DocsSurface"
 
 <ComponentPreviewTabs
   component={<ButtonVariantPlayground />}
-  source={<ComponentCode path="components/ui/button.tsx" src="../../packages/ui/src/components/ui/button.tsx" tokens also={[{ src: "../../packages/ui/src/components/ui/flickering-grid.tsx", path: "components/ui/flickering-grid.tsx" }]} />}
+  source={<ComponentCode path="components/ui/button" src="../../packages/ui/src/components/ui/button" tokens />}
 />
 
 ## Setup
 
 <ComponentSetup
-  path="components/ui/button.tsx"
+  path="components/ui/button"
   dependencies="class-variance-authority @radix-ui/react-slot"
   tokens
-  also={["components/ui/flickering-grid.tsx"]}
   example={"import { Button } from \"@/components/ui/button\"\n\n<Button>Get started</Button>\n\n<Button variant=\"secondary\" flicker flickerColor=\"#38bdf8\" flickerSize={4}>\n  Hover me\n</Button>"}
 />
 

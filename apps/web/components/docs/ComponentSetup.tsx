@@ -22,6 +22,25 @@ async function load(src: string | undefined, inline: string | undefined, lang: s
 
 const langOf = (file: string) => file.split(".").pop() ?? "tsx"
 
+/** A component folder lists its main file first, then other components, then hooks and helpers, then index. */
+function folderOrder(folder: string) {
+    const rank = (name: string) =>
+        name === `${folder}.tsx` ? 0 : name.startsWith("index.") ? 4 : name.endsWith(".tsx") ? 1 : name.startsWith("use-") ? 2 : 3
+    return (a: string, b: string) => rank(a) - rank(b) || a.localeCompare(b)
+}
+
+/** Expands a component folder into one entry per file; a plain file passes through. */
+async function expand(src: string, filePath: string): Promise<Array<{ src: string; path: string }>> {
+    "use cache"
+    const stat = await fs.stat(path.join(process.cwd(), src))
+    if (!stat.isDirectory()) return [{ src, path: filePath }]
+    const folder = filePath.split("/").pop() ?? ""
+    const names = (await fs.readdir(path.join(process.cwd(), src))).filter((n) => /\.(tsx?|css)$/.test(n))
+    return names.sort(folderOrder(folder)).map((name) => ({ src: `${src}/${name}`, path: `${filePath}/${name}` }))
+}
+
+const isFolder = (filePath: string) => !/\.[a-z]+$/.test(filePath)
+
 function Path({ children }: { children: React.ReactNode }) {
     return <code className="rounded-md bg-ui-muted px-1.5 py-0.5 font-mono text-[0.85em] text-ui-heading">{children}</code>
 }
@@ -60,7 +79,7 @@ export async function ComponentCode({
 }) {
     // Collect all files
     const files: Array<{ src: string; path: string }> = [
-        { src, path: filePath },
+        ...(await expand(src, filePath)),
         ...also,
         ...(utils ? [{ src: CN_SRC, path: "lib/utils.ts" }] : []),
         ...(tokens ? [{ src: TOKENS_SRC, path: "styles/tokens.css" }] : []),
@@ -155,9 +174,16 @@ export async function ComponentSetup({
                     </Step>
                 )}
                 <Step n={++n}>
-                    <p>
-                        Copy the component from the Code tab and create <Path>{filePath}</Path> in your project.
-                    </p>
+                    {isFolder(filePath) ? (
+                        <p>
+                            Create a <Path>{filePath}/</Path> folder and copy every file from the Code tab into it.
+                            Each file does one job, so you can read or change a piece without the rest.
+                        </p>
+                    ) : (
+                        <p>
+                            Copy the component from the Code tab and create <Path>{filePath}</Path> in your project.
+                        </p>
+                    )}
                 </Step>
                 <Step n={++n}>
                     <p>Import and render:</p>

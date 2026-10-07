@@ -30,7 +30,7 @@ function columnClass(header: string, index: number) {
 /** Props / API table: bordered, with a tinted header and row dividers. Scrolls sideways on small screens. */
 export function DocsTable({ headers, rows, className }: DocsTableProps) {
   return (
-    <div className={cn("my-6 overflow-x-auto rounded-xl border border-ui-border", className)} data-lenis-prevent>
+    <div className={cn("my-6 overflow-x-auto rounded-xl border border-ui-border", className)}>
       <table className="w-full border-collapse text-left text-sm">
         <thead>
           <tr className="border-b border-ui-border bg-ui-subtle">

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { SimpleSearch, type SimpleSearchItem } from "@workspace/ui/components/ui/simple-search"
+import { SimpleSearch, type SimpleSearchItem } from "@workspace/ui/components/ui/simple-search/index"
 
 const ITEMS: SimpleSearchItem[] = [
     { title: "Introduction", group: "Getting started", description: "What this library is and how to use it" },

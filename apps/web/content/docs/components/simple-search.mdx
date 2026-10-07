@@ -13,13 +13,13 @@ import { DocsTable } from "../../../components/docs/DocsSurface"
 <ComponentPreviewTabs
   align="start"
   component={<SimpleSearchDemo />}
-  source={<ComponentCode path="components/ui/simple-search.tsx" src="../../packages/ui/src/components/ui/simple-search.tsx" tokens />}
+  source={<ComponentCode path="components/ui/simple-search" src="../../packages/ui/src/components/ui/simple-search" tokens />}
 />
 
 ## Setup
 
 <ComponentSetup
-  path="components/ui/simple-search.tsx"
+  path="components/ui/simple-search"
   dependencies="framer-motion lucide-react tw-animate-css"
   tokens
   example={"import { SimpleSearch } from \"@/components/ui/simple-search\"\n\n<SimpleSearch\n  items={[{ title: \"Button\", href: \"/docs/button\", group: \"Components\" }]}\n  onSelect={(item) => router.push(item.href!)}\n/>"}

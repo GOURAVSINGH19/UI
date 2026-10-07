@@ -1,7 +1,7 @@
 "use client"
 
 import { useId, useState } from "react"
-import OrganicGrowth, { type Sprout } from "@workspace/ui/components/ui/organic-growth"
+import OrganicGrowth, { type Sprout } from "@workspace/ui/components/ui/organic-growth/index"
 
 // Short vines that fit around a small card.
 const SPROUTS: Sprout[] = [

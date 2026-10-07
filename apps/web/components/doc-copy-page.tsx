@@ -4,7 +4,7 @@
 import { Check, ChevronDown, Copy } from "lucide-react"
 
 import { useCopyToClipboard } from "@/hooks/useCopyClipboard"
-import { Button } from "@workspace/ui/components/ui/button"
+import { Button } from "@workspace/ui/components/ui/button/index"
 import {
     DropdownMenu,
     DropdownMenuContent,

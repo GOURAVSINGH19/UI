@@ -1,6 +1,6 @@
 "use client"
 
-import { TapeCover, TapeDeck, type TapeItem } from "@workspace/ui/components/ui/tape-deck"
+import { TapeCover, TapeDeck, type TapeItem } from "@workspace/ui/components/ui/tape-deck/index"
 
 // Sample tapes. Covers are plain CSS backgrounds, so no images are needed.
 const TAPES: TapeItem[] = [

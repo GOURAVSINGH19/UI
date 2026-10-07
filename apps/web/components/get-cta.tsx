@@ -1,4 +1,4 @@
-import { Button } from "@workspace/ui/components/ui/button";
+import { Button } from "@workspace/ui/components/ui/button/index";
 import { Icons } from "@workspace/ui/components/ui/icons";
 import { cn } from "@workspace/ui/lib/utils";
 import { ArrowRight, Layers, Megaphone, Sparkles, VerifiedIcon } from "lucide-react";

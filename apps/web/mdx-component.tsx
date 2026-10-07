@@ -12,7 +12,7 @@ import {
 } from "@workspace/ui/components/ui/accordion"
 import { Alert, AlertDescription, AlertTitle } from "@workspace/ui/components/ui/alert"
 import { AspectRatio } from "@workspace/ui/components/ui/aspect-ratio"
-import { Button } from "@workspace/ui/components/ui/button"
+import { Button } from "@workspace/ui/components/ui/button/index"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/ui/tabs"
 import { CopyButton } from "./components/copy-button"
 import { getIconForLanguageExtension } from "@workspace/ui/components/ui/icons"
@@ -136,7 +136,7 @@ export const mdxComponents = {
     <hr className="my-4 md:my-8" {...props} />
   ),
   table: ({ className, ...props }: React.ComponentProps<"table">) => (
-    <div className="my-6 w-full overflow-y-auto">
+    <div className="my-6 w-full overflow-x-auto">
       <table
         className={cn(
           "relative w-full overflow-hidden border-none text-sm",

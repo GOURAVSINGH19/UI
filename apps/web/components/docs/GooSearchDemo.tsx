@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { GooSearch, type GooSearchItem } from "@workspace/ui/components/ui/goo-search"
+import { GooSearch, type GooSearchItem } from "@workspace/ui/components/ui/goo-search/index"
 
 const ITEMS: GooSearchItem[] = [
     ...["Accordion", "Button", "Dialog", "Dropdown Menu", "Popover", "Tabs", "Toggle", "Tooltip"].map((title) => ({

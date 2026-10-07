@@ -1,0 +1,89 @@
+---
+title: Prompt Input
+description: A clean AI prompt box that grows open on focus, lit by a Beam border glow, with gooey menus, image attachments, voice input and run / stop.
+category: Inputs
+badge: New
+---
+
+import { PromptInputDemo } from "../../../components/docs/PromptInputDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  align="start"
+  component={<PromptInputDemo />}
+  source={<ComponentCode path="components/ui/prompt-input" src="../../packages/ui/src/components/ui/prompt-input" tokens />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/prompt-input"
+  dependencies="border-beam framer-motion lucide-react"
+  tokens
+  example={"import { PromptInput } from \"@/components/ui/prompt-input\"\n\n<PromptInput onSubmit={(value) => console.log(value)} />"}
+/>
+
+## Usage
+
+At rest the input is a small pill. Focusing it springs it open to full width and the
+toolbar blurs in: an attach menu, a model picker, the mic and the run button. It folds
+back once focus leaves and nothing is typed or attached.
+
+The attach and model menus drip out of their buttons as liquid blobs merged by an SVG
+goo filter.
+
+The glow around the box is [Beam](https://libraries.dev/beam) (`border-beam` on npm) by
+[Libraries.dev](https://github.com/Jakubantalik/Libraries.dev). It switches on when the box opens and
+speeds up while a prompt is running. Install it with `npm install border-beam`, and see its docs to
+tune the glow.
+
+```tsx
+import { PromptInput } from "@/components/ui/prompt-input"
+
+export function Chat() {
+  return (
+    <PromptInput
+      onSubmit={async (value, { attachments, model, signal }) => {
+        await fetch("/api/chat", {
+          method: "POST",
+          body: JSON.stringify({ value, model }),
+          signal,
+        })
+      }}
+    />
+  )
+}
+```
+
+Return a promise from `onSubmit` and the run button turns into a stop button until it
+settles. Pressing stop aborts `signal` and calls `onStop`.
+
+Images can be added from the menu, dropped onto the input, or pasted into the text.
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">onSubmit</code>, <code key="b">(value, context) =&gt; void | Promise</code>, "—", "Context has attachments, model and an AbortSignal."],
+    [<code key="a">onStop</code>, <code key="b">() =&gt; void</code>, "—", "Runs when the user presses stop."],
+    [<code key="a">placeholder</code>, <code key="b">string</code>, <code key="c">"Ask anything…"</code>, "Text shown when empty."],
+    [<code key="a">models</code>, <code key="b">PromptModel[]</code>, "3 samples", "Options for the model menu."],
+    [<code key="a">defaultModel</code>, <code key="b">string</code>, "first model", "Id of the model picked at start."],
+    [<code key="a">beam</code>, <code key="b">"colorful" | "mono" | "ocean" | "sunset" | …</code>, <code key="c">"colorful"</code>, "Beam colour variant, passed to border-beam."],
+    [<code key="a">theme</code>, <code key="b">"light" | "dark"</code>, "follows .dark", "Beam theme. By default it follows a .dark class on html."],
+    [<code key="a">collapsedWidth</code>, <code key="b">number</code>, <code key="c">300</code>, "Width at rest (px)."],
+    [<code key="a">expandedWidth</code>, <code key="b">number</code>, <code key="c">600</code>, "Width when open (px). Never wider than its container."],
+    [<code key="a">speech</code>, <code key="b">boolean</code>, <code key="c">true</code>, "Show the mic when the browser supports speech recognition."],
+    [<code key="a">label</code>, <code key="b">string</code>, <code key="c">"Prompt"</code>, "Accessible name for the text box."],
+  ]}
+/>
+
+## Accessibility
+
+- Enter runs, Shift + Enter adds a new line, Escape leaves the input
+- Menus open on Enter or Space, move with the arrow keys and close on Escape, returning focus to their button
+- Run, stop, mic and remove buttons all have labels; running and listening are announced
+- Respects `prefers-reduced-motion`: the beam stays off and springs become instant

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
-import { Button } from "@workspace/ui/components/ui/button"
+import { Button } from "@workspace/ui/components/ui/button/index"
 import { cn } from "@workspace/ui/lib/utils"
 
 type Variant = NonNullable<React.ComponentProps<typeof Button>["variant"]>
