@@ -93,8 +93,8 @@ export function BrowserSidebar({ categories }: { categories: ComponentCategory[]
                 </div>
             </nav>
 
-            <div className="grid-line border-t px-4 py-4">
-                <div className="rounded-xl border border-ui-border bg-ui-subtle p-3.5">
+            <div className="grid-line border-t px-1 py-4">
+                <div className="rounded-md border border-ui-border bg-ui-subtle p-3.5">
                     <p className="text-[13px] font-medium text-ui-heading">Free &amp; open source</p>
                     <p className="mt-1 text-xs leading-relaxed text-ui-caption">
                         <a href={site.license} target="_blank" rel="noreferrer" className="underline decoration-ui-border-strong underline-offset-2 hover:text-ui-heading">
@@ -111,10 +111,6 @@ export function BrowserSidebar({ categories }: { categories: ComponentCategory[]
                         </a>
                     </div>
                 </div>
-                <p className="mt-3 px-1 text-[11px] text-ui-hint">
-                    <span className="font-serif text-xs text-ui-caption">{site.name}</span>{" "}
-                    <span className="tabular-nums">v0.0.1</span> · by {site.author}
-                </p>
             </div>
         </aside>
     )

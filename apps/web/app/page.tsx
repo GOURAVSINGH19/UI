@@ -5,6 +5,8 @@ import { GridFrame, GridSection } from "@/components/grid/Grid";
 import { GithubCta } from "@/components/GithubCta";
 import { Resources } from "@/components/home/Resources";
 import { Faq } from "@/components/home/Faq";
+import { StatsCards } from "@/components/home/StatsCards";
+import { Suspense } from "react";
 
 // Shared padding for every home row: 16px on phones, the frame padding from md up.
 const row = "px-gutter md:px-[var(--ui-frame-pad)]";
@@ -16,6 +18,10 @@ const ComponentLibraryDemo = () => {
       <main>
         <GridSection className={`${row} pt-20 pb-14 md:pt-24`}>
           <Home />
+          {/* User activity from PostHog; renders nothing until stats are configured. */}
+          <Suspense>
+            <StatsCards className="mt-10" />
+          </Suspense>
         </GridSection>
         <GridSection className={`${row} py-12`}>
           <ComponentList />
