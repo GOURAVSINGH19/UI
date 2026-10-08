@@ -1,2 +1,3 @@
 export { PromptInput } from "./prompt-input"
-export type { PromptInputProps, PromptModel, PromptSubmitContext } from "./types"
+export { DEFAULT_TOOLS } from "./add-menu"
+export type { PromptInputProps, PromptModel, PromptSubmitContext, PromptTool } from "./types"

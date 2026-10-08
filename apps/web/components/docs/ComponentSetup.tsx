@@ -80,7 +80,8 @@ export async function ComponentCode({
     // Collect all files
     const files: Array<{ src: string; path: string }> = [
         ...(await expand(src, filePath)),
-        ...also,
+        // A component it builds on (a folder or a file) shows in the same Code tab.
+        ...(await Promise.all(also.map((extra) => expand(extra.src, extra.path)))).flat(),
         ...(utils ? [{ src: CN_SRC, path: "lib/utils.ts" }] : []),
         ...(tokens ? [{ src: TOKENS_SRC, path: "styles/tokens.css" }] : []),
     ]

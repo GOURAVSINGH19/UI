@@ -70,7 +70,7 @@ function useListbox(models: ModelOption[], selected: string | undefined, onPick:
 
 export function ModelSelector({
   models, value, defaultValue, onValueChange, thinking, onThinkingChange,
-  side = "bottom", align = "start", label = "Model", className,
+  side = "bottom", align = "start", label = "Model", className, triggerClassName,
 }: ModelSelectorProps) {
   const [inner, setInner] = useState(defaultValue ?? models[0]?.id)
   const selected = value ?? inner
@@ -101,6 +101,7 @@ export function ModelSelector({
         label={label}
         onClick={list.toggle}
         onOpen={list.show}
+        className={triggerClassName}
       />
 
       <AnimatePresence>

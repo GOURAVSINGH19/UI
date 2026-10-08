@@ -1,0 +1,91 @@
+---
+title: Particle Dissolve
+description: Break any element into drifting dust when it's deleted, sent or dismissed, with its real colours and a smooth fold.
+category: Effects
+badge: New
+---
+
+import { ParticleDissolveDemo } from "../../../components/docs/ParticleDissolveDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  align="start"
+  component={<ParticleDissolveDemo />}
+  source={<ComponentCode path="components/ui/particle-dissolve" src="../../packages/ui/src/components/ui/particle-dissolve" utils={false} />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/particle-dissolve"
+  utils={false}
+  example={"import { useDissolve } from \"@/components/ui/particle-dissolve\"\n\nconst { ref, dissolve } = useDissolve()\n\n<div ref={ref}>…</div>\n<button onClick={async () => { await dissolve(); removeItem() }}>Delete</button>"}
+/>
+
+No dependencies: it is plain React, Canvas and the Web Animations API.
+
+## Usage
+
+Attach `ref` to the element and call `dissolve()`. The element is copied into pixels, each
+pixel becomes a particle in its own colour, and the dust sweeps away on the wind. The promise
+resolves once the dust is gone, which is when you remove the item from your data.
+
+```tsx
+import { useDissolve } from "@/components/ui/particle-dissolve"
+
+function Message({ message, onDelete }) {
+  const { ref, dissolve } = useDissolve<HTMLDivElement>({ from: "left" })
+
+  return (
+    <div ref={ref}>
+      <p>{message.text}</p>
+      <button
+        onClick={async () => {
+          await dissolve()
+          onDelete(message.id)
+        }}
+      >
+        Delete
+      </button>
+    </div>
+  )
+}
+```
+
+Outside React, call `dissolve(element, options)` directly. `restore(element)` brings a dissolved
+element back, for an undo.
+
+Space between items should come from margins, not a flex `gap`, so the fold animates smoothly.
+Add `data-dissolve-ignore` to anything you don't want in the dust, such as the delete button.
+
+### How it stays fast
+
+- One canvas for the whole page, and its loop only runs while dust is moving
+- Particles live in typed arrays, not one object each, and finished ones are swapped out in place
+- Large elements are sampled more coarsely so they never pass `maxParticles`
+- Colours are grouped so the canvas rarely has to change paint
+
+## Options
+
+<DocsTable
+  headers={["Option", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">from</code>, <code key="b">"left" | "right" | "top" | "bottom" | "center"</code>, <code key="c">"left"</code>, "Where the element starts breaking up."],
+    [<code key="a">wind</code>, <code key="b">[x, y]</code>, <code key="c">WIND.rise</code>, "Push on every particle. Presets: WIND.rise, fall, left, right."],
+    [<code key="a">turbulence</code>, <code key="b">number</code>, <code key="c">0.012</code>, "How much particles wobble off the wind."],
+    [<code key="a">particleSize</code>, <code key="b">number</code>, <code key="c">2</code>, "Smallest particle in px. Bigger is chunkier and cheaper."],
+    [<code key="a">maxParticles</code>, <code key="b">number</code>, <code key="c">8000</code>, "Upper bound per element."],
+    [<code key="a">sweep</code>, <code key="b">number</code>, <code key="c">520</code>, "Ms for the break-up to cross the element."],
+    [<code key="a">lifetime</code>, <code key="b">number</code>, <code key="c">1100</code>, "Ms one particle lives after it lets go."],
+    [<code key="a">collapse</code>, <code key="b">boolean</code>, <code key="c">true</code>, "Fold the element's space away so neighbours slide in."],
+  ]}
+/>
+
+## Accessibility
+
+- The dust canvas is decorative and hidden from screen readers
+- The element is made `inert` while it dissolves, so it can't be focused or clicked twice
+- With `prefers-reduced-motion`, the element simply fades out and folds
+- Announce the change yourself (for example a "Message deleted" toast), since the effect is visual only

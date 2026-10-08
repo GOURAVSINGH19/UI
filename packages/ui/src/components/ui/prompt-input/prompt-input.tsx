@@ -7,6 +7,7 @@ import { type RefObject, useRef, useState } from "react"
 import { cn } from "@workspace/ui/lib/utils"
 import { AttachmentStrip, DropOverlay, useFilePickers, useAttachments } from "./attachments"
 import { useAutoHeight, useDarkClass, useRun, useVoice } from "./hooks"
+import { DEFAULT_TOOLS } from "./add-menu"
 import { Toolbar } from "./toolbar"
 import { DEFAULT_MODELS, RADIUS, WIDTH_SPRING, type PromptInputProps } from "./types"
 
@@ -61,11 +62,12 @@ export function PromptTextarea({
 }
 
 export function PromptInput({
-  onSubmit, onStop, placeholder = "Ask anything…", models = DEFAULT_MODELS, defaultModel,
+  onSubmit, onStop, placeholder = "Ask anything…", models = DEFAULT_MODELS, defaultModel, tools = DEFAULT_TOOLS,
   beam = "colorful", theme, collapsedWidth = 300, expandedWidth = 600, speech = true, label = "Prompt", className,
 }: PromptInputProps) {
   const [value, setValue] = useState("")
   const [model, setModel] = useState(defaultModel ?? models[0]?.id ?? "")
+  const [tool, setTool] = useState<string | null>(null)
   const [focused, setFocused] = useState(false)
   const [dragging, setDragging] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
@@ -89,7 +91,7 @@ export function PromptInput({
     const text = value.trim()
     const attachments = files.take()
     setValue("")
-    run.start((signal) => onSubmit?.(text, { attachments, model, signal }))
+    run.start((signal) => onSubmit?.(text, { attachments, model, tool, signal }))
   }
 
   const toggleVoice = () => {
@@ -145,7 +147,7 @@ export function PromptInput({
             onChange={setValue}
             onSubmit={submit}
             onImages={files.add}
-            placeholder={voice.listening ? "Listening…" : run.running ? "Thinking…" : placeholder}
+            placeholder={voice.listening ? "Listening…" : run.running ? "Thinking…" : (tools.find((t) => t.id === tool)?.placeholder ?? placeholder)}
             label={label}
           />
           <Toolbar
@@ -153,6 +155,12 @@ export function PromptInput({
             models={models}
             model={model}
             onModel={setModel}
+            tools={tools}
+            tool={tool}
+            onTool={(id) => {
+              setTool(id)
+              textRef.current?.focus()
+            }}
             onAttach={pickers.open}
             voice={voice.supported ? { listening: voice.listening, onToggle: toggleVoice } : undefined}
             running={run.running}

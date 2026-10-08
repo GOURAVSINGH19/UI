@@ -30,7 +30,7 @@ export function Glyph({ model, size = 20 }: { model: ModelOption; size?: number 
 
 /** The pill button. Its label blurs over to the new model and the pill resizes to fit. */
 export function ModelTrigger({
-  triggerRef, current, open, thinking, fromTop, listId, label, onClick, onOpen,
+  triggerRef, current, open, thinking, fromTop, listId, label, onClick, onOpen, className,
 }: {
   triggerRef: RefObject<HTMLButtonElement | null>
   current: ModelOption | undefined
@@ -41,6 +41,7 @@ export function ModelTrigger({
   label: string
   onClick: () => void
   onOpen: () => void
+  className?: string
 }) {
   const reduce = useReducedMotion()
 
@@ -63,7 +64,8 @@ export function ModelTrigger({
       transition={SPRING}
       className={cn(
         "flex h-9 cursor-pointer items-center gap-2 rounded-full border border-ui-border bg-ui-bg pr-2.5 pl-2 text-sm font-medium text-ui-heading shadow-[0_1px_2px_rgb(0_0_0/0.04)] outline-none transition-colors hover:bg-ui-subtle focus-visible:ring-2 focus-visible:ring-ui-accent/50",
-        open && "bg-ui-subtle"
+        open && "bg-ui-subtle",
+        className
       )}
     >
       <AnimatePresence mode="popLayout" initial={false}>

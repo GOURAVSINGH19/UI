@@ -19,9 +19,9 @@ export function PromptInputDemo() {
         <div className="flex h-[420px] w-full flex-col items-center gap-4 pt-16">
             <PromptInput
                 expandedWidth={560}
-                onSubmit={async (value, { attachments, model, signal }) => {
+                onSubmit={async (value, { attachments, model, tool, signal }) => {
                     const files = attachments.length ? ` with ${attachments.length} file${attachments.length > 1 ? "s" : ""}` : ""
-                    setStatus(`Running “${value || "…"}”${files} on ${model}`)
+                    setStatus(`Running “${value || "…"}”${files} on ${model}${tool ? ` with ${tool}` : ""}`)
                     await wait(3200, signal)
                     setStatus(signal.aborted ? "Stopped." : "Done. Ask something else.")
                 }}

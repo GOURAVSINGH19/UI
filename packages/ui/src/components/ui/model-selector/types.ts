@@ -24,6 +24,8 @@ export type ModelSelectorProps = {
   align?: "start" | "end"
   label?: string
   className?: string
+  /** Extra classes for the pill, e.g. to size it for a toolbar. */
+  triggerClassName?: string
 }
 
 export const SPRING = { type: "spring", stiffness: 520, damping: 34, mass: 0.7 } as const

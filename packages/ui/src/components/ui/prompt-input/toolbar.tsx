@@ -1,10 +1,11 @@
 "use client"
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { ArrowUp, Mic, Square, Camera, ChevronDown, ImagePlus, Paperclip, Plus } from "lucide-react"
+import { ArrowUp, Mic, Square } from "lucide-react"
 import { cn } from "@workspace/ui/lib/utils"
-import { GooMenu } from "./goo-menu"
-import { BLUR_IN, BLUR_SHOWN, POP_SPRING, type PromptModel } from "./types"
+import { ModelSelector } from "../model-selector/model-selector"
+import { AddMenu, ToolChip } from "./add-menu"
+import { BLUR_IN, BLUR_SHOWN, POP_SPRING, type PromptModel, type PromptTool } from "./types"
 
 const enter = { variants: { hidden: BLUR_IN, shown: BLUR_SHOWN } }
 
@@ -89,24 +90,20 @@ export type ToolbarProps = {
   models: PromptModel[]
   model: string
   onModel: (id: string) => void
-  onAttach: (kind: "image" | "camera" | "file") => void
+  tools: PromptTool[]
+  tool: string | null
+  onTool: (id: string | null) => void
+  onAttach: (kind: "camera" | "file") => void
   voice?: { listening: boolean; onToggle: () => void }
   running: boolean
   canRun: boolean
   onRun: () => void
 }
 
-const ATTACH_ITEMS = [
-  { id: "image", label: "Upload images", icon: <ImagePlus className="size-4" /> },
-  { id: "camera", label: "Take a photo", icon: <Camera className="size-4" /> },
-  { id: "file", label: "Attach a file", icon: <Paperclip className="size-4" /> },
-]
-
-/** The row under the text: attach + model on the left, mic + run on the right. Items blur in one by one. */
-export function Toolbar({ show, models, model, onModel, onAttach, voice, running, canRun, onRun }: ToolbarProps) {
+/** The row under the text: + menu, tool chip and model on the left, mic + run on the right. Items blur in one by one. */
+export function Toolbar({ show, models, model, onModel, tools, tool, onTool, onAttach, voice, running, canRun, onRun }: ToolbarProps) {
   const reduce = useReducedMotion()
   const spring = reduce ? { duration: 0 } : POP_SPRING
-  const active = models.find((entry) => entry.id === model) ?? models[0]
   const item = { variants: { hidden: BLUR_IN, shown: BLUR_SHOWN }, transition: spring }
 
   return (
@@ -127,27 +124,16 @@ export function Toolbar({ show, models, model, onModel, onAttach, voice, running
             variants={{ shown: { transition: { staggerChildren: reduce ? 0 : 0.05 } } }}
           >
             <motion.div {...item}>
-              <GooMenu
-                label="Add attachment"
-                triggerClassName="w-8"
-                trigger={<Plus className="size-4" aria-hidden />}
-                items={ATTACH_ITEMS}
-                onSelect={(id) => onAttach(id as "image" | "camera" | "file")}
-              />
+              <AddMenu tools={tools} tool={tool} onTool={onTool} onAttach={onAttach} />
             </motion.div>
+            <ToolChip tool={tools.find((t) => t.id === tool)} onClear={() => onTool(null)} />
             <motion.div {...item}>
-              <GooMenu
+              <ModelSelector
+                models={models}
+                value={model}
+                onValueChange={onModel}
                 label="Choose model"
-                menuWidth={208}
-                triggerClassName="px-3 text-[13px]"
-                trigger={
-                  <>
-                    {active?.label}
-                    <ChevronDown className="size-3.5 text-ui-caption" aria-hidden />
-                  </>
-                }
-                items={models.map((entry) => ({ ...entry, selected: entry.id === model }))}
-                onSelect={onModel}
+                triggerClassName="h-8 border-transparent bg-ui-muted pl-1.5 text-[13px] shadow-none hover:bg-ui-emphasis"
               />
             </motion.div>
 

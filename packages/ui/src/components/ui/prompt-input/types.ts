@@ -1,8 +1,16 @@
-export type PromptModel = { id: string; label: string; hint?: string }
+import type { ModelOption } from "../model-selector/types"
+
+/** A model in the picker: the same shape Model Selector uses (name, description, badge, color). */
+export type PromptModel = ModelOption
+
+/** A mode the prompt runs in, picked from the + menu (like ChatGPT's tools). */
+export type PromptTool = { id: string; label: string; icon: React.ReactNode; placeholder?: string }
 
 export type PromptSubmitContext = {
   attachments: File[]
   model: string
+  /** Id of the tool picked in the + menu, or null. */
+  tool: string | null
   signal: AbortSignal
 }
 
@@ -13,6 +21,8 @@ export type PromptInputProps = {
   onStop?: () => void
   placeholder?: string
   models?: PromptModel[]
+  /** Tools in the + menu. Defaults to Create image, Deep research, Web search and Think longer. */
+  tools?: PromptTool[]
   defaultModel?: string
   /** Beam colours, from border-beam. */
   beam?: "colorful" | "mono" | "ocean" | "sunset" | "forest" | "candy" | "ice" | "gold"
@@ -29,9 +39,9 @@ export type PromptInputProps = {
 export type Attachment = { id: string; file: File; url?: string }
 
 export const DEFAULT_MODELS: PromptModel[] = [
-  { id: "kinetik-1.5", label: "Kinetik 1.5", hint: "Balanced" },
-  { id: "kinetik-fast", label: "Kinetik Fast", hint: "Quick answers" },
-  { id: "kinetik-pro", label: "Kinetik Pro", hint: "Deep reasoning" },
+  { id: "kinetik-2", name: "Kinetik 2", description: "Our smartest model for everyday work", badge: "New", color: "#7c5cff" },
+  { id: "kinetik-pro", name: "Kinetik Pro", description: "Deep reasoning for complex problems", badge: "Pro", color: "#f97316" },
+  { id: "kinetik-fast", name: "Kinetik Fast", description: "Quick answers, lower cost", color: "#06b6d4" },
 ]
 
 export const RADIUS = 24

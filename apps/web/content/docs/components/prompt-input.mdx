@@ -1,6 +1,6 @@
 ---
 title: Prompt Input
-description: A clean AI prompt box that grows open on focus, lit by a Beam border glow, with gooey menus, image attachments, voice input and run / stop.
+description: A clean AI prompt box that grows open on focus, lit by a Beam border glow, with a ChatGPT-style + menu, model picker, attachments, voice input and run / stop.
 category: Inputs
 ---
 
@@ -12,7 +12,7 @@ import { DocsTable } from "../../../components/docs/DocsSurface"
 <ComponentPreviewTabs
   align="start"
   component={<PromptInputDemo />}
-  source={<ComponentCode path="components/ui/prompt-input" src="../../packages/ui/src/components/ui/prompt-input" tokens />}
+  source={<ComponentCode path="components/ui/prompt-input" src="../../packages/ui/src/components/ui/prompt-input" tokens also={[{ src: "../../packages/ui/src/components/ui/model-selector", path: "components/ui/model-selector" }]} />}
 />
 
 ## Setup
@@ -30,8 +30,12 @@ At rest the input is a small pill. Focusing it springs it open to full width and
 toolbar blurs in: an attach menu, a model picker, the mic and the run button. It folds
 back once focus leaves and nothing is typed or attached.
 
-The attach and model menus drip out of their buttons as liquid blobs merged by an SVG
-goo filter.
+The **+** button opens a menu like ChatGPT's: add photos and files or take a photo, then pick a
+tool (Create image, Deep research, Web search, Think longer). A picked tool shows as a blue chip
+beside **+**, changes the placeholder, and arrives in `onSubmit` as `tool`; click the chip to turn
+it off. Pass your own list with `tools`. The model picker is the [Model Selector](/docs/components/model-selector) component, so it keeps
+the same badges, colours, sliding highlight and keyboard support. Copy its
+`components/ui/model-selector/` folder too; both folders are in the Code tab.
 
 The glow around the box is [Beam](https://libraries.dev/beam) (`border-beam` on npm) by
 [Libraries.dev](https://github.com/Jakubantalik/Libraries.dev). It switches on when the box opens and
@@ -44,10 +48,10 @@ import { PromptInput } from "@/components/ui/prompt-input"
 export function Chat() {
   return (
     <PromptInput
-      onSubmit={async (value, { attachments, model, signal }) => {
+      onSubmit={async (value, { attachments, model, tool, signal }) => {
         await fetch("/api/chat", {
           method: "POST",
-          body: JSON.stringify({ value, model }),
+          body: JSON.stringify({ value, model, tool }),
           signal,
         })
       }}
@@ -66,10 +70,11 @@ Images can be added from the menu, dropped onto the input, or pasted into the te
 <DocsTable
   headers={["Prop", "Type", "Default", "Notes"]}
   rows={[
-    [<code key="a">onSubmit</code>, <code key="b">(value, context) =&gt; void | Promise</code>, "—", "Context has attachments, model and an AbortSignal."],
+    [<code key="a">onSubmit</code>, <code key="b">(value, context) =&gt; void | Promise</code>, "—", "Context has attachments, model, tool and an AbortSignal."],
     [<code key="a">onStop</code>, <code key="b">() =&gt; void</code>, "—", "Runs when the user presses stop."],
     [<code key="a">placeholder</code>, <code key="b">string</code>, <code key="c">"Ask anything…"</code>, "Text shown when empty."],
-    [<code key="a">models</code>, <code key="b">PromptModel[]</code>, "3 samples", "Options for the model menu."],
+    [<code key="a">models</code>, <code key="b">ModelOption[]</code>, "3 samples", "Same shape as Model Selector: id, name, description, badge, color."],
+    [<code key="a">tools</code>, <code key="b">PromptTool[]</code>, "4 tools", "The + menu's tools: id, label, icon, placeholder."],
     [<code key="a">defaultModel</code>, <code key="b">string</code>, "first model", "Id of the model picked at start."],
     [<code key="a">beam</code>, <code key="b">"colorful" | "mono" | "ocean" | "sunset" | …</code>, <code key="c">"colorful"</code>, "Beam colour variant, passed to border-beam."],
     [<code key="a">theme</code>, <code key="b">"light" | "dark"</code>, "follows .dark", "Beam theme. By default it follows a .dark class on html."],
