@@ -10,26 +10,26 @@ export type Trend = number | null
 
 export type SiteStats =
   | {
-      available: true
-      since: string
-      pageViews: number
-      /** Running page-view total at even steps from launch to today, oldest first. */
-      pageViewsGrowth: { date: string; total: number }[]
-      /** Last 30 days vs the 30 before. */
-      pageViewsTrend: Trend
-      visitors: number
-      /** Unique visitors in each of the last 7 rolling weeks, oldest first; the last is the past 7 days. */
-      weeklyVisitors: { start: string; end: string; visitors: number }[]
-      /** Past 7 days vs the 7 before. */
-      visitorsTrend: Trend
-      avgSessionSeconds: number
-      /** Last 30 days vs the 30 before. */
-      avgSessionTrend: Trend
-    }
+    available: true
+    since: string
+    pageViews: number
+    /** Running page-view total at even steps from launch to today, oldest first. */
+    pageViewsGrowth: { date: string; total: number }[]
+    /** Last 30 days vs the 30 before. */
+    pageViewsTrend: Trend
+    visitors: number
+    /** Unique visitors in each of the last 7 rolling weeks, oldest first; the last is the past 7 days. */
+    weeklyVisitors: { start: string; end: string; visitors: number }[]
+    /** Past 7 days vs the 7 before. */
+    visitorsTrend: Trend
+    avgSessionSeconds: number
+    /** Last 30 days vs the 30 before. */
+    avgSessionTrend: Trend
+  }
   | { available: false }
 
 // The query API lives on the app host (us.posthog.com), not the ingest host (us.i.posthog.com).
-const host = () => (process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.posthog.com").replace(".i.posthog.com", ".posthog.com")
+const host = () => (process.env.POSTHOG_HOST ?? "https://us.posthog.com").replace(".i.posthog.com", ".posthog.com")
 
 const PAGEVIEWS = `event = '$pageview' AND timestamp >= now() - INTERVAL 365 DAY`
 const QUERIES = [
