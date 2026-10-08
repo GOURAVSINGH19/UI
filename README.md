@@ -147,9 +147,9 @@ The site runs without any. Put these in `apps/web/.env.local` if you need them:
 
 | Variable | Used for |
 | --- | --- |
-| `NEXT_PUBLIC_APP_URL` | The site's public URL, used for absolute links and metadata |
-| `NEXT_PUBLIC_POSTHOG_KEY` | PostHog project key (analytics are off without it) |
-| `NEXT_PUBLIC_POSTHOG_HOST` | PostHog host |
+| `APP_URL` | The site's public URL, used for absolute links and metadata |
+| `POSTHOG_KEY` | PostHog project key (analytics are off without it) |
+| `POSTHOG_HOST` | PostHog host |
 | `CODE_THEME` | Shiki theme for code blocks |
 
 ---
