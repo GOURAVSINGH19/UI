@@ -41,7 +41,6 @@ export const metadata: Metadata = {
   category: "technology",
 }
 
-// Who made this, the site, and the library itself: read by search engines, answer engines and LLM crawlers.
 const personLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -102,7 +101,6 @@ export default function RootLayout({
 
 }>) {
   return (
-    // Font variables live on <html> so the --ui-font-* tokens on :root can resolve them.
     <html
       lang="en"
       suppressHydrationWarning

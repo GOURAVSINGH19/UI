@@ -19,7 +19,7 @@ const COLORS: Array<{ name: string; value?: string }> = [
     { name: "Rose", value: "#fb7185" },
 ]
 
-function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+export function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
     return (
         <button
             type="button"

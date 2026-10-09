@@ -1,10 +1,14 @@
-/** @type {import('next').NextConfig} */
+import { fileURLToPath } from "node:url";
 import { createMDX } from "fumadocs-mdx/next";
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   pageExtensions: ["ts", "tsx", "mdx"],
-  experimental: {
-    cacheComponents: true,
+  cacheComponents: true,
+  // Pin the monorepo root so a stray lockfile higher up isn't picked instead.
+  turbopack: {
+    root: fileURLToPath(new URL("../..", import.meta.url)),
   },
   // Proxy PostHog through our own domain. Swap "us" for "eu" if the project lives in the EU cloud.
   async rewrites() {

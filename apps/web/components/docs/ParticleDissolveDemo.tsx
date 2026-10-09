@@ -89,7 +89,7 @@ export function ParticleDissolveDemo() {
     const [wind, setWind] = useState<keyof typeof WINDS>("rise")
     const [chunky, setChunky] = useState(false)
     const runs = useRef(new Map<number, () => Promise<void>>())
-    const file = useDissolve<HTMLDivElement>()
+    const { ref: fileRef, dissolve: dissolveFile } = useDissolve<HTMLDivElement>()
 
     const options: DissolveOptions = { from, wind: [...WINDS[wind]], particleSize: chunky ? 4 : 2 }
     const gone = (id: number) => setMessages((list) => list.filter((m) => m.id !== id))
@@ -122,7 +122,7 @@ export function ParticleDissolveDemo() {
                 {messages.length === 0 && <p className="py-6 text-center text-sm text-ui-caption">Chat cleared.</p>}
 
                 {fileShown && (
-                    <div ref={file.ref} className="mt-1.5 flex max-w-xs items-center gap-3 rounded-xl border border-ui-border bg-ui-bg p-2.5 pr-2">
+                    <div ref={fileRef} className="mt-1.5 flex max-w-xs items-center gap-3 rounded-xl border border-ui-border bg-ui-bg p-2.5 pr-2">
                         <span className="grid size-9 place-items-center rounded-lg bg-orange-500 text-[10px] font-bold text-white">PDF</span>
                         <span className="min-w-0 flex-1">
                             <span className="block truncate text-sm font-medium text-ui-heading">Q3-report.pdf</span>
@@ -133,7 +133,7 @@ export function ParticleDissolveDemo() {
                             aria-label="Remove file"
                             data-dissolve-ignore
                             onClick={async () => {
-                                await file.dissolve(options)
+                                await dissolveFile(options)
                                 setFileShown(false)
                             }}
                             className="grid size-7 cursor-pointer place-items-center rounded-md text-ui-hint transition hover:bg-ui-muted hover:text-ui-heading"

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { usePathname } from "next/navigation"
 import { Folder, FolderOpen, Github, LayoutGrid, Mail } from "lucide-react"
 import { cn } from "@workspace/ui/lib/utils"
@@ -17,11 +17,12 @@ function useOpenCategory(categories: ComponentCategory[], activeCategory: string
         return activeCategory ?? categories[0]?.name ?? null
     })
 
-    useEffect(() => {
-        if (activeCategory) {
-            setOpenCategory(activeCategory)
-        }
-    }, [activeCategory])
+    // Open the active category whenever navigation changes it.
+    const [prevActive, setPrevActive] = useState(activeCategory)
+    if (activeCategory !== prevActive) {
+        setPrevActive(activeCategory)
+        if (activeCategory) setOpenCategory(activeCategory)
+    }
 
     const toggleOpen = (name: string, open: boolean) => {
         if (open) {
@@ -100,7 +101,7 @@ export function BrowserSidebar({ categories }: { categories: ComponentCategory[]
                         <a href={site.license} target="_blank" rel="noreferrer" className="underline decoration-ui-border-strong underline-offset-2 hover:text-ui-heading">
                             MIT licensed
                         </a>
-                        . Ship it in any project; credit is optional.
+                        . Ship it in any project; don&apos;t forget to give credit.
                     </p>
                     <div className="mt-3 grid grid-cols-2 gap-2">
                         <a href={site.repo} target="_blank" rel="noreferrer" data-press className="btn btn-secondary h-8 text-xs">

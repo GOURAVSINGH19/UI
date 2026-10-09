@@ -1,0 +1,91 @@
+---
+title: Click Spark
+description: Short strokes burst out from wherever you click, then shrink and fade away.
+category: Effects
+---
+
+import { ClickSparkDemo } from "../../../components/docs/ClickSparkDemo"
+import { DocsTable } from "../../../components/docs/DocsSurface"
+
+## Preview
+
+<ComponentPreviewTabs
+  component={<ClickSparkDemo />}
+  source={<ComponentCode path="components/ui/click-spark.tsx" src="../../packages/ui/src/components/ui/click-spark.tsx" />}
+/>
+
+## Setup
+
+<ComponentSetup
+  path="components/ui/click-spark.tsx"
+  example={"import { ClickSpark } from \"@/components/ui/click-spark\"\n\n<ClickSpark>\n  <main>…</main>\n</ClickSpark>"}
+/>
+
+No dependencies: it is plain React and Canvas.
+
+## Usage
+
+Wrap any area. Every click inside it sends sparks out from the cursor.
+
+```tsx
+import { ClickSpark } from "@/components/ui/click-spark"
+
+export function Page() {
+  return (
+    <ClickSpark sparkCount={10} sparkRadius={24}>
+      <main>…</main>
+    </ClickSpark>
+  )
+}
+```
+
+The sparks use the wrapper's text colour by default, so they follow light and dark mode.
+Pass `sparkColor` to pin a colour.
+
+### Bursts and triggers
+
+Pick a shape with `burst`: straight `lines`, swirling `curves`, `dots`, a single expanding
+`ring`, or spinning `stars`. Set `trigger="dblclick"` to fire only on a double click, so normal
+clicks stay quiet.
+
+```tsx
+<ClickSpark burst="curves">…</ClickSpark>
+
+<ClickSpark burst="stars" trigger="dblclick">…</ClickSpark>
+```
+
+### Sound
+
+Set `sound` to play a soft synthesised tick on every click, or pass a URL to use your own file.
+Files are fetched once and decoded, so quick clicks overlap without lag.
+
+```tsx
+<ClickSpark sound volume={0.3}>…</ClickSpark>
+
+<ClickSpark sound="/sounds/pop.mp3">…</ClickSpark>
+```
+
+## Props
+
+<DocsTable
+  headers={["Prop", "Type", "Default", "Notes"]}
+  rows={[
+    [<code key="a">burst</code>, <code key="b">"lines" | "curves" | "dots" | "ring" | "stars"</code>, <code key="c">"lines"</code>, "Shape of the burst. A ring draws one circle per click."],
+    [<code key="a">trigger</code>, <code key="b">"click" | "dblclick"</code>, <code key="c">"click"</code>, "Fire on every click or only on a double click."],
+    [<code key="a">sparkColor</code>, <code key="b">string</code>, "Text colour", "Stroke colour."],
+    [<code key="a">sparkSize</code>, <code key="b">number</code>, <code key="c">10</code>, "Length of each stroke at the start, in px."],
+    [<code key="a">sparkRadius</code>, <code key="b">number</code>, <code key="c">18</code>, "How far the strokes travel, in px."],
+    [<code key="a">sparkCount</code>, <code key="b">number</code>, <code key="c">8</code>, "Strokes per click."],
+    [<code key="a">duration</code>, <code key="b">number</code>, <code key="c">400</code>, "Ms for one burst."],
+    [<code key="a">lineWidth</code>, <code key="b">number</code>, <code key="c">2</code>, "Stroke width in px."],
+    [<code key="a">sound</code>, <code key="b">boolean | string</code>, <code key="c">false</code>, "true for a built-in tick, or a URL to an audio file."],
+    [<code key="a">volume</code>, <code key="b">number</code>, <code key="c">0.4</code>, "Sound volume, 0 to 1."],
+    [<code key="a">className</code>, <code key="b">string</code>, "—", "Applied to the wrapper."],
+  ]}
+/>
+
+## Accessibility
+
+- The canvas is decorative, hidden from screen readers and ignores pointer events
+- Clicks pass through to the children as normal
+- Sound is off by default, since unexpected audio can be disruptive

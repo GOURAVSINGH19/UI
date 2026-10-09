@@ -23,6 +23,20 @@
         "3001"
       ],
       "port": 3001
+    },
+    {
+      "name": "spark-preview",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4321",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "C:/Users/GOURAV~1/AppData/Local/Temp/claude/C--Users-Gourav-singh-Desktop-UI-library-UI/4a63de34-657c-4913-884a-4b56e809198d/scratchpad"
+      ],
+      "port": 4321
     }
   ]
 }
