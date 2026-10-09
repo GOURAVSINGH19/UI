@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import { getComponents } from "@/lib/components-index";
 import { LenisProvider } from "./leisprovider/lenisProvider";
 import { SoundProvider } from "@/components/SoundProvider";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { absoluteUrl, site, siteUrl, socials } from "@/lib/site";
 import { JsonLd } from "@/components/json-ld";
 
@@ -39,6 +39,14 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
   category: "technology",
+}
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 }
 
 const personLd = {

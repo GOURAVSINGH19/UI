@@ -95,14 +95,16 @@ export function useSimpleSearch({
     return () => window.removeEventListener("keydown", onKey)
   }, [hotkey])
 
-  // Focus the input and lock page scroll while open.
+  // Focus the input and lock page scroll while open. The lock goes on <html>, not <body>: an
+  // overflowing body becomes its own scroll container and sticky elements jump out of place.
   useEffect(() => {
     if (!open) return
-    inputRef.current?.focus()
-    const { overflow } = document.body.style
-    document.body.style.overflow = "hidden"
+    inputRef.current?.focus({ preventScroll: true })
+    const root = document.documentElement
+    const { overflow } = root.style
+    root.style.overflow = "hidden"
     return () => {
-      document.body.style.overflow = overflow
+      root.style.overflow = overflow
     }
   }, [open])
 
