@@ -1,1 +1,3 @@
 .env*
+# local likes counter (dev fallback storage)
+/.data/

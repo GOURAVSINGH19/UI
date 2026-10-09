@@ -42,7 +42,7 @@ const Home = () => {
 
             <motion.p
                 variants={fadeUp}
-                className='mt-heading-text text-base tracking-tight text-ui-body'
+                className='mt-1 text-base tracking-tight text-ui-body'
             >
                 Kinetik is a set of free, open source React components built with
                 Tailwind CSS and Motion. Copy them into your project, make them

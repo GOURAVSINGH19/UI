@@ -1,11 +1,49 @@
 // Site-wide content: links, socials, credits and FAQ. Edit here, not in the components.
 
+// Canonical origin for SEO (sitemap, canonical links, Open Graph). Set PUBLIC_SITE_URL in production.
+function resolveSiteUrl() {
+  const candidates = [
+    process.env.PUBLIC_SITE_URL,
+    process.env.PUBLIC_SITE_URL,
+    process.env.APP_URL,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`,
+  ]
+  for (const value of candidates) {
+    try {
+      if (value?.trim()) return new URL(value.trim()).origin
+    } catch { }
+  }
+  return "http://localhost:3000"
+}
+
+export const siteUrl = resolveSiteUrl()
+
+export const absoluteUrl = (path = "/") => `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`
+
 export const site = {
   name: "Kinetik",
   author: "Gourav Singh",
   repo: "https://github.com/GOURAVSINGH19/UI",
   license: "https://github.com/GOURAVSINGH19/UI/blob/main/LICENSE",
   email: "gouravsingh4495@outlook.com",
+  title: "Kinetik — animated React components",
+  description: "Free, open source React components built with Tailwind CSS and Motion. Copy, paste, make them yours.",
+  locale: "en_US",
+  twitter: "@GouravSing85027",
+  keywords: [
+    "Kinetik",
+    "React components",
+    "animated components",
+    "UI library",
+    "Tailwind CSS",
+    "Motion",
+    "Framer Motion",
+    "Next.js",
+    "TypeScript",
+    "copy paste components",
+    "open source",
+    "design engineering",
+  ],
 }
 
 export const socials = [
@@ -24,7 +62,6 @@ export const resources = [
   { name: "GSAP", use: "Scroll-driven templates", category: "Animation", href: "https://gsap.com" },
   { name: "Lenis", use: "Smooth scrolling", category: "Animation", href: "https://lenis.darkroom.engineering" },
   { name: "Lucide", use: "Icons", category: "Assets", href: "https://lucide.dev" },
-  { name: "Turborepo", use: "Monorepo builds", category: "Tooling", href: "https://turbo.build" },
 ]
 
 export const faqs = [

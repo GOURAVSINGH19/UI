@@ -18,7 +18,7 @@ const ComponentList = () => {
     return (
         <div>
             <h2 className="font-serif text-3xl text-ui-heading">Components</h2>
-            <p className="mt-heading-text text-base tracking-tight text-ui-body">
+            <p className="text-ui-caption tracking-tight text-ui-body">
                 Every component ships with a live preview, the source, and the
                 variants you need. Pick one and drop it in.
             </p>
@@ -30,7 +30,7 @@ const ComponentList = () => {
                         <li key={item.href}>
                             <Link
                                 href={item.href}
-                                className="group block overflow-hidden rounded-xl border border-ui-border bg-ui-bg transition-[border-color,box-shadow] duration-200 hover:border-ui-border-strong hover:shadow-[0_8px_24px_-12px_rgb(0_0_0/0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ui-border-strong"
+                                className="group block overflow-hidden rounded-xl border border-ui-border bg-ui-bg transition-[border-color,box-shadow] duration-200 hover:border-ui-border-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ui-border-strong"
                             >
                                 <div className="relative aspect-[16/10] overflow-hidden border-b border-ui-border-subtle bg-ui-subtle">
                                     {(["light", "dark"] as const).map((theme) => (

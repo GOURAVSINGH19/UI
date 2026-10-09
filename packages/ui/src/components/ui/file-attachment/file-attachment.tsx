@@ -5,7 +5,6 @@ import { cn } from "@workspace/ui/lib/utils"
 import { type Attachment, type Handlers, POP } from "./progress-ring"
 import { FileChip, ImageTile } from "./tiles"
 
-/* ------------------------------------------------------------------ */
 
 export function AttachmentPreview({ file, ...handlers }: { file: Attachment } & Handlers) {
   const isImage = Boolean(file.url) && (file.type?.startsWith("image/") ?? true)

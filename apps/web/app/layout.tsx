@@ -6,11 +6,76 @@ import { getComponents } from "@/lib/components-index";
 import { LenisProvider } from "./leisprovider/lenisProvider";
 import { SoundProvider } from "@/components/SoundProvider";
 import type { Metadata } from "next";
-import { site } from "@/lib/site";
+import { absoluteUrl, site, siteUrl, socials } from "@/lib/site";
+import { JsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
-  title: { default: `${site.name} — animated React components`, template: `%s — ${site.name}` },
-  description: "Free, open source React components built with Tailwind CSS and Motion. Copy, paste, make them yours.",
+  metadataBase: new URL(siteUrl),
+  title: { default: site.title, template: `%s — ${site.name}` },
+  description: site.description,
+  applicationName: site.name,
+  keywords: site.keywords,
+  authors: [{ name: site.author, url: socials[0].href }],
+  creator: site.author,
+  publisher: site.author,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    url: "/",
+    locale: site.locale,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+    creator: site.twitter,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  category: "technology",
+}
+
+// Who made this, the site, and the library itself: read by search engines, answer engines and LLM crawlers.
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteUrl}/#person`,
+  name: site.author,
+  email: `mailto:${site.email}`,
+  sameAs: socials.map((s) => s.href),
+}
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: site.name,
+  url: siteUrl,
+  description: site.description,
+  inLanguage: "en",
+  publisher: { "@id": `${siteUrl}/#person` },
+}
+
+const libraryLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "@id": `${siteUrl}/#library`,
+  name: site.name,
+  description: site.description,
+  url: absoluteUrl("/components"),
+  codeRepository: site.repo,
+  license: site.license,
+  programmingLanguage: ["TypeScript", "React"],
+  runtimePlatform: "React",
+  keywords: site.keywords.join(", "),
+  author: { "@id": `${siteUrl}/#person` },
+  isAccessibleForFree: true,
 }
 
 const fontSans = Geist({
@@ -44,6 +109,7 @@ export default function RootLayout({
       className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable}`}
     >
       <body className="antialiased">
+        <JsonLd data={[personLd, websiteLd, libraryLd]} />
         <RootProvider
           search={{
             enabled: false,

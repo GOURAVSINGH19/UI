@@ -19,8 +19,8 @@ export function SimpleSearchDemo() {
     const [picked, setPicked] = useState<string | null>(null)
 
     return (
-        <div className="flex w-full max-w-md flex-col gap-3 self-start pt-4">
-            <div className="flex h-12 items-center justify-between rounded-full border border-ui-border bg-ui-bg pr-2.5 pl-4">
+        <div className="flex items-center justify-center w-full max-w-md flex-col gap-3 self-start pt-4">
+            <div className="flex  items-center justify-between rounded-lg border border-ui-border bg-ui-bg px-6 py-1">
                 <SimpleSearch items={ITEMS} onSelect={(item) => setPicked(item.title)} hotkey={false} label="Search the demo docs" />
             </div>
             <p role="status" className="px-1 text-xs text-ui-caption">

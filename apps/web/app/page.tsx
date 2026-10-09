@@ -32,9 +32,6 @@ const ComponentLibraryDemo = () => {
         <GridSection className={`${row} py-12`}>
           <Faq />
         </GridSection>
-        <GridSection className={`${row} py-12`}>
-          <GithubCta />
-        </GridSection>
       </main>
       <GridSection as="footer" className={`${row} pt-12 pb-8`}>
         <Footer />

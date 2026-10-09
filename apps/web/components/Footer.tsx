@@ -6,6 +6,7 @@ import { Check, Copy, Github, Linkedin, Mail } from "lucide-react"
 import { cue } from "@/lib/sound"
 import { Icons } from "@workspace/ui/components/ui/icons"
 import { site, socials } from "@/lib/site"
+import { LikeButton } from "@/components/LikeButton"
 
 const SOCIAL_ICONS = {
     x: (props: { className?: string }) => <Icons.twitter {...props} className={`${props.className} fill-current`} />,
@@ -59,8 +60,9 @@ const Footer = () => {
                     <p className="mt-3 max-w-xs text-sm leading-relaxed text-ui-caption">
                         Free, open source React components. Copy them in and make them yours.
                     </p>
-                    <div className="mt-5">
+                    <div className="mt-5 flex flex-wrap items-center gap-2">
                         <CopyEmail />
+                        <LikeButton />
                     </div>
                 </div>
 

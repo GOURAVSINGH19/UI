@@ -6,19 +6,43 @@ import { ComponentIndex } from "@/components/browser/ComponentIndex"
 import { OnThisPage } from "@/components/browser/OnThisPage"
 import { Breadcrumbs } from "@/components/browser/Breadcrumbs"
 import { GridSection } from "@/components/grid/Grid"
+import { JsonLd } from "@/components/json-ld"
+import { absoluteUrl, siteUrl } from "@/lib/site"
 
 export const metadata: Metadata = {
     title: "All components",
     description: "Browse every free, open source React component in Kinetik.",
+    alternates: { canonical: "/components" },
 }
 
 const AllComponents = () => {
     const components = getComponents()
     const categories = groupByCategory(components)
 
+    // The catalog as an ordered list, so search and answer engines can see every component.
+    const listLd = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Kinetik components",
+        url: absoluteUrl("/components"),
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: components.length,
+            itemListElement: components.map((component, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: component.title,
+                description: component.description,
+                url: absoluteUrl(component.href),
+            })),
+        },
+    }
+
     return (
         <BrowserShell>
             <main className="min-w-0">
+                <JsonLd data={listLd} />
                 <header id="overview" className="scroll-mt-20 px-gutter pt-10 pb-12 md:px-10 md:pt-14">
                     <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Components" }]} />
                     <h1 className="mt-6 flex items-baseline gap-3 font-serif text-4xl leading-tight text-ui-heading">

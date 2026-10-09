@@ -1,10 +1,23 @@
 import { Plus } from "lucide-react"
 import { faqs } from "@/lib/site"
+import { JsonLd } from "@/components/json-ld"
+
+// Same questions as structured data, so answer engines can quote them directly (AEO).
+const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+}
 
 /** FAQ built on <details>, so it opens with the keyboard and works without JavaScript. */
 export function Faq() {
     return (
         <div>
+            <JsonLd data={faqLd} />
             <p className="eyebrow">FAQ</p>
             <h2 className="mt-2 font-serif text-3xl leading-tight text-ui-heading">Good questions.</h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-ui-caption">

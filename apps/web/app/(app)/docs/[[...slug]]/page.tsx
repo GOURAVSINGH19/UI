@@ -6,7 +6,8 @@ import { mdxComponents } from "@/mdx-component"
 import { source } from "@/lib/source"
 import { getComponents } from "@/lib/components-index"
 import { inSidebarOrder } from "@/lib/component-groups"
-import { absoluteUrl } from "@workspace/ui/lib/utils"
+import { absoluteUrl, site, siteUrl } from "@/lib/site"
+import { JsonLd } from "@/components/json-ld"
 import { OnThisPage } from "@/components/browser/OnThisPage"
 import { Breadcrumbs } from "@/components/browser/Breadcrumbs"
 import { ComponentBadge } from "@/components/browser/ComponentBadge"
@@ -52,6 +53,7 @@ export async function generateMetadata(props: {
   return {
     title: doc.title,
     description: doc.description,
+    alternates: { canonical: page.url },
     openGraph: {
       title: doc.title,
       description: doc.description,
@@ -64,7 +66,7 @@ export async function generateMetadata(props: {
       title: doc.title,
       description: doc.description,
       images: [{ url: ogImage }],
-      creator: "@Gourav",
+      creator: site.twitter,
     },
   }
 }
@@ -88,12 +90,38 @@ export default async function Page(props: {
       .map((item) => ({ id: item.url.replace(/^#/, ""), title: item.title })),
   ]
 
+  // How-to-use docs for one component, plus where it sits in the site (AEO / rich results).
+  const pageLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      headline: doc.title,
+      description: doc.description,
+      url: absoluteUrl(page.url),
+      inLanguage: "en",
+      proficiencyLevel: "Beginner",
+      about: { "@id": `${siteUrl}/#library` },
+      author: { "@id": `${siteUrl}/#person` },
+      isPartOf: { "@id": `${siteUrl}/#website` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+        { "@type": "ListItem", position: 2, name: "Components", item: absoluteUrl("/components") },
+        { "@type": "ListItem", position: 3, name: doc.title, item: absoluteUrl(page.url) },
+      ],
+    },
+  ]
+
   const pagerLink =
     "inline-flex h-8 items-center gap-1.5 rounded-md border border-ui-border px-3 text-xs text-ui-secondary transition-colors hover:bg-ui-muted hover:text-ui-heading"
 
   return (
     <>
       <main data-slot="docs" className="min-w-0">
+        <JsonLd data={pageLd} />
         <header id="overview" className="scroll-mt-20 px-gutter pt-10 pb-12 md:px-10 md:pt-14">
           <div className="flex items-center justify-between gap-4">
             <Breadcrumbs

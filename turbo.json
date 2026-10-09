@@ -5,6 +5,17 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "env": [
+        "APP_URL",
+        "PUBLIC_SITE_URL",
+        "DATABASE_URL",
+        "LIKES_SALT",
+        "POSTHOG_KEY",
+        "POSTHOG_HOST",
+        "POSTHOG_PROJECT_ID",
+        "POSTHOG_PERSONAL_API_KEY",
+        "CODE_THEME"
+      ],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
